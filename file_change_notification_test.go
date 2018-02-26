@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-02-24 01:44:01 FAAF9B      [zr_win/file_change_notification_test.go]
+// :v: 2018-02-26 23:07:34 3082B0      [zr_win/file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -8,7 +8,7 @@ package win
 import "fmt"     // standard
 import "testing" // standard
 
-import "github.com/balacode/zr" // Zirconium
+import "github.com/balacode/zr" // Zircon-Go
 
 /*
 to test all items in file_change_notification.go use:
@@ -31,7 +31,7 @@ func Test_fchn_FindFirstChangeNotification_(t *testing.T) {
 	// create a subfolder called TEST
 	// write a timestamp to file A
 	// wait for one second
-	// write a timestamt to file B
+	// write a timestamp to file B
 	//
 	var NOTIFY = FILE_NOTIFY_CHANGE_FILE_NAME |
 		FILE_NOTIFY_CHANGE_DIR_NAME |
@@ -59,7 +59,7 @@ func Test_fchn_FileChangeNotifications_(t *testing.T) {
 		PL("Test_fchn_FileChangeNotifications_ IS UNIFINISHED")
 		return
 	}
-	const WAIT_OBJECT = 0 //TODO: move constants to balacode/zr_win
+	const WAIT_OBJECT = 0 //TODO: move constants to github.com/balacode/zr_win
 	const WAIT_OBJECT_0 = 0
 	const WAIT_TIMEOUT = 258
 	const NULL = 0

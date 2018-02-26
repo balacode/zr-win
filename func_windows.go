@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-02-24 01:44:01 6981A6                       [zr_win/func_windows.go]
+// :v: 2018-02-26 23:07:34 01B210                       [zr_win/func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -32,7 +32,7 @@ import "fmt"         // standard
 import "unsafe"      // standard
 import str "strings" // standard
 
-import "github.com/balacode/zr" // Zirconium
+import "github.com/balacode/zr" // Zircon-Go
 
 // -----------------------------------------------------------------------------
 // # Constants

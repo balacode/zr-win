@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-02-24 01:44:00 D5E6F3                        [zr_win/api_windows.go]
+// :v: 2018-02-26 23:07:34 4ED9CA                        [zr_win/api_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -782,7 +782,7 @@ const WAIT_TIMEOUT = 258
 const WHEEL_DELTA = 120
 
 // -----------------------------------------------------------------------------
-// Window messages used by Zirconium lib and applications:
+// Window messages used by Zircon-Go lib and applications:
 
 // WM_ACTIVATE Win32 API message constant.
 const WM_ACTIVATE = 0x0006
