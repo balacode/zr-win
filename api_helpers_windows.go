@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 AB3BD6                [zr-win/api_helpers_windows.go]
+// :v: 2018-05-09 01:03:18 86940A                [zr-win/api_helpers_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -20,12 +20,14 @@ package win
 // # Internal
 //   abort(funcName string, err error)
 
-import "bytes"       // standard
-import "fmt"         // standard
-import "runtime"     // standard
-import "syscall"     // standard
-import "unsafe"      // standard
-import str "strings" // standard
+import (
+	"bytes"
+	"fmt"
+	"runtime"
+	str "strings"
+	"syscall"
+	"unsafe"
+)
 
 // -----------------------------------------------------------------------------
 // # Call Stack Functions

@@ -1,12 +1,14 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 97F671                [zr-win/dll_shell32_windows.go]
+// :v: 2018-05-09 01:03:18 3FBAB0                [zr-win/dll_shell32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
 
-import "syscall" // standard
-import "unsafe"  // standard
+import (
+	"syscall"
+	"unsafe"
+)
 
 var shell32 = syscall.NewLazyDLL("shell32.dll")
 var shellDragAcceptFiles = shell32.NewProc("DragAcceptFiles")

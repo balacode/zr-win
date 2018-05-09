@@ -1,15 +1,17 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 D44CD8                             [zr-win/module.go]
+// :v: 2018-05-09 01:03:18 31AF00                             [zr-win/module.go]
 // -----------------------------------------------------------------------------
 
 // Package win provides Windows API function and
 // type wrappers used by the Zircon-Go library.
 package win
 
-import "fmt" // standard
+import (
+	"fmt"
 
-import "github.com/balacode/zr" // Zircon-Go
+	"github.com/balacode/zr" // Zircon-Go
+)
 
 // LB specifies a line break string.
 // On Windows it is a pair of CR and LF.

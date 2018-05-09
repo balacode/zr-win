@@ -1,15 +1,17 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 CEC13A                  [zr-win/dll_gdi32_windows.go]
+// :v: 2018-05-09 01:03:18 B52311                  [zr-win/dll_gdi32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
 
-import "syscall"      // standard
-import "unicode/utf8" // standard
-import "unsafe"       // standard
+import (
+	"syscall"
+	"unicode/utf8"
+	"unsafe"
 
-import "github.com/balacode/zr" // Zircon-Go
+	"github.com/balacode/zr" // Zircon-Go
+)
 
 var gdi32 = syscall.NewLazyDLL("gdi32.dll")
 var gdiBitBlt = gdi32.NewProc("BitBlt")

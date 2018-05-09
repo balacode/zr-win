@@ -1,12 +1,14 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 37C4F6                 [zr-win/dll_user32_windows.go]
+// :v: 2018-05-09 01:03:18 7B6551                 [zr-win/dll_user32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
 
-import "syscall" // standard
-import "unsafe"  // standard
+import (
+	"syscall"
+	"unsafe"
+)
 
 var user32 = syscall.NewLazyDLL("user32.dll")
 var userAppendMenuW = user32.NewProc("AppendMenuW")

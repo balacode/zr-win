@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 202938                       [zr-win/func_windows.go]
+// :v: 2018-05-09 01:03:18 B3E32D                       [zr-win/func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -27,12 +27,14 @@ package win
 //   registryHardwareInfo(valueName string) string
 //   windowsVersionInfo() OSVERSIONINFO
 
-import "bytes"       // standard
-import "fmt"         // standard
-import "unsafe"      // standard
-import str "strings" // standard
+import (
+	"bytes"
+	"fmt"
+	str "strings"
+	"unsafe"
 
-import "github.com/balacode/zr" // Zircon-Go
+	"github.com/balacode/zr" // Zircon-Go
+)
 
 // -----------------------------------------------------------------------------
 // # Constants

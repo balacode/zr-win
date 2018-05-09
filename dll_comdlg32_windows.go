@@ -1,12 +1,14 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 3074EC               [zr-win/dll_comdlg32_windows.go]
+// :v: 2018-05-09 01:03:18 5D7FC9               [zr-win/dll_comdlg32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
 
-import "syscall" // standard
-import "unsafe"  // standard
+import (
+	"syscall"
+	"unsafe"
+)
 
 var comdlg32 = syscall.NewLazyDLL("comdlg32.dll")
 var comdlgGetOpenFileNameW = comdlg32.NewProc("GetOpenFileNameW")

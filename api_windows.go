@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 A20F58                        [zr-win/api_windows.go]
+// :v: 2018-05-09 01:03:18 CCE370                        [zr-win/api_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -15,7 +15,9 @@ package win
 // # Helper Functions
 //   WindowMessageName(msg UINT) string
 
-import "unsafe" // standard
+import (
+	"unsafe"
+)
 
 // -----------------------------------------------------------------------------
 // # Constants

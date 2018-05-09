@@ -1,12 +1,14 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 5868D5               [zr-win/dll_kernel32_windows.go]
+// :v: 2018-05-09 01:03:18 96466D               [zr-win/dll_kernel32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
 
-import "syscall" // standard
-import "unsafe"  // standard
+import (
+	"syscall"
+	"unsafe"
+)
 
 var kernel32 = syscall.NewLazyDLL("kernel32.dll")
 

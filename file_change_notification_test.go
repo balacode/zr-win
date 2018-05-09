@@ -1,14 +1,16 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-03-23 11:40:22 1B149C      [zr-win/file_change_notification_test.go]
+// :v: 2018-05-09 01:03:18 1068F5      [zr-win/file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
 
-import "fmt"     // standard
-import "testing" // standard
+import (
+	"fmt"
+	"testing"
 
-import "github.com/balacode/zr" // Zircon-Go
+	"github.com/balacode/zr" // Zircon-Go
+)
 
 /*
 to test all items in file_change_notification.go use:
