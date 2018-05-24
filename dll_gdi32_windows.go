@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 B52311                  [zr-win/dll_gdi32_windows.go]
+// :v: 2018-05-24 04:46:26 791790                  [zr-win/dll_gdi32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -10,7 +10,7 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/balacode/zr" // Zircon-Go
+	"github.com/balacode/zr"
 )
 
 var gdi32 = syscall.NewLazyDLL("gdi32.dll")

@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 1068F5      [zr-win/file_change_notification_test.go]
+// :v: 2018-05-24 04:46:26 E8232A      [zr-win/file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/balacode/zr" // Zircon-Go
+	"github.com/balacode/zr"
 )
 
 /*
@@ -61,7 +61,7 @@ func Test_fchn_FileChangeNotifications_(t *testing.T) {
 		PL("Test_fchn_FileChangeNotifications_ IS UNIFINISHED")
 		return
 	}
-	const WAIT_OBJECT = 0 //TODO: move constants to github.com/balacode/zr-win
+	const WAIT_OBJECT = 0 //TODO: move constants
 	const WAIT_OBJECT_0 = 0
 	const WAIT_TIMEOUT = 258
 	const NULL = 0

@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 31AF00                             [zr-win/module.go]
+// :v: 2018-05-24 04:46:26 E5BB18                             [zr-win/module.go]
 // -----------------------------------------------------------------------------
 
 // Package win provides Windows API function and
@@ -10,7 +10,7 @@ package win
 import (
 	"fmt"
 
-	"github.com/balacode/zr" // Zircon-Go
+	"github.com/balacode/zr"
 )
 
 // LB specifies a line break string.
