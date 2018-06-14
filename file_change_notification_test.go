@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-24 04:46:26 E8232A      [zr-win/file_change_notification_test.go]
+// :v: 2018-05-24 04:46:26 0F7390      zr-win/[file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
