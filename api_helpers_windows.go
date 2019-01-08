@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 4F058D                zr-win/[api_helpers_windows.go]
+// :v: 2018-11-29 10:45:07 DC57C3                zr-win/[api_helpers_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -82,9 +82,9 @@ func ErrorName(errNo DWORD) string {
 		nil, // lpSource
 		err, // dwMessageId
 		DWORD(MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT)), // dwLanguageID
-		LPWSTR(&buf256[0]),                               // lpBuffer
-		BufferSize,                                       // nSize
-		nil,                                              // arguments
+		LPWSTR(&buf256[0]), // lpBuffer
+		BufferSize,         // nSize
+		nil,                // arguments
 	)
 	// build result string
 	var retBuf bytes.Buffer
