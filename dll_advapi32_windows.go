@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 013F8A               zr-win/[dll_advapi32_windows.go]
+// :v: 2019-04-03 14:50:33 211B1B               zr-win/[dll_advapi32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -10,9 +10,12 @@ import (
 	"unsafe"
 )
 
-var advapi32 = syscall.NewLazyDLL("advapi32.dll")
-var advapiRegOpenKeyEx = advapi32.NewProc("RegOpenKeyExW")
-var advapiRegQueryValueEx = advapi32.NewProc("RegQueryValueExW")
+var (
+	advapi32 = syscall.NewLazyDLL("advapi32.dll")
+
+	advapiRegOpenKeyEx    = advapi32.NewProc("RegOpenKeyExW")
+	advapiRegQueryValueEx = advapi32.NewProc("RegQueryValueExW")
+)
 
 // RegOpenKeyEx library: advapi32.dll
 func RegOpenKeyEx(
@@ -23,7 +26,7 @@ func RegOpenKeyEx(
 	phkResult PHKEY,
 ) LONG {
 	//
-	var ret, _, _ = advapiRegOpenKeyEx.Call(
+	ret, _, _ := advapiRegOpenKeyEx.Call(
 		uintptr(hKey),                      // [in]  HKEY
 		UintptrFromString(&lpSubKey),       // [in]  LPCTSTR
 		uintptr(ulOptions),                 // DWORD
@@ -42,7 +45,7 @@ func RegQueryValueEx(
 	lpData LPBYTE,
 	lpcbData LPDWORD,
 ) LONG {
-	var ret, _, _ = advapiRegQueryValueEx.Call(
+	ret, _, _ := advapiRegQueryValueEx.Call(
 		uintptr(hKey),                       // [in] HKEY
 		UintptrFromString(&lpValueName),     // [in] LPCTSTR
 		uintptr(unsafe.Pointer(lpReserved)), // LPDWORD

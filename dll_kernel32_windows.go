@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 615D80               zr-win/[dll_kernel32_windows.go]
+// :v: 2019-04-03 14:50:33 B88935               zr-win/[dll_kernel32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -10,57 +10,57 @@ import (
 	"unsafe"
 )
 
-var kernel32 = syscall.NewLazyDLL("kernel32.dll")
+var (
+	kernel32 = syscall.NewLazyDLL("kernel32.dll")
 
-//
-var kernelAllocConsole = kernel32.NewProc("AllocConsole")
-var kernelCreateFileW = kernel32.NewProc("CreateFileW")
-var kernelFindClose = kernel32.NewProc("FindClose")
-var kernelFindFirstFileExW = kernel32.NewProc("FindFirstFileExW")
-var kernelFindNextFileNameW = kernel32.NewProc("FindNextFileNameW")
-var kernelFormatMessageW = kernel32.NewProc("FormatMessageW")
-var kernelGetConsoleWindow = kernel32.NewProc("GetConsoleWindow")
-var kernelGetFileSize = kernel32.NewProc("GetFileSize")
-var kernelGetLastError = kernel32.NewProc("GetLastError")
-var kernelGetModuleHandleW = kernel32.NewProc("GetModuleHandleW")
-var kernelGetStdHandle = kernel32.NewProc("GetStdHandle")
-var kernelGetTickCount = kernel32.NewProc("GetTickCount")
-var kernelGetVersionEx = kernel32.NewProc("GetVersionExW")
-var kernelGetVolumeInformation = kernel32.NewProc("GetVolumeInformationW")
-var kernelGetWindowsDirectory = kernel32.NewProc("GetWindowsDirectoryW")
-var kernelGlobalAlloc = kernel32.NewProc("GlobalAlloc")
-var kernelGlobalFree = kernel32.NewProc("GlobalFree")
-var kernelGlobalLock = kernel32.NewProc("GlobalLock")
-var kernelGlobalSize = kernel32.NewProc("GlobalSize")
-var kernelGlobalUnlock = kernel32.NewProc("GlobalUnlock")
-var kernelMulDiv = kernel32.NewProc("MulDiv")
-var kernelMultiByteToWideChar = kernel32.NewProc("MultiByteToWideChar")
-var kernelReadFile = kernel32.NewProc("ReadFile")
-var kernelWaitForMultipleObjects = kernel32.NewProc("WaitForMultipleObjects")
-var kernelWideCharToMultiByte = kernel32.NewProc("WideCharToMultiByte")
+	kernelAllocConsole           = kernel32.NewProc("AllocConsole")
+	kernelCreateFileW            = kernel32.NewProc("CreateFileW")
+	kernelFindClose              = kernel32.NewProc("FindClose")
+	kernelFindFirstFileExW       = kernel32.NewProc("FindFirstFileExW")
+	kernelFindNextFileNameW      = kernel32.NewProc("FindNextFileNameW")
+	kernelFormatMessageW         = kernel32.NewProc("FormatMessageW")
+	kernelGetConsoleWindow       = kernel32.NewProc("GetConsoleWindow")
+	kernelGetFileSize            = kernel32.NewProc("GetFileSize")
+	kernelGetLastError           = kernel32.NewProc("GetLastError")
+	kernelGetModuleHandleW       = kernel32.NewProc("GetModuleHandleW")
+	kernelGetStdHandle           = kernel32.NewProc("GetStdHandle")
+	kernelGetTickCount           = kernel32.NewProc("GetTickCount")
+	kernelGetVersionEx           = kernel32.NewProc("GetVersionExW")
+	kernelGetVolumeInformation   = kernel32.NewProc("GetVolumeInformationW")
+	kernelGetWindowsDirectory    = kernel32.NewProc("GetWindowsDirectoryW")
+	kernelGlobalAlloc            = kernel32.NewProc("GlobalAlloc")
+	kernelGlobalFree             = kernel32.NewProc("GlobalFree")
+	kernelGlobalLock             = kernel32.NewProc("GlobalLock")
+	kernelGlobalSize             = kernel32.NewProc("GlobalSize")
+	kernelGlobalUnlock           = kernel32.NewProc("GlobalUnlock")
+	kernelMulDiv                 = kernel32.NewProc("MulDiv")
+	kernelMultiByteToWideChar    = kernel32.NewProc("MultiByteToWideChar")
+	kernelReadFile               = kernel32.NewProc("ReadFile")
+	kernelWaitForMultipleObjects = kernel32.NewProc("WaitForMultipleObjects")
+	kernelWideCharToMultiByte    = kernel32.NewProc("WideCharToMultiByte")
 
-var kernelFindCloseChangeNotification = kernel32.NewProc(
-	"FindCloseChangeNotification",
-)
-var kernelFindFirstChangeNotification = kernel32.NewProc(
-	"FindFirstChangeNotificationW",
-)
-var kernelFindNextChangeNotification = kernel32.NewProc(
-	"FindNextChangeNotification",
-)
-var kernelGetConsoleScreenBufferInfoEx = kernel32.NewProc(
-	"GetConsoleScreenBufferInfoEx",
-)
-var kernelSetConsoleScreenBufferSize = kernel32.NewProc(
-	"SetConsoleScreenBufferSize",
-)
+	kernelFindCloseChangeNotification = kernel32.NewProc(
+		"FindCloseChangeNotification")
 
-// [UNUSED]
-// var kernelWriteConsoleInputW   = kernel32.NewProc("WriteConsoleInputW")
+	kernelFindFirstChangeNotification = kernel32.NewProc(
+		"FindFirstChangeNotificationW")
+
+	kernelFindNextChangeNotification = kernel32.NewProc(
+		"FindNextChangeNotification")
+
+	kernelGetConsoleScreenBufferInfoEx = kernel32.NewProc(
+		"GetConsoleScreenBufferInfoEx")
+
+	kernelSetConsoleScreenBufferSize = kernel32.NewProc(
+		"SetConsoleScreenBufferSize")
+
+	// [UNUSED]
+	// kernelWriteConsoleInputW   = kernel32.NewProc("WriteConsoleInputW")
+)
 
 // AllocConsole library: kernel32.dll
 func AllocConsole() BOOL {
-	var ret, _, _ = kernelAllocConsole.Call()
+	ret, _, _ := kernelAllocConsole.Call()
 	return BOOLResult(ret)
 } //                                                                AllocConsole
 
@@ -74,7 +74,7 @@ func CreateFile(
 	dwFlagsAndAttributes DWORD,
 	hTemplateFile HANDLE,
 ) HANDLE {
-	var ret, _, _ = kernelCreateFileW.Call(
+	ret, _, _ := kernelCreateFileW.Call(
 		UintptrFromString(&FileName),                  // [in] LPCTSTR
 		uintptr(dwDesiredAccess),                      // [in] DWORD
 		uintptr(dwShareMode),                          // [in] DWORD
@@ -88,13 +88,13 @@ func CreateFile(
 
 // FindClose library: kernel32.dll
 func FindClose(hFindFile HANDLE) BOOL {
-	var ret, _, _ = kernelFindClose.Call(uintptr(hFindFile)) // [in/out] HANDLE
+	ret, _, _ := kernelFindClose.Call(uintptr(hFindFile)) // [in/out] HANDLE
 	return BOOLResult(ret)
 } //                                                                   FindClose
 
 // FindCloseChangeNotification __
 func FindCloseChangeNotification(hChangeHandle HANDLE) BOOL {
-	var ret, _, _ = kernelFindCloseChangeNotification.Call(
+	ret, _, _ := kernelFindCloseChangeNotification.Call(
 		uintptr(hChangeHandle), // HANDLE
 	)
 	return BOOLResult(ret)
@@ -106,7 +106,7 @@ func FindFirstChangeNotification(
 	bWatchSubtree BOOL,
 	dwNotifyFilter DWORD,
 ) HANDLE {
-	var ret, _, _ = kernelFindFirstChangeNotification.Call(
+	ret, _, _ := kernelFindFirstChangeNotification.Call(
 		UintptrFromString(&lpPathName), // LPCSTR lpPathName
 		uintptr(bWatchSubtree),         // BOOL bWatchSubtree
 		uintptr(dwNotifyFilter),        // DWORD dwNotifyFilter
@@ -123,7 +123,7 @@ func FindFirstFileEx(
 	lpSearchFilter LPVOID,
 	dwAdditionalFlags DWORD,
 ) HANDLE {
-	var ret, _, _ = kernelFindFirstFileExW.Call(
+	ret, _, _ := kernelFindFirstFileExW.Call(
 		UintptrFromString(&FileName),            // [in] LPCTSTR
 		uintptr(fInfoLevelId),                   // [in] FINDEX_INFO_LEVELS
 		uintptr(unsafe.Pointer(lpFindFileData)), // [out] LPVOID
@@ -136,7 +136,7 @@ func FindFirstFileEx(
 
 // FindNextChangeNotification library: kernel32.dll
 func FindNextChangeNotification(hChangeHandle HANDLE) BOOL {
-	var ret, _, _ = kernelFindNextChangeNotification.Call(
+	ret, _, _ := kernelFindNextChangeNotification.Call(
 		uintptr(hChangeHandle), // HANDLE
 	)
 	return BOOLResult(ret)
@@ -148,7 +148,7 @@ func FindNextFileName(
 	StringLength LPDWORD,
 	LinkName string,
 ) BOOL {
-	var ret, _, _ = kernelFindNextFileNameW.Call(
+	ret, _, _ := kernelFindNextFileNameW.Call(
 		uintptr(hFindStream),                  // [in] HANDLE
 		uintptr(unsafe.Pointer(StringLength)), // [in/out] LPDWORD
 		UintptrFromString(&LinkName),          // [in/out] PWCHAR
@@ -167,7 +167,7 @@ func FormatMessage(
 	Arguments *byte,
 	//TODO: *va_list   type va_list = *c_char
 ) DWORD {
-	var ret, _, _ = kernelFormatMessageW.Call(
+	ret, _, _ := kernelFormatMessageW.Call(
 		uintptr(dwFlags),                   // [in] DWORD
 		uintptr(unsafe.Pointer(lpSource)),  // [in] LPCVOID
 		uintptr(dwMessageId),               // [in] DWORD
@@ -184,7 +184,7 @@ func GetConsoleScreenBufferInfoEx(
 	hConsoleOutput HANDLE,
 	lpConsoleScreenBufferInfoEx *CONSOLE_SCREEN_BUFFER_INFOEX,
 ) BOOL {
-	var ret, _, _ = kernelGetConsoleScreenBufferInfoEx.Call(
+	ret, _, _ := kernelGetConsoleScreenBufferInfoEx.Call(
 		uintptr(hConsoleOutput),                              // [in] HANDLE
 		uintptr(unsafe.Pointer(lpConsoleScreenBufferInfoEx)), // [out] PCONSO...
 	)
@@ -193,7 +193,7 @@ func GetConsoleScreenBufferInfoEx(
 
 // GetConsoleWindow library: kernel32.dll
 func GetConsoleWindow() HWND {
-	var ret, _, _ = kernelGetConsoleWindow.Call()
+	ret, _, _ := kernelGetConsoleWindow.Call()
 	return HWND(ret)
 } //                                                            GetConsoleWindow
 
@@ -202,7 +202,7 @@ func GetFileSize(
 	hFile HANDLE,
 	lpFileSizeHigh LPDWORD,
 ) DWORD {
-	var ret, _, _ = kernelGetFileSize.Call(
+	ret, _, _ := kernelGetFileSize.Call(
 		uintptr(hFile),                          // [in] HANDLE
 		uintptr(unsafe.Pointer(lpFileSizeHigh)), // [out] LPDWORD
 	)
@@ -211,35 +211,35 @@ func GetFileSize(
 
 // GetLastError library: kernel32.dll
 func GetLastError() DWORD {
-	var ret, _, _ = kernelGetLastError.Call()
+	ret, _, _ := kernelGetLastError.Call()
 	return DWORD(ret)
 } //                                                                GetLastError
 
 // GetModuleHandle library: kernel32.dll
 func GetModuleHandle(lpModuleName string) HMODULE {
-	var ptr = uintptr(0)
+	ptr := uintptr(0)
 	if lpModuleName != "" {
 		ptr = UintptrFromString(&lpModuleName)
 	}
-	var ret, _, _ = kernelGetModuleHandleW.Call(ptr) // [in] LPCTSTR
+	ret, _, _ := kernelGetModuleHandleW.Call(ptr) // [in] LPCTSTR
 	return HMODULE(ret)
 } //                                                             GetModuleHandle
 
 // GetStdHandle library: kernel32.dll
 func GetStdHandle(nStdHandle DWORD) HANDLE {
-	var ret, _, _ = kernelGetStdHandle.Call(uintptr(nStdHandle))
+	ret, _, _ := kernelGetStdHandle.Call(uintptr(nStdHandle))
 	return HANDLE(ret)
 } //                                                                GetStdHandle
 
 // GetTickCount library: kernel32.dll
 func GetTickCount() DWORD {
-	var ret, _, _ = kernelGetTickCount.Call()
+	ret, _, _ := kernelGetTickCount.Call()
 	return DWORD(ret)
 } //                                                                GetTickCount
 
 // GetVersionEx library: kernel32.dll
 func GetVersionEx(lpVersionInfo *OSVERSIONINFO) BOOL {
-	var ret, _, _ = kernelGetVersionEx.Call(
+	ret, _, _ := kernelGetVersionEx.Call(
 		uintptr(unsafe.Pointer(lpVersionInfo)), // [in/out] LPOSVERSIONINFO
 	)
 	return BOOLResult(ret)
@@ -256,7 +256,7 @@ func GetVolumeInformation(
 	lpFileSystemNameBuffer LPTSTR,
 	nFileSystemNameSize DWORD,
 ) BOOL {
-	var ret, _, _ = kernelGetVolumeInformation.Call(
+	ret, _, _ := kernelGetVolumeInformation.Call(
 		UintptrFromString(&lpRootPathName),                // in  LPCTSTR
 		uintptr(unsafe.Pointer(lpVolumeNameBuffer)),       // out LPTSTR
 		uintptr(nVolumeNameSize),                          // in  DWORD
@@ -270,7 +270,7 @@ func GetVolumeInformation(
 
 // GetWindowsDirectory library: kernel32.dll
 func GetWindowsDirectory(lpBuffer LPTSTR, uSize UINT) UINT {
-	var ret, _, _ = kernelGetWindowsDirectory.Call(
+	ret, _, _ := kernelGetWindowsDirectory.Call(
 		uintptr(unsafe.Pointer(lpBuffer)), // [out] LPWSTR
 		uintptr(uSize),                    // [in]  UINT
 	)
@@ -279,7 +279,7 @@ func GetWindowsDirectory(lpBuffer LPTSTR, uSize UINT) UINT {
 
 // GlobalAlloc library: kernel32.dll
 func GlobalAlloc(uFlags UINT, dwBytes SIZE_T) HGLOBAL {
-	var ret, _, _ = kernelGlobalAlloc.Call(
+	ret, _, _ := kernelGlobalAlloc.Call(
 		uintptr(uFlags),  // [in] UINT
 		uintptr(dwBytes), // [in] SIZE_T
 	)
@@ -288,13 +288,13 @@ func GlobalAlloc(uFlags UINT, dwBytes SIZE_T) HGLOBAL {
 
 // GlobalFree library: kernel32.dll
 func GlobalFree(hMem HGLOBAL) HGLOBAL {
-	var ret, _, _ = kernelGlobalFree.Call(uintptr(hMem))
+	ret, _, _ := kernelGlobalFree.Call(uintptr(hMem))
 	return HGLOBAL(ret)
 } //                                                                  GlobalFree
 
 // GlobalLock library: kernel32.dll
 func GlobalLock(hMem HGLOBAL) unsafe.Pointer { // (returns LPVOID)
-	var ret, _, _ = kernelGlobalLock.Call(uintptr(hMem))
+	ret, _, _ := kernelGlobalLock.Call(uintptr(hMem))
 	if ret == NULL {
 		//TODO: mod.Error("GlobalLock failed"
 	}
@@ -307,19 +307,19 @@ func GlobalLock(hMem HGLOBAL) unsafe.Pointer { // (returns LPVOID)
 
 // GlobalSize library: kernel32.dll
 func GlobalSize(hMem HGLOBAL) SIZE_T {
-	var ret, _, _ = kernelGlobalSize.Call(uintptr(hMem))
+	ret, _, _ := kernelGlobalSize.Call(uintptr(hMem))
 	return SIZE_T(ret)
 } //                                                                  GlobalSize
 
 // GlobalUnlock library: kernel32.dll
 func GlobalUnlock(hMem HGLOBAL) BOOL {
-	var ret, _, _ = kernelGlobalUnlock.Call(uintptr(hMem))
+	ret, _, _ := kernelGlobalUnlock.Call(uintptr(hMem))
 	return BOOLResult(ret)
 } //                                                                GlobalUnlock
 
 // MulDiv library: kernel32.dll
 func MulDiv(nNumber, nNumerator, nDenominator INT) INT {
-	var ret, _, _ = kernelMulDiv.Call(
+	ret, _, _ := kernelMulDiv.Call(
 		uintptr(nNumber),
 		uintptr(nNumerator),
 		uintptr(nDenominator),
@@ -336,7 +336,7 @@ func MultiByteToWideChar(
 	lpWideCharStr LPWSTR,
 	cchWideChar INT,
 ) INT {
-	var ret, _, _ = kernelMultiByteToWideChar.Call(
+	ret, _, _ := kernelMultiByteToWideChar.Call(
 		uintptr(CodePage),
 		uintptr(dwFlags),
 		uintptr(unsafe.Pointer(lpMultiByteStr)),
@@ -355,7 +355,7 @@ func ReadFile(
 	lpNumberOfBytesRead LPDWORD,
 	lpOverlapped *OVERLAPPED,
 ) BOOL {
-	var ret, _, _ = kernelReadFile.Call(
+	ret, _, _ := kernelReadFile.Call(
 		uintptr(hFile),
 		uintptr(lpBuffer),
 		uintptr(nNumberOfBytesToRead),
@@ -369,7 +369,7 @@ func ReadFile(
 //TODO: How to pass COORD struct when Call() needs uintptr?
 // SetConsoleScreenBufferSize library: kernel32.dll
 func SetConsoleScreenBufferSize(hConsoleOutput HANDLE, dwSize COORD) BOOL {
-    var ret, _, _ = kernelSetConsoleScreenBufferSize.Call(
+    ret, _, _ := kernelSetConsoleScreenBufferSize.Call(
         uintptr(hConsoleOutput), // [in] HANDLE
         uintptr(dwSize),         // [in] COORD
     )
@@ -384,7 +384,7 @@ func WaitForMultipleObjects(
 	bWaitAll BOOL,
 	dwMilliseconds DWORD,
 ) DWORD {
-	var ret, _, _ = kernelWaitForMultipleObjects.Call(
+	ret, _, _ := kernelWaitForMultipleObjects.Call(
 		uintptr(nCount),                    // DWORD
 		uintptr(unsafe.Pointer(lpHandles)), // *HANDLE
 		uintptr(bWaitAll),                  // BOOL
@@ -404,7 +404,7 @@ func WideCharToMultiByte(
 	lpDefaultChar LPCCH,
 	lpUsedDefaultChar LPBOOL,
 ) INT {
-	var ret, _, _ = kernelWideCharToMultiByte.Call(
+	ret, _, _ := kernelWideCharToMultiByte.Call(
 		uintptr(CodePage),
 		uintptr(dwFlags),
 		uintptr(unsafe.Pointer(lpWideCharStr)),
@@ -425,7 +425,7 @@ func WriteConsoleInput(
 	nLength DWORD,
 	lpNumberOfEventsWritten LPDWORD,
 ) BOOL {
-	var ret, _, _ = kernelWriteConsoleInputW.Call(
+	ret, _, _ := kernelWriteConsoleInputW.Call(
 		uintptr(hConsoleInput),
 		uintptr(unsafe.Pointer(lpBuffer)),
 		uintptr(nLength),

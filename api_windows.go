@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 D2A4C0                        zr-win/[api_windows.go]
+// :v: 2019-04-03 14:50:33 2CCB8F                        zr-win/[api_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -1981,7 +1981,7 @@ func DialogBox(
 	hWndParent HWND,
 	lpDialogFunc DLGPROC,
 ) INT_PTR {
-	var ret, _, _ = userDialogBoxParamW.Call(
+	ret, _, _ := userDialogBoxParamW.Call(
 		uintptr(hInstance),
 		UintptrFromString(&TemplateName),
 		uintptr(hWndParent),
@@ -2046,7 +2046,7 @@ func RGB(red, green, blue int) COLORREF {
 // WindowMessageName returns a string describing a window message.
 // For example WindowMessageName(0x0006) returns "WM_ACTIVATE".
 func WindowMessageName(msg UINT) string {
-	var messages = map[UINT]string{
+	messages := map[UINT]string{
 		WM_ACTIVATE:    "WM_ACTIVATE",
 		WM_CHAR:        "WM_CHAR",
 		WM_COMMAND:     "WM_COMMAND",

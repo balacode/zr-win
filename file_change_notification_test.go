@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-24 04:46:26 0F7390      zr-win/[file_change_notification_test.go]
+// :v: 2019-04-03 14:43:43 0BCB68      zr-win/[file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -35,7 +35,7 @@ func Test_fchn_FindFirstChangeNotification_(t *testing.T) {
 	// wait for one second
 	// write a timestamp to file B
 	//
-	var NOTIFY = FILE_NOTIFY_CHANGE_FILE_NAME |
+	NOTIFY := FILE_NOTIFY_CHANGE_FILE_NAME |
 		FILE_NOTIFY_CHANGE_DIR_NAME |
 		FILE_NOTIFY_CHANGE_ATTRIBUTES |
 		FILE_NOTIFY_CHANGE_SIZE |
@@ -46,7 +46,7 @@ func Test_fchn_FindFirstChangeNotification_(t *testing.T) {
 	//
 	// call with invalid folder:
 	// should return INVALID_HANDLE_VALUE i.e. -1 / 0xFFFFFFFFFFFFFFFF
-	var got = HANDLE(FindFirstChangeNotification(`z:\yx`, TRUE, DWORD(NOTIFY)))
+	got := HANDLE(FindFirstChangeNotification(`z:\yx`, TRUE, DWORD(NOTIFY)))
 	zr.TTrue(t, (got&INVALID_HANDLE_VALUE) == INVALID_HANDLE_VALUE)
 	//
 	// call with valid folder:
@@ -66,8 +66,8 @@ func Test_fchn_FileChangeNotifications_(t *testing.T) {
 	const WAIT_TIMEOUT = 258
 	const NULL = 0
 	const INFINITE = 0xFFFFFFFF // infinite timeout
-	var path = `X:\TEST`
-	var NOTIFY = FILE_NOTIFY_CHANGE_CREATION |
+	path := `X:\TEST`
+	NOTIFY := FILE_NOTIFY_CHANGE_CREATION |
 		FILE_NOTIFY_CHANGE_FILE_NAME |
 		FILE_NOTIFY_CHANGE_LAST_WRITE |
 		FILE_NOTIFY_CHANGE_SIZE |
@@ -77,10 +77,10 @@ func Test_fchn_FileChangeNotifications_(t *testing.T) {
 	// FILE_NOTIFY_CHANGE_DIR_NAME |
 	// FILE_NOTIFY_CHANGE_LAST_ACCESS |
 	// FILE_NOTIFY_CHANGE_SECURITY |
-	var tms = zr.Timestamp
+	tms := zr.Timestamp
 	//
 	// start watching the folder
-	var handles = []HANDLE{
+	handles := []HANDLE{
 		FindFirstChangeNotification(path, TRUE, DWORD(NOTIFY)),
 	}
 	// check that handle value is correct
@@ -100,7 +100,7 @@ func Test_fchn_FileChangeNotifications_(t *testing.T) {
 	for {
 		// wait for notification
 		fmt.Println(tms(), "Waiting.."+".")
-		var status = WaitForMultipleObjects(1, &handles[0], TRUE, INFINITE)
+		status := WaitForMultipleObjects(1, &handles[0], TRUE, INFINITE)
 		fmt.Println(tms(), "Wait ended"+".")
 		switch status {
 		case WAIT_OBJECT_0:

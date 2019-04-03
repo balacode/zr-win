@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 70E5E2               zr-win/[dll_comdlg32_windows.go]
+// :v: 2019-04-03 14:50:33 4B6091               zr-win/[dll_comdlg32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -10,19 +10,22 @@ import (
 	"unsafe"
 )
 
-var comdlg32 = syscall.NewLazyDLL("comdlg32.dll")
-var comdlgGetOpenFileNameW = comdlg32.NewProc("GetOpenFileNameW")
-var comdlgGetSaveFileNameW = comdlg32.NewProc("GetSaveFileNameW")
+var (
+	comdlg32 = syscall.NewLazyDLL("comdlg32.dll")
+
+	comdlgGetOpenFileNameW = comdlg32.NewProc("GetOpenFileNameW")
+	comdlgGetSaveFileNameW = comdlg32.NewProc("GetSaveFileNameW")
+)
 
 // GetOpenFileName library: comdlg32.dll
 func GetOpenFileName(lpofn *OPENFILENAME) BOOL {
-	var ret, _, _ = comdlgGetOpenFileNameW.Call(uintptr(unsafe.Pointer(lpofn)))
+	ret, _, _ := comdlgGetOpenFileNameW.Call(uintptr(unsafe.Pointer(lpofn)))
 	return BOOLResult(ret)
 } //                                                             GetOpenFileName
 
 // GetSaveFileName library: comdlg32.dll
 func GetSaveFileName(lpofn *OPENFILENAME) BOOL {
-	var ret, _, _ = comdlgGetSaveFileNameW.Call(uintptr(unsafe.Pointer(lpofn)))
+	ret, _, _ := comdlgGetSaveFileNameW.Call(uintptr(unsafe.Pointer(lpofn)))
 	return BOOLResult(ret)
 } //                                                             GetSaveFileName
 

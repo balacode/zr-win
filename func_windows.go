@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-24 04:46:26 673ACB                       zr-win/[func_windows.go]
+// :v: 2019-04-03 14:43:43 2B4064                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -95,7 +95,7 @@ func OSClass() OSType {
 // OSFolder __
 func OSFolder() string {
 	var buffer [MAX_PATH + 1]WCHAR // buffer to receive Windows directory
-	var count = GetWindowsDirectory(
+	count := GetWindowsDirectory(
 		&buffer[0], // buffer for Windows directory
 		MAX_PATH+1, // size of buffer
 	)
@@ -122,9 +122,9 @@ func VolumeID(path string) uint32 {
 	case 2:
 		path += "\\"
 	}
-	var drive = path[:3]
-	var ret = DWORD(0)
-	var result = GetVolumeInformation(
+	drive := path[:3]
+	ret := DWORD(0)
+	result := GetVolumeInformation(
 		drive, // in  LPCTSTR lpRootPathName
 		nil,   // out LPTSTR  lpVolumeNameBuffer
 		0,     // in  DWORD   nVolumeNameSize
@@ -180,12 +180,12 @@ func GetRegistryString(key, valueName string) string {
 	var ar [BufferSize]WCHAR
 	//
 	// split registry key and subkey
-	var rootKey = getRegistryKey(key)
-	var subkey = getRegistrySubkey(key)
+	rootKey := getRegistryKey(key)
+	subkey := getRegistrySubkey(key)
 	//
 	// open the specified registry location
-	var openKey = HKEY(0)
-	var result = RegOpenKeyEx(
+	openKey := HKEY(0)
+	result := RegOpenKeyEx(
 		rootKey,  // hKey       [in]  HKEY
 		subkey,   // lpSubKey   [in]  LPCTSTR
 		0,        // ulOptions        DWORD
@@ -199,8 +199,8 @@ func GetRegistryString(key, valueName string) string {
 		return erv
 	}
 	// read the specified registry value
-	var lpData = LPBYTE(unsafe.Pointer(&ar[0]))
-	var bufSize = DWORD(BufferSize)
+	lpData := LPBYTE(unsafe.Pointer(&ar[0]))
+	bufSize := DWORD(BufferSize)
 	result = RegQueryValueEx(
 		openKey,   // hKey        HKEY
 		valueName, // lpValueName string
@@ -215,8 +215,8 @@ func GetRegistryString(key, valueName string) string {
 		return erv
 	}
 	// copy the array to a string
-	var retBuf = bytes.NewBuffer(make([]byte, 0, bufSize))
-	var ws = retBuf.WriteString
+	retBuf := bytes.NewBuffer(make([]byte, 0, bufSize))
+	ws := retBuf.WriteString
 	for i := 0; ar[i] != 0; i++ {
 		ws(string(ar[i]))
 	}
@@ -269,8 +269,8 @@ func getRegistrySubkey(key string) string {
 	const erv = ""
 	for _, iter := range rootKeys {
 		if str.HasPrefix(str.ToUpper(key), iter.name) {
-			var pos = len(iter.name)
-			var ret = key[pos+1:]
+			pos := len(iter.name)
+			ret := key[pos+1:]
 			return ret
 		}
 	}
@@ -280,7 +280,7 @@ func getRegistrySubkey(key string) string {
 
 // registryHardwareInfo __
 func registryHardwareInfo(valueName string) string {
-	var ret = GetRegistryString(
+	ret := GetRegistryString(
 		`HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System`,
 		valueName,
 	)
@@ -292,7 +292,7 @@ func registryHardwareInfo(valueName string) string {
 func windowsVersionInfo() OSVERSIONINFO {
 	var ret OSVERSIONINFO
 	ret.dwOSVersionInfoSize = DWORD(unsafe.Sizeof(ret))
-	var result = GetVersionEx(&ret) != 0
+	result := GetVersionEx(&ret) != 0
 	if !result {
 		//TODO: handle failure to get OS version (in windowsVersionInfo)
 	}

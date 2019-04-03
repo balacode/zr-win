@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-09 01:03:18 1E0D93                 zr-win/[dll_user32_windows.go]
+// :v: 2019-04-03 14:50:33 FCA57E                 zr-win/[dll_user32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -10,70 +10,72 @@ import (
 	"unsafe"
 )
 
-var user32 = syscall.NewLazyDLL("user32.dll")
-var userAppendMenuW = user32.NewProc("AppendMenuW")
-var userBeginPaint = user32.NewProc("BeginPaint")
-var userChangeWindowMessageFilter = user32.NewProc("ChangeWindowMessageFilter")
-var userCheckMenuItem = user32.NewProc("CheckMenuItem")
-var userCloseClipboard = user32.NewProc("CloseClipboard")
-var userCreateCaret = user32.NewProc("CreateCaret")
-var userCreateMenu = user32.NewProc("CreateMenu")
-var userCreateWindowExW = user32.NewProc("CreateWindowExW")
-var userDefWindowProcW = user32.NewProc("DefWindowProcW")
-var userDestroyCaret = user32.NewProc("DestroyCaret")
-var userDestroyMenu = user32.NewProc("DestroyMenu")
-var userDestroyWindow = user32.NewProc("DestroyWindow")
-var userDialogBoxIndirectParamW = user32.NewProc("DialogBoxIndirectParamW")
-var userDialogBoxParamW = user32.NewProc("DialogBoxParamW")
-var userDispatchMessageW = user32.NewProc("DispatchMessageW")
-var userDrawTextW = user32.NewProc("DrawTextW")
-var userEmptyClipboard = user32.NewProc("EmptyClipboard")
-var userEndDialog = user32.NewProc("EndDialog")
-var userEndPaint = user32.NewProc("EndPaint")
-var userFillRect = user32.NewProc("FillRect")
-var userGetActiveWindow = user32.NewProc("GetActiveWindow")
-var userGetClientRect = user32.NewProc("GetClientRect")
-var userGetClipboardData = user32.NewProc("GetClipboardData")
-var userGetDC = user32.NewProc("GetDC")
-var userGetDlgItem = user32.NewProc("GetDlgItem")
-var userGetDlgItemTextW = user32.NewProc("GetDlgItemTextW")
-var userGetKeyState = user32.NewProc("GetKeyState")
-var userGetMenu = user32.NewProc("GetMenu")
-var userGetMessageW = user32.NewProc("GetMessageW")
-var userHideCaret = user32.NewProc("HideCaret")
-var userInvalidateRect = user32.NewProc("InvalidateRect")
-var userIsMenu = user32.NewProc("IsMenu")
-var userIsWindow = user32.NewProc("IsWindow")
-var userLoadAcceleratorsW = user32.NewProc("LoadAcceleratorsW")
-var userLoadCursorW = user32.NewProc("LoadCursorW")
-var userLoadIconW = user32.NewProc("LoadIconW")
-var userMapVirtualKeyW = user32.NewProc("MapVirtualKeyW")
-var userMessageBoxW = user32.NewProc("MessageBoxW")
-var userOpenClipboard = user32.NewProc("OpenClipboard")
-var userPeekMessageW = user32.NewProc("PeekMessageW")
-var userPostQuitMessage = user32.NewProc("PostQuitMessage")
-var userRegisterClassExW = user32.NewProc("RegisterClassExW")
-var userReleaseDC = user32.NewProc("ReleaseDC")
-var userSendMessageW = user32.NewProc("SendMessageW")
-var userSetCaretPos = user32.NewProc("SetCaretPos")
-var userSetClipboardData = user32.NewProc("SetClipboardData")
-var userSetCursor = user32.NewProc("SetCursor")
-var userSetDlgItemTextW = user32.NewProc("SetDlgItemTextW")
-var userSetMenu = user32.NewProc("SetMenu")
-var userSetMenuItemInfoW = user32.NewProc("SetMenuItemInfoW")
-var userSetRect = user32.NewProc("SetRect")
-var userSetWindowPos = user32.NewProc("SetWindowPos")
-var userSetWindowTextW = user32.NewProc("SetWindowTextW")
-var userShowCaret = user32.NewProc("ShowCaret")
-var userShowWindow = user32.NewProc("ShowWindow")
-var userTranslateAccelerator = user32.NewProc("TranslateAccelerator")
-var userTranslateMessage = user32.NewProc("TranslateMessage")
-var userUnregisterHotKey = user32.NewProc("UnregisterHotKey")
-var userUpdateWindow = user32.NewProc("UpdateWindow")
-var userWindowFromDC = user32.NewProc("WindowFromDC")
+var (
+	user32 = syscall.NewLazyDLL("user32.dll")
 
-var userIsClipboardFormatAvailable = user32.NewProc(
-	"IsClipboardFormatAvailable",
+	userAppendMenuW               = user32.NewProc("AppendMenuW")
+	userBeginPaint                = user32.NewProc("BeginPaint")
+	userChangeWindowMessageFilter = user32.NewProc("ChangeWindowMessageFilter")
+	userCheckMenuItem             = user32.NewProc("CheckMenuItem")
+	userCloseClipboard            = user32.NewProc("CloseClipboard")
+	userCreateCaret               = user32.NewProc("CreateCaret")
+	userCreateMenu                = user32.NewProc("CreateMenu")
+	userCreateWindowExW           = user32.NewProc("CreateWindowExW")
+	userDefWindowProcW            = user32.NewProc("DefWindowProcW")
+	userDestroyCaret              = user32.NewProc("DestroyCaret")
+	userDestroyMenu               = user32.NewProc("DestroyMenu")
+	userDestroyWindow             = user32.NewProc("DestroyWindow")
+	userDialogBoxIndirectParamW   = user32.NewProc("DialogBoxIndirectParamW")
+	userDialogBoxParamW           = user32.NewProc("DialogBoxParamW")
+	userDispatchMessageW          = user32.NewProc("DispatchMessageW")
+	userDrawTextW                 = user32.NewProc("DrawTextW")
+	userEmptyClipboard            = user32.NewProc("EmptyClipboard")
+	userEndDialog                 = user32.NewProc("EndDialog")
+	userEndPaint                  = user32.NewProc("EndPaint")
+	userFillRect                  = user32.NewProc("FillRect")
+	userGetActiveWindow           = user32.NewProc("GetActiveWindow")
+	userGetClientRect             = user32.NewProc("GetClientRect")
+	userGetClipboardData          = user32.NewProc("GetClipboardData")
+	userGetDC                     = user32.NewProc("GetDC")
+	userGetDlgItem                = user32.NewProc("GetDlgItem")
+	userGetDlgItemTextW           = user32.NewProc("GetDlgItemTextW")
+	userGetKeyState               = user32.NewProc("GetKeyState")
+	userGetMenu                   = user32.NewProc("GetMenu")
+	userGetMessageW               = user32.NewProc("GetMessageW")
+	userHideCaret                 = user32.NewProc("HideCaret")
+	userInvalidateRect            = user32.NewProc("InvalidateRect")
+	userIsMenu                    = user32.NewProc("IsMenu")
+	userIsWindow                  = user32.NewProc("IsWindow")
+	userLoadAcceleratorsW         = user32.NewProc("LoadAcceleratorsW")
+	userLoadCursorW               = user32.NewProc("LoadCursorW")
+	userLoadIconW                 = user32.NewProc("LoadIconW")
+	userMapVirtualKeyW            = user32.NewProc("MapVirtualKeyW")
+	userMessageBoxW               = user32.NewProc("MessageBoxW")
+	userOpenClipboard             = user32.NewProc("OpenClipboard")
+	userPeekMessageW              = user32.NewProc("PeekMessageW")
+	userPostQuitMessage           = user32.NewProc("PostQuitMessage")
+	userRegisterClassExW          = user32.NewProc("RegisterClassExW")
+	userReleaseDC                 = user32.NewProc("ReleaseDC")
+	userSendMessageW              = user32.NewProc("SendMessageW")
+	userSetCaretPos               = user32.NewProc("SetCaretPos")
+	userSetClipboardData          = user32.NewProc("SetClipboardData")
+	userSetCursor                 = user32.NewProc("SetCursor")
+	userSetDlgItemTextW           = user32.NewProc("SetDlgItemTextW")
+	userSetMenu                   = user32.NewProc("SetMenu")
+	userSetMenuItemInfoW          = user32.NewProc("SetMenuItemInfoW")
+	userSetRect                   = user32.NewProc("SetRect")
+	userSetWindowPos              = user32.NewProc("SetWindowPos")
+	userSetWindowTextW            = user32.NewProc("SetWindowTextW")
+	userShowCaret                 = user32.NewProc("ShowCaret")
+	userShowWindow                = user32.NewProc("ShowWindow")
+	userTranslateAccelerator      = user32.NewProc("TranslateAccelerator")
+	userTranslateMessage          = user32.NewProc("TranslateMessage")
+	userUnregisterHotKey          = user32.NewProc("UnregisterHotKey")
+	userUpdateWindow              = user32.NewProc("UpdateWindow")
+	userWindowFromDC              = user32.NewProc("WindowFromDC")
+
+	userIsClipboardFormatAvailable = user32.NewProc(
+		"IsClipboardFormatAvailable")
 )
 
 // unused for now:
@@ -86,7 +88,7 @@ func AppendMenu(
 	uIDNewItem UINT_PTR,
 	NewItem string,
 ) BOOL {
-	var ret, _, _ = userAppendMenuW.Call(
+	ret, _, _ := userAppendMenuW.Call(
 		uintptr(hMenu),
 		uintptr(uFlags),
 		uintptr(uIDNewItem),
@@ -96,7 +98,7 @@ func AppendMenu(
 
 // BeginPaint library: user32.dll
 func BeginPaint(hWnd HWND, lpPaint *PAINTSTRUCT) HDC {
-	var ret, _, _ = userBeginPaint.Call(
+	ret, _, _ := userBeginPaint.Call(
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpPaint)))
 	return HDC(ret)
@@ -104,7 +106,7 @@ func BeginPaint(hWnd HWND, lpPaint *PAINTSTRUCT) HDC {
 
 // CheckMenuItem library: user32.dll
 func CheckMenuItem(hMenu HMENU, uIDCheckItem, uCheck UINT) DWORD {
-	var ret, _, _ = userCheckMenuItem.Call(
+	ret, _, _ := userCheckMenuItem.Call(
 		uintptr(hMenu),
 		uintptr(uIDCheckItem),
 		uintptr(uCheck))
@@ -113,7 +115,7 @@ func CheckMenuItem(hMenu HMENU, uIDCheckItem, uCheck UINT) DWORD {
 
 // CloseClipboard library: user32.dll
 func CloseClipboard() BOOL {
-	var ret, _, _ = userCloseClipboard.Call()
+	ret, _, _ := userCloseClipboard.Call()
 	return BOOLResult(ret)
 } //                                                              CloseClipboard
 
@@ -124,7 +126,7 @@ func CreateCaret(
 	nWidth INT,
 	nHeight INT,
 ) BOOL {
-	var ret, _, _ = userCreateCaret.Call(
+	ret, _, _ := userCreateCaret.Call(
 		uintptr(hWnd),
 		uintptr(hBitmap),
 		uintptr(nWidth),
@@ -134,7 +136,7 @@ func CreateCaret(
 
 // CreateMenu library: user32.dll
 func CreateMenu() HMENU {
-	var ret, _, _ = userCreateMenu.Call()
+	ret, _, _ := userCreateMenu.Call()
 	return HMENU(ret)
 } //                                                                  CreateMenu
 
@@ -153,7 +155,7 @@ func CreateWindowEx(
 	HInstance HINSTANCE,
 	lpParam LPVOID,
 ) HWND {
-	var ret, _, _ = userCreateWindowExW.Call(
+	ret, _, _ := userCreateWindowExW.Call(
 		uintptr(dwExStyle),
 		UintptrFromString(&ClassName),
 		UintptrFromString(&WindowName),
@@ -171,7 +173,7 @@ func CreateWindowEx(
 
 // DefWindowProc library: user32.dll
 func DefWindowProc(hWnd HWND, Msg UINT, wParam WPARAM, lParam LPARAM) LRESULT {
-	var ret, _, _ = userDefWindowProcW.Call(
+	ret, _, _ := userDefWindowProcW.Call(
 		uintptr(hWnd),
 		uintptr(Msg),
 		uintptr(wParam),
@@ -182,19 +184,19 @@ func DefWindowProc(hWnd HWND, Msg UINT, wParam WPARAM, lParam LPARAM) LRESULT {
 
 // DestroyCaret library: user32.dll
 func DestroyCaret() BOOL {
-	var ret, _, _ = userDestroyCaret.Call()
+	ret, _, _ := userDestroyCaret.Call()
 	return BOOLResult(ret)
 } //                                                                DestroyCaret
 
 // DestroyMenu library: user32.dll
 func DestroyMenu(hMenu HMENU) BOOL {
-	var ret, _, _ = userDestroyMenu.Call(uintptr(hMenu))
+	ret, _, _ := userDestroyMenu.Call(uintptr(hMenu))
 	return BOOLResult(ret)
 } //                                                                 DestroyMenu
 
 // DestroyWindow library: user32.dll
 func DestroyWindow(hWnd HWND) BOOL {
-	var ret, _, _ = userDestroyWindow.Call(uintptr(hWnd))
+	ret, _, _ := userDestroyWindow.Call(uintptr(hWnd))
 	return BOOLResult(ret)
 } //                                                               DestroyWindow
 
@@ -206,7 +208,7 @@ func DialogBoxIndirectParam(
 	lpDialogFunc DLGPROC,
 	dwInitParam LPARAM,
 ) INT_PTR {
-	var ret, _, _ = userDialogBoxIndirectParamW.Call(
+	ret, _, _ := userDialogBoxIndirectParamW.Call(
 		uintptr(hInstance),
 		uintptr(unsafe.Pointer(hDialogTemplate)),
 		uintptr(hWndParent),
@@ -218,7 +220,7 @@ func DialogBoxIndirectParam(
 
 // DispatchMessage library: user32.dll
 func DispatchMessage(lpmsg *MSG) LRESULT {
-	var ret, _, _ = userDispatchMessageW.Call(
+	ret, _, _ := userDispatchMessageW.Call(
 		uintptr(unsafe.Pointer(lpmsg)),
 	)
 	return LRESULT(ret)
@@ -232,7 +234,7 @@ func DrawText(
 	lpRect *RECT,
 	uFormat UINT,
 ) INT {
-	var ret, _, _ = userDrawTextW.Call(
+	ret, _, _ := userDrawTextW.Call(
 		uintptr(hDC),                    // handle to DC
 		UintptrFromString(&lpString),    // text to draw
 		uintptr(nCount),                 // text length
@@ -244,13 +246,13 @@ func DrawText(
 
 // EmptyClipboard library: user32.dll
 func EmptyClipboard() BOOL {
-	var ret, _, _ = userEmptyClipboard.Call()
+	ret, _, _ := userEmptyClipboard.Call()
 	return BOOLResult(ret)
 } //                                                              EmptyClipboard
 
 // EndDialog library: user32.dll
 func EndDialog(hDlg HWND, nResult INT_PTR) BOOL {
-	var ret, _, _ = userEndDialog.Call(
+	ret, _, _ := userEndDialog.Call(
 		uintptr(hDlg),
 		uintptr(nResult),
 	)
@@ -259,7 +261,7 @@ func EndDialog(hDlg HWND, nResult INT_PTR) BOOL {
 
 // EndPaint library: user32.dll
 func EndPaint(hWnd HWND, lpPaint *PAINTSTRUCT) BOOL {
-	var ret, _, _ = userEndPaint.Call(
+	ret, _, _ := userEndPaint.Call(
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpPaint)),
 	)
@@ -268,7 +270,7 @@ func EndPaint(hWnd HWND, lpPaint *PAINTSTRUCT) BOOL {
 
 // FillRect library: user32.dll
 func FillRect(hDC HDC, lprc *RECT, hbr HBRUSH) INT {
-	var ret, _, _ = userFillRect.Call(
+	ret, _, _ := userFillRect.Call(
 		uintptr(hDC),
 		uintptr(unsafe.Pointer(lprc)),
 		uintptr(hbr),
@@ -278,13 +280,13 @@ func FillRect(hDC HDC, lprc *RECT, hbr HBRUSH) INT {
 
 // GetActiveWindow library: user32.dll
 func GetActiveWindow() HWND {
-	var ret, _, _ = userGetActiveWindow.Call()
+	ret, _, _ := userGetActiveWindow.Call()
 	return HWND(ret)
 } //                                                             GetActiveWindow
 
 // GetClientRect library: user32.dll
 func GetClientRect(hWnd HWND, lpRect *RECT) BOOL {
-	var ret, _, _ = userGetClientRect.Call(
+	ret, _, _ := userGetClientRect.Call(
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpRect)),
 	)
@@ -293,19 +295,19 @@ func GetClientRect(hWnd HWND, lpRect *RECT) BOOL {
 
 // GetClipboardData library: user32.dll
 func GetClipboardData(uFormat UINT) HANDLE {
-	var ret, _, _ = userGetClipboardData.Call(uintptr(uFormat))
+	ret, _, _ := userGetClipboardData.Call(uintptr(uFormat))
 	return HANDLE(ret)
 } //                                                            GetClipboardData
 
 // GetDC library: user32.dll
 func GetDC(hWnd HWND) HDC {
-	var ret, _, _ = userGetDC.Call(uintptr(hWnd))
+	ret, _, _ := userGetDC.Call(uintptr(hWnd))
 	return HDC(ret)
 } //                                                                       GetDC
 
 // GetDlgItem library: user32.dll
 func GetDlgItem(hDlg HWND, nIDDlgItem int) HWND {
-	var ret, _, _ = userGetDlgItem.Call(
+	ret, _, _ := userGetDlgItem.Call(
 		uintptr(hDlg),
 		uintptr(nIDDlgItem),
 	)
@@ -319,7 +321,7 @@ func GetDlgItemText(
 	lpString LPWSTR,
 	nMaxCount INT,
 ) UINT {
-	var ret, _, _ = userGetDlgItemTextW.Call(
+	ret, _, _ := userGetDlgItemTextW.Call(
 		uintptr(hDlg),
 		uintptr(nIDDlgItem),
 		uintptr(unsafe.Pointer(lpString)),
@@ -330,13 +332,13 @@ func GetDlgItemText(
 
 // GetKeyState library: user32.dll
 func GetKeyState(nVirtKey INT) SHORT {
-	var ret, _, _ = userGetKeyState.Call(uintptr(nVirtKey)) // [in] int
+	ret, _, _ := userGetKeyState.Call(uintptr(nVirtKey)) // [in] int
 	return SHORT(ret)
 } //                                                                 GetKeyState
 
 // GetMenu library: user32.dll
 func GetMenu(hWnd HWND) HMENU {
-	var ret, _, _ = userGetMenu.Call(uintptr(hWnd))
+	ret, _, _ := userGetMenu.Call(uintptr(hWnd))
 	return HMENU(ret)
 } //                                                                     GetMenu
 
@@ -347,7 +349,7 @@ func GetMessage(
 	wMsgFilterMin UINT,
 	wMsgFilterMax UINT,
 ) BOOL {
-	var ret, _, _ = userGetMessageW.Call(
+	ret, _, _ := userGetMessageW.Call(
 		uintptr(unsafe.Pointer(lpMsg)),
 		uintptr(hWnd),
 		uintptr(wMsgFilterMin),
@@ -358,13 +360,13 @@ func GetMessage(
 
 // HideCaret library: user32.dll
 func HideCaret(hWnd HWND) BOOL {
-	var ret, _, _ = userHideCaret.Call(uintptr(hWnd)) // [in] HWND
+	ret, _, _ := userHideCaret.Call(uintptr(hWnd)) // [in] HWND
 	return BOOLResult(ret)
 } //                                                                   HideCaret
 
 // InvalidateRect library: user32.dll
 func InvalidateRect(hWnd HWND, lpRect *RECT, bErase BOOL) BOOL {
-	var ret, _, _ = userInvalidateRect.Call(
+	ret, _, _ := userInvalidateRect.Call(
 		uintptr(hWnd),                   // handle to window
 		uintptr(unsafe.Pointer(lpRect)), // rectangle coordinates
 		uintptr(bErase),                 // erase state
@@ -374,25 +376,25 @@ func InvalidateRect(hWnd HWND, lpRect *RECT, bErase BOOL) BOOL {
 
 // IsClipboardFormatAvailable library: user32.dll
 func IsClipboardFormatAvailable(format UINT) BOOL {
-	var ret, _, _ = userIsClipboardFormatAvailable.Call(uintptr(format))
+	ret, _, _ := userIsClipboardFormatAvailable.Call(uintptr(format))
 	return BOOLResult(ret)
 } //                                                  IsClipboardFormatAvailable
 
 // IsMenu library: user32.dll
 func IsMenu(hMenu HMENU) BOOL {
-	var ret, _, _ = userIsMenu.Call(uintptr(hMenu))
+	ret, _, _ := userIsMenu.Call(uintptr(hMenu))
 	return BOOLResult(ret)
 } //                                                                      IsMenu
 
 // IsWindow library: user32.dll
 func IsWindow(hWnd HWND) BOOL {
-	var ret, _, _ = userIsWindow.Call(uintptr(hWnd))
+	ret, _, _ := userIsWindow.Call(uintptr(hWnd))
 	return BOOLResult(ret)
 } //                                                                    IsWindow
 
 // LoadAccelerators library: user32.dll
 func LoadAccelerators(hInstance HINSTANCE, TableName string) HACCEL {
-	var ret, _, _ = userLoadAcceleratorsW.Call(
+	ret, _, _ := userLoadAcceleratorsW.Call(
 		uintptr(hInstance),
 		UintptrFromString(&TableName),
 	)
@@ -401,7 +403,7 @@ func LoadAccelerators(hInstance HINSTANCE, TableName string) HACCEL {
 
 // LoadCursor library: user32.dll
 func LoadCursor(hInstance HINSTANCE, lpCursorName LPCWSTR) HCURSOR {
-	var ret, _, _ = userLoadCursorW.Call(
+	ret, _, _ := userLoadCursorW.Call(
 		uintptr(hInstance),
 		uintptr(unsafe.Pointer(lpCursorName)),
 	)
@@ -410,7 +412,7 @@ func LoadCursor(hInstance HINSTANCE, lpCursorName LPCWSTR) HCURSOR {
 
 // LoadIcon library: user32.dll
 func LoadIcon(hInstance HINSTANCE, lpIconName LPCWSTR) HICON {
-	var ret, _, _ = userLoadIconW.Call(
+	ret, _, _ := userLoadIconW.Call(
 		uintptr(hInstance),
 		uintptr(unsafe.Pointer(lpIconName)),
 	)
@@ -419,7 +421,7 @@ func LoadIcon(hInstance HINSTANCE, lpIconName LPCWSTR) HICON {
 
 // MapVirtualKey library: user32.dll
 func MapVirtualKey(nCode, uMapType uint) uint {
-	var ret, _, _ = userMapVirtualKeyW.Call(
+	ret, _, _ := userMapVirtualKeyW.Call(
 		uintptr(nCode),
 		uintptr(uMapType),
 	)
@@ -428,7 +430,7 @@ func MapVirtualKey(nCode, uMapType uint) uint {
 
 // MessageBox library: user32.dll
 func MessageBox(hWnd HWND, title, caption string, flags uint) int {
-	var ret, _, _ = userMessageBoxW.Call(
+	ret, _, _ := userMessageBoxW.Call(
 		uintptr(hWnd),
 		UintptrFromString(&title),
 		UintptrFromString(&caption),
@@ -439,7 +441,7 @@ func MessageBox(hWnd HWND, title, caption string, flags uint) int {
 
 // OpenClipboard library: user32.dll
 func OpenClipboard(hWnd HWND) BOOL {
-	var ret, _, _ = userOpenClipboard.Call(uintptr(hWnd))
+	ret, _, _ := userOpenClipboard.Call(uintptr(hWnd))
 	return BOOLResult(ret)
 } //                                                               OpenClipboard
 
@@ -451,7 +453,7 @@ func PeekMessage(
 	wMsgFilterMax UINT,
 	wRemoveMsg UINT,
 ) BOOL {
-	var ret, _, _ = userPeekMessageW.Call(
+	ret, _, _ := userPeekMessageW.Call(
 		uintptr(unsafe.Pointer(lpMsg)),
 		uintptr(hWnd),
 		uintptr(wMsgFilterMin),
@@ -474,7 +476,7 @@ func PostQuitMessage(nExitCode INT) {
 //          hrgnUpdate HRGN,
 //          flags UINT,
 //    ) BOOL {
-//          var ret, _, _ = userRedrawWindow.Call(
+//          ret, _, _ := userRedrawWindow.Call(
 //                uintptr(hWnd),
 //                uintptr(unsafe.Pointer(lprcUpdate)),
 //                uintptr(hrgnUpdate),
@@ -485,7 +487,7 @@ func PostQuitMessage(nExitCode INT) {
 
 // RegisterClassEx library: user32.dll
 func RegisterClassEx(lpWndClass *WNDCLASSEX) ATOM {
-	var ret, _, _ = userRegisterClassExW.Call(
+	ret, _, _ := userRegisterClassExW.Call(
 		uintptr(unsafe.Pointer(lpWndClass)),
 	)
 	return ATOM(ret)
@@ -493,7 +495,7 @@ func RegisterClassEx(lpWndClass *WNDCLASSEX) ATOM {
 
 // ReleaseDC library: user32.dll
 func ReleaseDC(hWnd HWND, hDC HDC) INT {
-	var ret, _, _ = userReleaseDC.Call(
+	ret, _, _ := userReleaseDC.Call(
 		uintptr(hWnd),
 		uintptr(hDC),
 	)
@@ -502,7 +504,7 @@ func ReleaseDC(hWnd HWND, hDC HDC) INT {
 
 // SendMessage library: user32.dll
 func SendMessage(hWnd HWND, Msg UINT, wParam WPARAM, lParam LPARAM) LRESULT {
-	var ret, _, _ = userSendMessageW.Call(
+	ret, _, _ := userSendMessageW.Call(
 		uintptr(hWnd),
 		uintptr(Msg),
 		uintptr(wParam),
@@ -513,19 +515,19 @@ func SendMessage(hWnd HWND, Msg UINT, wParam WPARAM, lParam LPARAM) LRESULT {
 
 // SetCaretPos library: user32.dll
 func SetCaretPos(x, y INT) BOOL {
-	var ret, _, _ = userSetCaretPos.Call(uintptr(x), uintptr(y))
+	ret, _, _ := userSetCaretPos.Call(uintptr(x), uintptr(y))
 	return BOOLResult(ret)
 } //                                                                 SetCaretPos
 
 // SetClipboardData library: user32.dll
 func SetClipboardData(uFormat UINT, hMem HANDLE) HANDLE {
-	var ret, _, _ = userSetClipboardData.Call(uintptr(uFormat), uintptr(hMem))
+	ret, _, _ := userSetClipboardData.Call(uintptr(uFormat), uintptr(hMem))
 	return HANDLE(ret)
 } //                                                            SetClipboardData
 
 // SetCursor library: user32.dll
 func SetCursor(hCursor HCURSOR) HCURSOR {
-	var ret, _, _ = userSetCursor.Call(uintptr(hCursor))
+	ret, _, _ := userSetCursor.Call(uintptr(hCursor))
 	return HCURSOR(ret)
 } //                                                                   SetCursor
 
@@ -535,7 +537,7 @@ func SetDlgItemText(
 	nIDDlgItem INT,
 	Text string,
 ) BOOL {
-	var ret, _, _ = userSetDlgItemTextW.Call(
+	ret, _, _ := userSetDlgItemTextW.Call(
 		uintptr(hDlg),
 		uintptr(nIDDlgItem),
 		UintptrFromString(&Text),
@@ -545,7 +547,7 @@ func SetDlgItemText(
 
 // SetMenu library: user32.dll
 func SetMenu(hWnd HWND, hMenu HMENU) BOOL {
-	var ret, _, _ = userSetMenu.Call(
+	ret, _, _ := userSetMenu.Call(
 		uintptr(hWnd),
 		uintptr(hMenu),
 	)
@@ -559,7 +561,7 @@ func SetMenuItemInfo(
 	fByPosition BOOL,
 	lpmii *MENUITEMINFO,
 ) BOOL {
-	var ret, _, _ = userSetMenuItemInfoW.Call(
+	ret, _, _ := userSetMenuItemInfoW.Call(
 		uintptr(hMenu),
 		uintptr(uItem),
 		uintptr(fByPosition),
@@ -570,7 +572,7 @@ func SetMenuItemInfo(
 
 // SetRect library: user32.dll
 func SetRect(lprc *RECT, xLeft, yTop, xRight, yBottom INT) BOOL {
-	var ret, _, _ = userSetRect.Call(
+	ret, _, _ := userSetRect.Call(
 		uintptr(unsafe.Pointer(lprc)),
 		uintptr(xLeft),
 		uintptr(yTop),
@@ -590,7 +592,7 @@ func SetWindowPos(
 	cy INT,
 	uFlags UINT,
 ) BOOL {
-	var ret, _, _ = userSetWindowPos.Call(
+	ret, _, _ := userSetWindowPos.Call(
 		uintptr(hWnd),
 		uintptr(hWndInsertAfter),
 		uintptr(X),
@@ -604,7 +606,7 @@ func SetWindowPos(
 
 // SetWindowText library: user32.dll
 func SetWindowText(hWnd HWND, Text string) BOOL {
-	var ret, _, _ = userSetWindowTextW.Call(
+	ret, _, _ := userSetWindowTextW.Call(
 		uintptr(hWnd),
 		UintptrFromString(&Text),
 	)
@@ -613,13 +615,13 @@ func SetWindowText(hWnd HWND, Text string) BOOL {
 
 // ShowCaret library: user32.dll
 func ShowCaret(hWnd HWND) BOOL {
-	var ret, _, _ = userShowCaret.Call(uintptr(hWnd))
+	ret, _, _ := userShowCaret.Call(uintptr(hWnd))
 	return BOOLResult(ret)
 } //                                                                   ShowCaret
 
 // ShowWindow library: user32.dll
 func ShowWindow(hWnd HWND, nCmdShow INT) BOOL {
-	var ret, _, _ = userShowWindow.Call(
+	ret, _, _ := userShowWindow.Call(
 		uintptr(hWnd),
 		uintptr(nCmdShow),
 	)
@@ -628,7 +630,7 @@ func ShowWindow(hWnd HWND, nCmdShow INT) BOOL {
 
 // TranslateAccelerator library: user32.dll
 func TranslateAccelerator(hWnd HWND, hAccTable HACCEL, lpMsg *MSG) INT {
-	var ret, _, _ = userTranslateMessage.Call(
+	ret, _, _ := userTranslateMessage.Call(
 		uintptr(hWnd),
 		uintptr(hAccTable),
 		uintptr(unsafe.Pointer(lpMsg)),
@@ -638,7 +640,7 @@ func TranslateAccelerator(hWnd HWND, hAccTable HACCEL, lpMsg *MSG) INT {
 
 // TranslateMessage library: user32.dll
 func TranslateMessage(lpmsg *MSG) BOOL {
-	var ret, _, _ = userTranslateMessage.Call(uintptr(unsafe.Pointer(lpmsg)))
+	ret, _, _ := userTranslateMessage.Call(uintptr(unsafe.Pointer(lpmsg)))
 	if ret == 0 {
 		return FALSE
 	}
@@ -649,7 +651,7 @@ func TranslateMessage(lpmsg *MSG) BOOL {
 
 // UnregisterHotKey library: user32.dll
 func UnregisterHotKey(hWnd HWND, id INT) BOOL {
-	var ret, _, _ = userUnregisterHotKey.Call(
+	ret, _, _ := userUnregisterHotKey.Call(
 		uintptr(hWnd),
 		uintptr(id),
 	)
@@ -658,13 +660,13 @@ func UnregisterHotKey(hWnd HWND, id INT) BOOL {
 
 // UpdateWindow library: user32.dll
 func UpdateWindow(hWnd HWND) BOOL {
-	var ret, _, _ = userUpdateWindow.Call(uintptr(hWnd))
+	ret, _, _ := userUpdateWindow.Call(uintptr(hWnd))
 	return BOOLResult(ret)
 } //                                                                UpdateWindow
 
 // WindowFromDC library: user32.dll
 func WindowFromDC(hDC HDC) HWND {
-	var ret, _, _ = userWindowFromDC.Call(uintptr(hDC))
+	ret, _, _ := userWindowFromDC.Call(uintptr(hDC))
 	return HWND(ret)
 } //                                                                WindowFromDC
 
