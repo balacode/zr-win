@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-04-03 14:43:43 2B4064                       zr-win/[func_windows.go]
+// :v: 2019-04-28 18:10:21 649DA4                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -30,7 +30,7 @@ package win
 import (
 	"bytes"
 	"fmt"
-	str "strings"
+	"strings"
 	"unsafe"
 
 	"github.com/balacode/zr"
@@ -255,7 +255,7 @@ func getRegistryKey(key string) HKEY {
 		return erv
 	}
 	for _, iter := range rootKeys {
-		if str.HasPrefix(str.ToUpper(key), iter.name) {
+		if strings.HasPrefix(strings.ToUpper(key), iter.name) {
 			return iter.key
 		}
 	}
@@ -268,7 +268,7 @@ func getRegistryKey(key string) HKEY {
 func getRegistrySubkey(key string) string {
 	const erv = ""
 	for _, iter := range rootKeys {
-		if str.HasPrefix(str.ToUpper(key), iter.name) {
+		if strings.HasPrefix(strings.ToUpper(key), iter.name) {
 			pos := len(iter.name)
 			ret := key[pos+1:]
 			return ret
@@ -284,7 +284,7 @@ func registryHardwareInfo(valueName string) string {
 		`HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System`,
 		valueName,
 	)
-	ret = str.Trim(ret, SPACES)
+	ret = strings.Trim(ret, SPACES)
 	return ret
 } //                                                        registryHardwareInfo
 

@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-04-03 14:50:33 D40CDB                zr-win/[api_helpers_windows.go]
+// :v: 2019-04-28 18:10:21 3A75E2                zr-win/[api_helpers_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -24,7 +24,7 @@ import (
 	"bytes"
 	"fmt"
 	"runtime"
-	str "strings"
+	"strings"
 	"syscall"
 	"unsafe"
 )
@@ -102,8 +102,8 @@ func PWSTRFromString(s string) *WCHAR {
 	if s == "" {
 		return (*WCHAR)(nil)
 	}
-	if str.Contains(s, "\x00") {
-		count := str.Count(s, "")
+	if strings.Contains(s, "\x00") {
+		count := strings.Count(s, "")
 		ret := make([]WCHAR, count)
 		for i, r := range s {
 			ret[i] = WCHAR(r)
@@ -138,7 +138,7 @@ func UintptrFromString(s *string) uintptr {
 	var ret *uint16
 	// Some Windows API functions like GetTextExtentPoint32() panic when given
 	// a string containing NUL. This block checks & returns the part before NUL.
-	zeroAt := str.Index(*s, "\x00")
+	zeroAt := strings.Index(*s, "\x00")
 	if zeroAt == -1 {
 		ret, _ = syscall.UTF16PtrFromString(*s)
 		return uintptr(unsafe.Pointer(ret))
