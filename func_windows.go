@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-04-28 18:10:21 649DA4                       zr-win/[func_windows.go]
+// :v: 2019-05-06 06:30:05 2F45FB                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -211,7 +211,7 @@ func GetRegistryString(key, valueName string) string {
 	)
 	if result != ERROR_SUCCESS && result != ERROR_FILE_NOT_FOUND {
 		zr.Error(zr.EFailedReading, "registry key^", key, "value^", valueName)
-		//TODO: add SystemErrorName(result) (in GetRegistryString)
+		// TODO: add SystemErrorName(result) (in GetRegistryString)
 		return erv
 	}
 	// copy the array to a string
@@ -294,7 +294,7 @@ func windowsVersionInfo() OSVERSIONINFO {
 	ret.dwOSVersionInfoSize = DWORD(unsafe.Sizeof(ret))
 	result := GetVersionEx(&ret) != 0
 	if !result {
-		//TODO: handle failure to get OS version (in windowsVersionInfo)
+		// TODO: handle failure to get OS version (in windowsVersionInfo)
 	}
 	return ret
 } //                                                          windowsVersionInfo

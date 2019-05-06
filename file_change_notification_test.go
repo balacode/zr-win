@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-04-03 14:43:43 0BCB68      zr-win/[file_change_notification_test.go]
+// :v: 2019-05-06 06:30:05 9ECA42      zr-win/[file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -61,7 +61,7 @@ func Test_fchn_FileChangeNotifications_(t *testing.T) {
 		PL("Test_fchn_FileChangeNotifications_ IS UNIFINISHED")
 		return
 	}
-	const WAIT_OBJECT = 0 //TODO: move constants
+	const WAIT_OBJECT = 0 // TODO: move constants
 	const WAIT_OBJECT_0 = 0
 	const WAIT_TIMEOUT = 258
 	const NULL = 0

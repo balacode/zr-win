@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-04-03 14:50:33 2CCB8F                        zr-win/[api_windows.go]
+// :v: 2019-05-06 06:30:05 036AEA                        zr-win/[api_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -421,7 +421,7 @@ const IDC_STATIC = 0xffffffff
 const IDI_APPLICATION = 32512
 
 // INVALID_HANDLE_VALUE __
-const INVALID_HANDLE_VALUE = 0xffffffff //TODO: HANDLE(-1)
+const INVALID_HANDLE_VALUE = 0xffffffff // TODO: HANDLE(-1)
 
 // INFINITE __
 const INFINITE = 0xFFFFFFFF // infinite timeout

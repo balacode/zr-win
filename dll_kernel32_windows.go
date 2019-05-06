@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-04-03 14:50:33 B88935               zr-win/[dll_kernel32_windows.go]
+// :v: 2019-05-06 06:30:05 83A637               zr-win/[dll_kernel32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -165,7 +165,7 @@ func FormatMessage(
 	lpBuffer LPWSTR,
 	nSize DWORD,
 	Arguments *byte,
-	//TODO: *va_list   type va_list = *c_char
+	// TODO: *va_list: type va_list = *c_char
 ) DWORD {
 	ret, _, _ := kernelFormatMessageW.Call(
 		uintptr(dwFlags),                   // [in] DWORD
@@ -296,7 +296,7 @@ func GlobalFree(hMem HGLOBAL) HGLOBAL {
 func GlobalLock(hMem HGLOBAL) unsafe.Pointer { // (returns LPVOID)
 	ret, _, _ := kernelGlobalLock.Call(uintptr(hMem))
 	if ret == NULL {
-		//TODO: mod.Error("GlobalLock failed"
+		// TODO: mod.Error("GlobalLock failed"
 	}
 	// turn 'ret' to unsafe.Pointer without 'go vet' triggering a warning:
 	var ptr unsafe.Pointer
@@ -366,7 +366,7 @@ func ReadFile(
 } //                                                                    ReadFile
 
 /*
-//TODO: How to pass COORD struct when Call() needs uintptr?
+// TODO: How to pass COORD struct when Call() needs uintptr?
 // SetConsoleScreenBufferSize library: kernel32.dll
 func SetConsoleScreenBufferSize(hConsoleOutput HANDLE, dwSize COORD) BOOL {
     ret, _, _ := kernelSetConsoleScreenBufferSize.Call(
@@ -374,7 +374,7 @@ func SetConsoleScreenBufferSize(hConsoleOutput HANDLE, dwSize COORD) BOOL {
         uintptr(dwSize),         // [in] COORD
     )
     return BOOLResult(ret)
-} //                                               SetConsoleScreenBufferSize
+} //                                                  SetConsoleScreenBufferSize
 */
 
 // WaitForMultipleObjects library: kernel32.dll

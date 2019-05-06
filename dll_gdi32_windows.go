@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-04-03 14:50:33 147BE7                  zr-win/[dll_gdi32_windows.go]
+// :v: 2019-05-06 06:30:05 024BE8                  zr-win/[dll_gdi32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -176,7 +176,7 @@ func GetDeviceCaps(
 //          uintptr(fnObject)) // int: stock object type
 //      )
 //      return HGDIOBJ(ret)
-//  } //                                                           GetStockObject
+//  } //                                                          GetStockObject
 
 // GetTextExtentPoint32 library: gdi32.dll
 func GetTextExtentPoint32(
@@ -272,7 +272,7 @@ func SetBkColor(hDC HDC, color COLORREF) COLORREF {
 //          uintptr(crColor), // COLORREF: new brush color
 //      )
 //      return COLORREF(ret)
-//  } //                                                             SetDCBrushColor
+//  } //                                                         SetDCBrushColor
 
 // SetMapMode library: gdi32.dll
 func SetMapMode(hDC HDC, fnMapMode INT) INT {
