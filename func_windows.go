@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-06 06:30:05 2F45FB                       zr-win/[func_windows.go]
+// :v: 2019-05-07 20:45:25 F124E2                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -83,8 +83,9 @@ func OSClass() OSType {
 	// ancient Windows platforms e.g. Windows ME
 	// (Win32s: could likely be platform 0)
 	case 1:
-		return OSUnknown
-	//
+		{
+			return OSUnknown
+		}
 	// Windows-NT based OS, e.g. Windows XP and above
 	case 2:
 		return OSWindows
@@ -115,10 +116,14 @@ func SystemVolumeID() uint32 {
 func VolumeID(path string) uint32 {
 	switch len(path) {
 	case 0:
-		return 0
+		{
+			return 0
+		}
 	// assume a drive letter
 	case 1:
-		path += ":\\"
+		{
+			path += ":\\"
+		}
 	case 2:
 		path += "\\"
 	}

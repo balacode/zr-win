@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-06 06:30:05 9ECA42      zr-win/[file_change_notification_test.go]
+// :v: 2019-05-07 20:45:25 565A86      zr-win/[file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -86,13 +86,17 @@ func Test_fchn_FileChangeNotifications_(t *testing.T) {
 	// check that handle value is correct
 	switch handles[0] {
 	case INVALID_HANDLE_VALUE:
-		fmt.Println(tms(), "FindFirstChangeNotification() failed")
-		t.Fail()
-		return
+		{
+			fmt.Println(tms(), "FindFirstChangeNotification() failed")
+			t.Fail()
+			return
+		}
 	case NULL:
-		fmt.Println(tms(), "FindFirstChangeNotification() returned NULL")
-		t.Fail()
-		return
+		{
+			fmt.Println(tms(), "FindFirstChangeNotification() returned NULL")
+			t.Fail()
+			return
+		}
 	default:
 		fmt.Println(tms(), "FindFirstChangeNotification() handle:",
 			handles[0])
