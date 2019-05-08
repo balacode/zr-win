@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-07 20:45:25 F124E2                       zr-win/[func_windows.go]
+// :v: 2019-05-08 11:34:09 B6C364                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -289,7 +289,7 @@ func registryHardwareInfo(valueName string) string {
 		`HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System`,
 		valueName,
 	)
-	ret = strings.Trim(ret, SPACES)
+	ret = strings.TrimSpace(ret)
 	return ret
 } //                                                        registryHardwareInfo
 
