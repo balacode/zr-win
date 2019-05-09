@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2018-05-24 04:46:26 577968                             zr-win/[module.go]
+// :v: 2019-05-09 17:22:37 076AE8                             zr-win/[module.go]
 // -----------------------------------------------------------------------------
 
 // Package win provides Windows API function and
@@ -12,12 +12,6 @@ import (
 
 	"github.com/balacode/zr"
 )
-
-// LB specifies a line break string.
-// On Windows it is a pair of CR and LF.
-// CR is decimal 13, hex 0D.
-// LF is decimal 10, hex 0A.
-const LB = "\r\n"
 
 // PL is fmt.Println() but is used only for debugging.
 var PL = fmt.Println

@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-04-28 18:10:21 3A75E2                zr-win/[api_helpers_windows.go]
+// :v: 2019-05-09 17:22:37 75CB11                zr-win/[api_helpers_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -56,7 +56,7 @@ func LineNo(callDepth int) int {
 func BOOLResult(result uintptr) BOOL {
 	if result == FALSE && ShowResultStatus {
 		err := GetLastError()
-		fmt.Printf("win.%s() == FALSE. GetLastError() == %d - %s"+LB,
+		fmt.Printf("win.%s() == FALSE. GetLastError() == %d - %s\r\n",
 			FuncName(2), err, ErrorName(err))
 	}
 	return BOOL(result)
