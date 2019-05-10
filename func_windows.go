@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-10 02:58:00 9B4546                       zr-win/[func_windows.go]
+// :v: 2019-05-10 02:59:03 693100                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -247,10 +247,6 @@ var rootKeys = []struct {
 	{"HKEY_PERFORMANCE_DATA", HKEY_PERFORMANCE_DATA},
 	{"HKEY_USERS", HKEY_USERS},
 }
-
-// SPACES is a string of all white-space characters,
-// which includes spaces, tabs, and newline characters.
-const SPACES = " \a\b\f\n\r\t\v"
 
 // -----------------------------------------------------------------------------
 // # Internal Functions
