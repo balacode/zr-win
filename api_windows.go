@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-06 06:30:05 036AEA                        zr-win/[api_windows.go]
+// :v: 2019-05-10 02:58:00 ACCE4D                        zr-win/[api_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -25,1509 +25,1573 @@ import (
 // -----------------------------------------------------------------------------
 // Button Control Styles (from WinUser.h)
 
-// BS_DEFPUSHBUTTON Win32 API constant.
-const BS_DEFPUSHBUTTON = 0x00000001
+const (
+	// BS_DEFPUSHBUTTON Win32 API constant.
+	BS_DEFPUSHBUTTON = 0x00000001
 
-// BS_PUSHBUTTON Win32 API constant.
-const BS_PUSHBUTTON = 0x00000000
+	// BS_PUSHBUTTON Win32 API constant.
+	BS_PUSHBUTTON = 0x00000000
 
-// not used:
-// BS_CHECKBOX        = 0x00000002
-// BS_AUTOCHECKBOX    = 0x00000003
-// BS_RADIOBUTTON     = 0x00000004
-// BS_3STATE          = 0x00000005
-// BS_AUTO3STATE      = 0x00000006
-// BS_GROUPBOX        = 0x00000007
-// BS_USERBUTTON      = 0x00000008
-// BS_AUTORADIOBUTTON = 0x00000009
-// BS_PUSHBOX         = 0x0000000A
-// BS_OWNERDRAW       = 0x0000000B
-// BS_TYPEMASK        = 0x0000000F
-// BS_LEFTTEXT        = 0x00000020
-// BS_TEXT            = 0x00000000 // WINVER >= 0x0400
-// BS_ICON            = 0x00000040
-// BS_BITMAP          = 0x00000080
-// BS_LEFT            = 0x00000100
-// BS_RIGHT           = 0x00000200
-// BS_CENTER          = 0x00000300
-// BS_TOP             = 0x00000400
-// BS_BOTTOM          = 0x00000800
-// BS_VCENTER         = 0x00000C00
-// BS_PUSHLIKE        = 0x00001000
-// BS_MULTILINE       = 0x00002000
-// BS_NOTIFY          = 0x00004000
-// BS_FLAT            = 0x00008000
-// BS_RIGHTBUTTON     = BS_LEFTTEXT
+	// not used:
+	// BS_CHECKBOX        = 0x00000002
+	// BS_AUTOCHECKBOX    = 0x00000003
+	// BS_RADIOBUTTON     = 0x00000004
+	// BS_3STATE          = 0x00000005
+	// BS_AUTO3STATE      = 0x00000006
+	// BS_GROUPBOX        = 0x00000007
+	// BS_USERBUTTON      = 0x00000008
+	// BS_AUTORADIOBUTTON = 0x00000009
+	// BS_PUSHBOX         = 0x0000000A
+	// BS_OWNERDRAW       = 0x0000000B
+	// BS_TYPEMASK        = 0x0000000F
+	// BS_LEFTTEXT        = 0x00000020
+	// BS_TEXT            = 0x00000000 // WINVER >= 0x0400
+	// BS_ICON            = 0x00000040
+	// BS_BITMAP          = 0x00000080
+	// BS_LEFT            = 0x00000100
+	// BS_RIGHT           = 0x00000200
+	// BS_CENTER          = 0x00000300
+	// BS_TOP             = 0x00000400
+	// BS_BOTTOM          = 0x00000800
+	// BS_VCENTER         = 0x00000C00
+	// BS_PUSHLIKE        = 0x00001000
+	// BS_MULTILINE       = 0x00002000
+	// BS_NOTIFY          = 0x00004000
+	// BS_FLAT            = 0x00008000
+	// BS_RIGHTBUTTON     = BS_LEFTTEXT
+)
 
 // -----------------------------------------------------------------------------
 // Predefined Clipboard Formats (from WinUser.h)
 
-// CF_TEXT clipboard format
-const CF_TEXT = 1
+const (
+	// CF_TEXT clipboard format
+	CF_TEXT = 1
 
-// CF_UNICODETEXT clipboard format
-const CF_UNICODETEXT = 13
+	// CF_UNICODETEXT clipboard format
+	CF_UNICODETEXT = 13
 
-// not used:
-// CF_BITMAP       = 2
-// CF_METAFILEPICT = 3
-// CF_SYLK         = 4
-// CF_DIF          = 5
-// CF_TIFF         = 6
-// CF_OEMTEXT      = 7
-// CF_DIB          = 8
-// CF_PALETTE      = 9
-// CF_PENDATA      = 10
-// CF_RIFF         = 11
-// CF_WAVE         = 12
-// CF_ENHMETAFILE  = 14
-// CF_HDROP        = 15 // WINVER >= 0x0400
-// CF_LOCALE       = 16
-// CF_DIBV5        = 17 // WINVER >= 0x0500
-// CF_MAX          = 18 // WINVER >= 0x0500
-// for WINVER >= 0x0400 CF_MAX = 17
-// else                 CF_MAX = 15
-// CF_OWNERDISPLAY    = 0x0080
-// CF_DSPTEXT         = 0x0081
-// CF_DSPBITMAP       = 0x0082
-// CF_DSPMETAFILEPICT = 0x0083
-// CF_DSPENHMETAFILE  = 0x008E
-// CF_PRIVATEFIRST    = 0x0200 // 'Private' formats don't get GlobalFree()
-// CF_PRIVATELAST     = 0x02FF
-// CF_GDIOBJFIRST     = 0x0300 // 'GDIOBJ' formats do get DeleteObject()
-// CF_GDIOBJLAST      = 0x03FF
+	// not used:
+	// CF_BITMAP       = 2
+	// CF_METAFILEPICT = 3
+	// CF_SYLK         = 4
+	// CF_DIF          = 5
+	// CF_TIFF         = 6
+	// CF_OEMTEXT      = 7
+	// CF_DIB          = 8
+	// CF_PALETTE      = 9
+	// CF_PENDATA      = 10
+	// CF_RIFF         = 11
+	// CF_WAVE         = 12
+	// CF_ENHMETAFILE  = 14
+	// CF_HDROP        = 15 // WINVER >= 0x0400
+	// CF_LOCALE       = 16
+	// CF_DIBV5        = 17 // WINVER >= 0x0500
+	// CF_MAX          = 18 // WINVER >= 0x0500
+	// for WINVER >= 0x0400 CF_MAX = 17
+	// else                 CF_MAX = 15
+	// CF_OWNERDISPLAY    = 0x0080
+	// CF_DSPTEXT         = 0x0081
+	// CF_DSPBITMAP       = 0x0082
+	// CF_DSPMETAFILEPICT = 0x0083
+	// CF_DSPENHMETAFILE  = 0x008E
+	// CF_PRIVATEFIRST    = 0x0200 // 'Private' formats don't get GlobalFree()
+	// CF_PRIVATELAST     = 0x02FF
+	// CF_GDIOBJFIRST     = 0x0300 // 'GDIOBJ' formats do get DeleteObject()
+	// CF_GDIOBJLAST      = 0x03FF
+)
 
 // -----------------------------------------------------------------------------
 // from WinGDI.h
 
-// CLIP_DEFAULT_PRECIS Win32 API constant.
-const CLIP_DEFAULT_PRECIS = 0
+const (
+	// CLIP_DEFAULT_PRECIS Win32 API constant.
+	CLIP_DEFAULT_PRECIS = 0
 
-// not used:
-// CLIP_CHARACTER_PRECIS = 1
-// CLIP_STROKE_PRECIS    = 2
-// CLIP_MASK             = 0xf
-// CLIP_LH_ANGLES        = (1 << 4)
-// CLIP_TT_ALWAYS        = (2 << 4)
-// CLIP_DFA_DISABLE      = (4 << 4) // _WIN32_WINNT >= _WIN32_WINNT_LONGHORN
-// CLIP_EMBEDDED         = (8 << 4)
+	// not used:
+	// CLIP_CHARACTER_PRECIS = 1
+	// CLIP_STROKE_PRECIS    = 2
+	// CLIP_MASK             = 0xf
+	// CLIP_LH_ANGLES        = (1 << 4)
+	// CLIP_TT_ALWAYS        = (2 << 4)
+	// CLIP_DFA_DISABLE      = (4 << 4) // _WIN32_WINNT >= _WIN32_WINNT_LONGHORN
+	// CLIP_EMBEDDED         = (8 << 4)
 
-// CLR_INVALID Win32 API constant.
-const CLR_INVALID = 0xFFFFFFFF
+	// CLR_INVALID Win32 API constant.
+	CLR_INVALID = 0xFFFFFFFF
+)
 
 // -----------------------------------------------------------------------------
 //  Code Page Default Values (from WinNls.h)
 
-// CP_UTF8 Win32 API constant.
-const CP_UTF8 = 65001 // UTF-8 translation
+const (
+	// CP_UTF8 Win32 API constant.
+	CP_UTF8 = 65001 // UTF-8 translation
 
-// not used:
-// CP_ACP        = 0     // default to ANSI code page
-// CP_OEMCP      = 1     // default to OEM  code page
-// CP_MACCP      = 2     // default to MAC  code page
-// CP_THREAD_ACP = 3     // current thread's ANSI code page
-// CP_SYMBOL     = 42    // SYMBOL translations
-// CP_UTF7       = 65000 // UTF-7 translation
+	// not used:
+	// CP_ACP        = 0     // default to ANSI code page
+	// CP_OEMCP      = 1     // default to OEM  code page
+	// CP_MACCP      = 2     // default to MAC  code page
+	// CP_THREAD_ACP = 3     // current thread's ANSI code page
+	// CP_SYMBOL     = 42    // SYMBOL translations
+	// CP_UTF7       = 65000 // UTF-7 translation
+)
 
 // -----------------------------------------------------------------------------
 // Window class styles
 
-// CS_DBLCLKS Win32 API constant.
-const CS_DBLCLKS = 0x0008
+const (
+	// CS_DBLCLKS Win32 API constant.
+	CS_DBLCLKS = 0x0008
 
-// CS_HREDRAW Win32 API constant.
-const CS_HREDRAW = 0x0002
+	// CS_HREDRAW Win32 API constant.
+	CS_HREDRAW = 0x0002
 
-// CS_VREDRAW Win32 API constant.
-const CS_VREDRAW = 0x0001
+	// CS_VREDRAW Win32 API constant.
+	CS_VREDRAW = 0x0001
 
-// not used:
-// CS_BYTEALIGNCLIENT = 0x1000
-// CS_BYTEALIGNWINDOW = 0x2000
-// CS_CLASSDC         = 0x0040
-// CS_DROPSHADOW      = 0x00020000
-// CS_GLOBALCLASS     = 0x4000
-// CS_IME             = 0x00010000
-// CS_NOCLOSE         = 0x0200
-// CS_OWNDC           = 0x0020
-// CS_PARENTDC        = 0x0080
-// CS_SAVEBITS        = 0x0800
+	// not used:
+	// CS_BYTEALIGNCLIENT = 0x1000
+	// CS_BYTEALIGNWINDOW = 0x2000
+	// CS_CLASSDC         = 0x0040
+	// CS_DROPSHADOW      = 0x00020000
+	// CS_GLOBALCLASS     = 0x4000
+	// CS_IME             = 0x00010000
+	// CS_NOCLOSE         = 0x0200
+	// CS_OWNDC           = 0x0020
+	// CS_PARENTDC        = 0x0080
+	// CS_SAVEBITS        = 0x0800
+)
 
 // -----------------------------------------------------------------------------
 
-// CW_USEDEFAULT Win32 API constant.
-const CW_USEDEFAULT = ^0x7fffffff // C: ((int)0x80000000)
+const (
+	// CW_USEDEFAULT Win32 API constant.
+	CW_USEDEFAULT = ^0x7fffffff // C: ((int)0x80000000)
 
-// const DC_BRUSH = 18
+	// DC_BRUSH = 18
 
-// DEFAULT_CHARSET Win32 API constant.
-const DEFAULT_CHARSET = 1 // from WinGdi.h
+	// DEFAULT_CHARSET Win32 API constant.
+	DEFAULT_CHARSET = 1 // from WinGdi.h
 
-// DEFAULT_PITCH Win32 API constant.
-const DEFAULT_PITCH = 0 // from WinGdi.h
+	// DEFAULT_PITCH Win32 API constant.
+	DEFAULT_PITCH = 0 // from WinGdi.h
+)
 
 // -----------------------------------------------------------------------------
 // Dialog Styles (from WinUser.h)
 
-// DS_MODALFRAME Win32 API constant.
-const DS_MODALFRAME = 0x80 // WINVER < 0x0400 Can be combined with WS_CAPTION
+const (
+	// DS_MODALFRAME Win32 API constant.
+	DS_MODALFRAME = 0x80 // WINVER < 0x0400 Can be combined with WS_CAPTION
 
-// DS_CENTER Win32 API constant.
-const DS_CENTER = 0x0800 // WINVER >= 0x0400
+	// DS_CENTER Win32 API constant.
+	DS_CENTER = 0x0800 // WINVER >= 0x0400
 
-// not used:
-// DS_ABSALIGN      = 0x01
-// DS_SYSMODAL      = 0x02
-// DS_LOCALEDIT     = 0x20  // Edit items get Local storage.
-// DS_SETFONT       = 0x40  // User specified font for Dlg controls
-// DS_NOIDLEMSG     = 0x100 // WM_ENTERIDLE message will not be sent
-// DS_SETFOREGROUND = 0x200 // not in win3.1
-// WINVER >= 0x0400:
-// DS_3DLOOK       = 0x0004
-// DS_FIXEDSYS     = 0x0008
-// DS_NOFAILCREATE = 0x0010
-// DS_CONTROL      = 0x0400
-// DS_CENTERMOUSE  = 0x1000
-// DS_CONTEXTHELP  = 0x2000
-// DS_SHELLFONT    = (DS_SETFONT | DS_FIXEDSYS)
-// _WIN32_WCE >= 0x0500
-// DS_USEPIXELS = 0x8000
+	// not used:
+	// DS_ABSALIGN      = 0x01
+	// DS_SYSMODAL      = 0x02
+	// DS_LOCALEDIT     = 0x20  // Edit items get Local storage.
+	// DS_SETFONT       = 0x40  // User specified font for Dlg controls
+	// DS_NOIDLEMSG     = 0x100 // WM_ENTERIDLE message will not be sent
+	// DS_SETFOREGROUND = 0x200 // not in win3.1
+	//
+	// WINVER >= 0x0400:
+	// DS_3DLOOK       = 0x0004
+	// DS_FIXEDSYS     = 0x0008
+	// DS_NOFAILCREATE = 0x0010
+	// DS_CONTROL      = 0x0400
+	// DS_CENTERMOUSE  = 0x1000
+	// DS_CONTEXTHELP  = 0x2000
+	// DS_SHELLFONT    = (DS_SETFONT | DS_FIXEDSYS)
+	//
+	// _WIN32_WCE >= 0x0500:
+	// DS_USEPIXELS = 0x8000
+)
 
-// DT_LEFT Win32 API constant.
-const DT_LEFT = 0x00000000
+const (
+	// DT_LEFT Win32 API constant.
+	DT_LEFT = 0x00000000
+)
 
 // -----------------------------------------------------------------------------
 // Region Flags
 
-// ERROR Win32 API constant.
-const ERROR = 0
+const (
+	// ERROR Win32 API constant.
+	ERROR = 0
 
-// NULLREGION Win32 API constant.
-const NULLREGION = 1
+	// NULLREGION Win32 API constant.
+	NULLREGION = 1
 
-// SIMPLEREGION Win32 API constant.
-const SIMPLEREGION = 2
+	// SIMPLEREGION Win32 API constant.
+	SIMPLEREGION = 2
 
-// COMPLEXREGION Win32 API constant.
-const COMPLEXREGION = 3
+	// COMPLEXREGION Win32 API constant.
+	COMPLEXREGION = 3
 
-// RGN_ERROR Win32 API constant.
-const RGN_ERROR = ERROR
-
-// -----------------------------------------------------------------------------
-
-// ERROR_FILE_NOT_FOUND - The system cannot find the file specified.
-const ERROR_FILE_NOT_FOUND = 2
-
-// ERROR_SUCCESS - The operation completed successfully.
-const ERROR_SUCCESS = 0
-
-// ES_LEFT Win32 API constant.
-const ES_LEFT = 0x0000
-
-// FALSE Win32 API constant.
-const FALSE = 0
-
-// FF_DONTCARE Win32 API constant.
-const FF_DONTCARE = (0 << 4) // Don't care or don't know.
-
-// FILE_ATTRIBUTE_DIRECTORY Win32 API constant.
-const FILE_ATTRIBUTE_DIRECTORY = 0x00000010
-
-// FILE_ATTRIBUTE_NORMAL Win32 API constant.
-const FILE_ATTRIBUTE_NORMAL = 0x00000080
-
-// FILE_SHARE_READ Win32 API constant.
-const FILE_SHARE_READ = 0x00000001
+	// RGN_ERROR Win32 API constant.
+	RGN_ERROR = ERROR
+)
 
 // -----------------------------------------------------------------------------
 
-// FILE_NOTIFY_CHANGE_FILE_NAME __
-const FILE_NOTIFY_CHANGE_FILE_NAME = 0x00000001
+const (
+	// ERROR_FILE_NOT_FOUND - The system cannot find the file specified.
+	ERROR_FILE_NOT_FOUND = 2
 
-// FILE_NOTIFY_CHANGE_DIR_NAME __
-const FILE_NOTIFY_CHANGE_DIR_NAME = 0x00000002
+	// ERROR_SUCCESS - The operation completed successfully.
+	ERROR_SUCCESS = 0
 
-// FILE_NOTIFY_CHANGE_ATTRIBUTES __
-const FILE_NOTIFY_CHANGE_ATTRIBUTES = 0x00000004
+	// ES_LEFT Win32 API constant.
+	ES_LEFT = 0x0000
 
-// FILE_NOTIFY_CHANGE_SIZE __
-const FILE_NOTIFY_CHANGE_SIZE = 0x00000008
+	// FALSE Win32 API constant.
+	FALSE = 0
 
-// FILE_NOTIFY_CHANGE_LAST_WRITE __
-const FILE_NOTIFY_CHANGE_LAST_WRITE = 0x00000010
+	// FF_DONTCARE Win32 API constant.
+	FF_DONTCARE = (0 << 4) // Don't care or don't know.
 
-// FILE_NOTIFY_CHANGE_LAST_ACCESS __
-const FILE_NOTIFY_CHANGE_LAST_ACCESS = 0x00000020
+	// FILE_ATTRIBUTE_DIRECTORY Win32 API constant.
+	FILE_ATTRIBUTE_DIRECTORY = 0x00000010
 
-// FILE_NOTIFY_CHANGE_CREATION __
-const FILE_NOTIFY_CHANGE_CREATION = 0x00000040
+	// FILE_ATTRIBUTE_NORMAL Win32 API constant.
+	FILE_ATTRIBUTE_NORMAL = 0x00000080
 
-// FILE_NOTIFY_CHANGE_SECURITY __
-const FILE_NOTIFY_CHANGE_SECURITY = 0x00000100
-
-// -----------------------------------------------------------------------------
-
-// FindExInfoStandard Win32 API constant.
-const FindExInfoStandard = 0
-
-// FindExInfoBasic Win32 API constant.
-const FindExInfoBasic = 1
-
-// FindExInfoMaxInfoLevel Win32 API constant.
-const FindExInfoMaxInfoLevel = 2
+	// FILE_SHARE_READ Win32 API constant.
+	FILE_SHARE_READ = 0x00000001
+)
 
 // -----------------------------------------------------------------------------
 
-// FindExSearchNameMatch Win32 API constant.
-const FindExSearchNameMatch = 0
+const (
+	// FILE_NOTIFY_CHANGE_FILE_NAME __
+	FILE_NOTIFY_CHANGE_FILE_NAME = 0x00000001
 
-// FindExSearchLimitToDirectories Win32 API constant.
-const FindExSearchLimitToDirectories = 1
+	// FILE_NOTIFY_CHANGE_DIR_NAME __
+	FILE_NOTIFY_CHANGE_DIR_NAME = 0x00000002
 
-// FindExSearchLimitToDevices Win32 API constant.
-const FindExSearchLimitToDevices = 2
+	// FILE_NOTIFY_CHANGE_ATTRIBUTES __
+	FILE_NOTIFY_CHANGE_ATTRIBUTES = 0x00000004
 
-// FindExSearchMaxSearchOp Win32 API constant.
-const FindExSearchMaxSearchOp = 3
+	// FILE_NOTIFY_CHANGE_SIZE __
+	FILE_NOTIFY_CHANGE_SIZE = 0x00000008
 
-// -----------------------------------------------------------------------------
+	// FILE_NOTIFY_CHANGE_LAST_WRITE __
+	FILE_NOTIFY_CHANGE_LAST_WRITE = 0x00000010
 
-// FORMAT_MESSAGE_FROM_SYSTEM Win32 API constant.
-const FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000
+	// FILE_NOTIFY_CHANGE_LAST_ACCESS __
+	FILE_NOTIFY_CHANGE_LAST_ACCESS = 0x00000020
 
-// FORMAT_MESSAGE_IGNORE_INSERTS Win32 API constant.
-const FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200
+	// FILE_NOTIFY_CHANGE_CREATION __
+	FILE_NOTIFY_CHANGE_CREATION = 0x00000040
 
-// FW_NORMAL Win32 API constant.
-const FW_NORMAL = 400
-
-// GENERIC_READ Win32 API constant.
-const GENERIC_READ = 0x80000000
-
-// GMEM_MOVEABLE Win32 API constant.
-const GMEM_MOVEABLE = 0x0002
-
-// GMEM_ZEROINIT Win32 API constant.
-const GMEM_ZEROINIT = 0x0040
-
-// HGDI_ERROR Win32 API constant.
-const HGDI_ERROR = 0xFFFFFFFF
+	// FILE_NOTIFY_CHANGE_SECURITY __
+	FILE_NOTIFY_CHANGE_SECURITY = 0x00000100
+)
 
 // -----------------------------------------------------------------------------
 
-// HKEY_CLASSES_ROOT Win32 API constant.
-const HKEY_CLASSES_ROOT = HKEY(0x80000000)
+const (
+	// FindExInfoStandard Win32 API constant.
+	FindExInfoStandard = 0
 
-// HKEY_CURRENT_USER Win32 API constant.
-const HKEY_CURRENT_USER = HKEY(0x80000001)
+	// FindExInfoBasic Win32 API constant.
+	FindExInfoBasic = 1
 
-// HKEY_LOCAL_MACHINE Win32 API constant.
-const HKEY_LOCAL_MACHINE = HKEY(0x80000002)
-
-// HKEY_USERS Win32 API constant.
-const HKEY_USERS = HKEY(0x80000003)
-
-// HKEY_PERFORMANCE_DATA Win32 API constant.
-const HKEY_PERFORMANCE_DATA = HKEY(0x80000004)
-
-// HKEY_CURRENT_CONFIG Win32 API constant.
-const HKEY_CURRENT_CONFIG = HKEY(0x80000005)
-
-// HKEY_DYN_DATA Win32 API constant.
-const HKEY_DYN_DATA = HKEY(0x80000006)
+	// FindExInfoMaxInfoLevel Win32 API constant.
+	FindExInfoMaxInfoLevel = 2
+)
 
 // -----------------------------------------------------------------------------
 
-// HWND_DESKTOP Win32 API constant.
-const HWND_DESKTOP = 0
+const (
+	// FindExSearchNameMatch Win32 API constant.
+	FindExSearchNameMatch = 0
 
-// HWND_NOTOPMOST Win32 API constant.
-const HWND_NOTOPMOST = -2
+	// FindExSearchLimitToDirectories Win32 API constant.
+	FindExSearchLimitToDirectories = 1
 
-// HWND_TOPMOST Win32 API constant.
-const HWND_TOPMOST = -1
+	// FindExSearchLimitToDevices Win32 API constant.
+	FindExSearchLimitToDevices = 2
+
+	// FindExSearchMaxSearchOp Win32 API constant.
+	FindExSearchMaxSearchOp = 3
+)
+
+// -----------------------------------------------------------------------------
+
+const (
+	// FORMAT_MESSAGE_FROM_SYSTEM Win32 API constant.
+	FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000
+
+	// FORMAT_MESSAGE_IGNORE_INSERTS Win32 API constant.
+	FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200
+
+	// FW_NORMAL Win32 API constant.
+	FW_NORMAL = 400
+
+	// GENERIC_READ Win32 API constant.
+	GENERIC_READ = 0x80000000
+
+	// GMEM_MOVEABLE Win32 API constant.
+	GMEM_MOVEABLE = 0x0002
+
+	// GMEM_ZEROINIT Win32 API constant.
+	GMEM_ZEROINIT = 0x0040
+
+	// HGDI_ERROR Win32 API constant.
+	HGDI_ERROR = 0xFFFFFFFF
+)
+
+// -----------------------------------------------------------------------------
+
+const (
+	// HKEY_CLASSES_ROOT Win32 API constant.
+	HKEY_CLASSES_ROOT = HKEY(0x80000000)
+
+	// HKEY_CURRENT_USER Win32 API constant.
+	HKEY_CURRENT_USER = HKEY(0x80000001)
+
+	// HKEY_LOCAL_MACHINE Win32 API constant.
+	HKEY_LOCAL_MACHINE = HKEY(0x80000002)
+
+	// HKEY_USERS Win32 API constant.
+	HKEY_USERS = HKEY(0x80000003)
+
+	// HKEY_PERFORMANCE_DATA Win32 API constant.
+	HKEY_PERFORMANCE_DATA = HKEY(0x80000004)
+
+	// HKEY_CURRENT_CONFIG Win32 API constant.
+	HKEY_CURRENT_CONFIG = HKEY(0x80000005)
+
+	// HKEY_DYN_DATA Win32 API constant.
+	HKEY_DYN_DATA = HKEY(0x80000006)
+)
+
+// -----------------------------------------------------------------------------
+
+const (
+	// HWND_DESKTOP Win32 API constant.
+	HWND_DESKTOP = 0
+
+	// HWND_NOTOPMOST Win32 API constant.
+	HWND_NOTOPMOST = -2
+
+	// HWND_TOPMOST Win32 API constant.
+	HWND_TOPMOST = -1
+)
 
 // -----------------------------------------------------------------------------
 // Dialog Box Command IDs (from WinUser.h)
 
-// IDOK Win32 API constant.
-const IDOK = 1
+const (
+	// IDOK Win32 API constant.
+	IDOK = 1
 
-// IDCANCEL Win32 API constant.
-const IDCANCEL = 2
+	// IDCANCEL Win32 API constant.
+	IDCANCEL = 2
 
-// IDABORT Win32 API constant.
-const IDABORT = 3
+	// IDABORT Win32 API constant.
+	IDABORT = 3
 
-// IDRETRY Win32 API constant.
-const IDRETRY = 4
+	// IDRETRY Win32 API constant.
+	IDRETRY = 4
 
-// IDIGNORE Win32 API constant.
-const IDIGNORE = 5
+	// IDIGNORE Win32 API constant.
+	IDIGNORE = 5
 
-// IDYES Win32 API constant.
-const IDYES = 6
+	// IDYES Win32 API constant.
+	IDYES = 6
 
-// IDNO Win32 API constant.
-const IDNO = 7
+	// IDNO Win32 API constant.
+	IDNO = 7
 
-// IDCLOSE Win32 API constant.
-const IDCLOSE = 8
+	// IDCLOSE Win32 API constant.
+	IDCLOSE = 8
 
-// IDHELP Win32 API constant.
-const IDHELP = 9
+	// IDHELP Win32 API constant.
+	IDHELP = 9
 
-// IDTRYAGAIN Win32 API constant.
-const IDTRYAGAIN = 10
+	// IDTRYAGAIN Win32 API constant.
+	IDTRYAGAIN = 10
 
-// IDCONTINUE Win32 API constant.
-const IDCONTINUE = 11
+	// IDCONTINUE Win32 API constant.
+	IDCONTINUE = 11
 
-// IDTIMEOUT Win32 API constant.
-const IDTIMEOUT = 32000
+	// IDTIMEOUT Win32 API constant.
+	IDTIMEOUT = 32000
+)
 
 // -----------------------------------------------------------------------------
 // Cursor Constants
 
-// IDC_ARROW Win32 API constant.
-const IDC_ARROW = 32512
+const (
+	// IDC_ARROW Win32 API constant.
+	IDC_ARROW = 32512
 
-// IDC_IBEAM Win32 API constant.
-const IDC_IBEAM = 32513
+	// IDC_IBEAM Win32 API constant.
+	IDC_IBEAM = 32513
 
-// not used:
-// IDC_WAIT        = 32514
-// IDC_CROSS       = 32515
-// IDC_UPARROW     = 32516
-// IDC_SIZE        = 32640
-// IDC_ICON        = 32641
-// IDC_SIZENWSE    = 32642
-// IDC_SIZENESW    = 32643
-// IDC_SIZEWE      = 32644
-// IDC_SIZENS      = 32645
-// IDC_SIZEALL     = 32646
-// IDC_NO          = 32648
-// IDC_HAND        = 32649
-// IDC_APPSTARTING = 32650
-// IDC_HELP        = 32651
-
-// -----------------------------------------------------------------------------
-
-// IDC_STATIC Win32 API constant.
-const IDC_STATIC = 0xffffffff
-
-// IDI_APPLICATION Win32 API constant.
-const IDI_APPLICATION = 32512
-
-// INVALID_HANDLE_VALUE __
-const INVALID_HANDLE_VALUE = 0xffffffff // TODO: HANDLE(-1)
-
-// INFINITE __
-const INFINITE = 0xFFFFFFFF // infinite timeout
-
-// KEY_EVENT Win32 API constant.
-const KEY_EVENT = 0x0001 // Event contains key event record
+	// not used:
+	// IDC_WAIT        = 32514
+	// IDC_CROSS       = 32515
+	// IDC_UPARROW     = 32516
+	// IDC_SIZE        = 32640
+	// IDC_ICON        = 32641
+	// IDC_SIZENWSE    = 32642
+	// IDC_SIZENESW    = 32643
+	// IDC_SIZEWE      = 32644
+	// IDC_SIZENS      = 32645
+	// IDC_SIZEALL     = 32646
+	// IDC_NO          = 32648
+	// IDC_HAND        = 32649
+	// IDC_APPSTARTING = 32650
+	// IDC_HELP        = 32651
+)
 
 // -----------------------------------------------------------------------------
 
-// KEY_QUERY_VALUE Windows API constant.
-const KEY_QUERY_VALUE = 0x0001
+const (
+	// IDC_STATIC Win32 API constant.
+	IDC_STATIC = 0xffffffff
 
-// KEY_ENUMERATE_SUB_KEYS Win32 API constant.
-const KEY_ENUMERATE_SUB_KEYS = 0x0008
+	// IDI_APPLICATION Win32 API constant.
+	IDI_APPLICATION = 32512
 
-// KEY_NOTIFY Win32 API constant.
-const KEY_NOTIFY = 0x0010
+	// INVALID_HANDLE_VALUE __
+	INVALID_HANDLE_VALUE = 0xffffffff // TODO: HANDLE(-1)
 
-// not used:
-// KEY_SET_VALUE      = 0x0002
-// KEY_CREATE_SUB_KEY = 0x0004
-// KEY_CREATE_LINK    = 0x0020
-// KEY_WOW64_32KEY    = 0x0200
-// KEY_WOW64_64KEY    = 0x0100
-// KEY_WOW64_RES      = 0x0300
+	// INFINITE __
+	INFINITE = 0xFFFFFFFF // infinite timeout
+
+	// KEY_EVENT Win32 API constant.
+	KEY_EVENT = 0x0001 // Event contains key event record
+)
 
 // -----------------------------------------------------------------------------
 
-// DELETE Win32 API constant.
-const DELETE = 0x00010000
+const (
+	// KEY_QUERY_VALUE Windows API constant.
+	KEY_QUERY_VALUE = 0x0001
 
-// READ_CONTROL Win32 API constant.
-const READ_CONTROL = 0x00020000
+	// KEY_ENUMERATE_SUB_KEYS Win32 API constant.
+	KEY_ENUMERATE_SUB_KEYS = 0x0008
 
-// WRITE_DAC Win32 API constant.
-const WRITE_DAC = 0x00040000
+	// KEY_NOTIFY Win32 API constant.
+	KEY_NOTIFY = 0x0010
 
-// WRITE_OWNER Win32 API constant.
-const WRITE_OWNER = 0x00080000
+	// not used:
+	// KEY_SET_VALUE      = 0x0002
+	// KEY_CREATE_SUB_KEY = 0x0004
+	// KEY_CREATE_LINK    = 0x0020
+	// KEY_WOW64_32KEY    = 0x0200
+	// KEY_WOW64_64KEY    = 0x0100
+	// KEY_WOW64_RES      = 0x0300
+)
 
-// STANDARD_RIGHTS_REQUIRED Win32 API constant.
-const STANDARD_RIGHTS_REQUIRED = 0x000F0000
+// -----------------------------------------------------------------------------
 
-// STANDARD_RIGHTS_READ Win32 API constant.
-const STANDARD_RIGHTS_READ = READ_CONTROL
+const (
+	// DELETE Win32 API constant.
+	DELETE = 0x00010000
 
-// STANDARD_RIGHTS_WRITE Win32 API constant.
-const STANDARD_RIGHTS_WRITE = READ_CONTROL
+	// READ_CONTROL Win32 API constant.
+	READ_CONTROL = 0x00020000
 
-// STANDARD_RIGHTS_EXECUTE Win32 API constant.
-const STANDARD_RIGHTS_EXECUTE = READ_CONTROL
+	// WRITE_DAC Win32 API constant.
+	WRITE_DAC = 0x00040000
 
-// STANDARD_RIGHTS_ALL Win32 API constant.
-const STANDARD_RIGHTS_ALL = 0x001F0000
+	// WRITE_OWNER Win32 API constant.
+	WRITE_OWNER = 0x00080000
 
-// SPECIFIC_RIGHTS_ALL Win32 API constant.
-const SPECIFIC_RIGHTS_ALL = 0x0000FFFF
+	// STANDARD_RIGHTS_REQUIRED Win32 API constant.
+	STANDARD_RIGHTS_REQUIRED = 0x000F0000
 
-// KEY_READ Win32 API constant.
-const KEY_READ = REGSAM(0x20019)
+	// STANDARD_RIGHTS_READ Win32 API constant.
+	STANDARD_RIGHTS_READ = READ_CONTROL
 
-// LANG_NEUTRAL Win32 API constant.
-const LANG_NEUTRAL = 0x00
+	// STANDARD_RIGHTS_WRITE Win32 API constant.
+	STANDARD_RIGHTS_WRITE = READ_CONTROL
 
-// LF_FACESIZE Win32 API constant.
-const LF_FACESIZE = 32
+	// STANDARD_RIGHTS_EXECUTE Win32 API constant.
+	STANDARD_RIGHTS_EXECUTE = READ_CONTROL
 
-// LOGPIXELSY Win32 API constant.
-const LOGPIXELSY = 90 // Logical pixels/inch in Y
+	// STANDARD_RIGHTS_ALL Win32 API constant.
+	STANDARD_RIGHTS_ALL = 0x001F0000
 
-// MAPVK_VK_TO_VSC Win32 API constant.
-const MAPVK_VK_TO_VSC = 0
+	// SPECIFIC_RIGHTS_ALL Win32 API constant.
+	SPECIFIC_RIGHTS_ALL = 0x0000FFFF
 
-// MAX_PATH Win32 API constant.
-const MAX_PATH = 260
+	// KEY_READ Win32 API constant.
+	KEY_READ = REGSAM(0x20019)
+
+	// LANG_NEUTRAL Win32 API constant.
+	LANG_NEUTRAL = 0x00
+
+	// LF_FACESIZE Win32 API constant.
+	LF_FACESIZE = 32
+
+	// LOGPIXELSY Win32 API constant.
+	LOGPIXELSY = 90 // Logical pixels/inch in Y
+
+	// MAPVK_VK_TO_VSC Win32 API constant.
+	MAPVK_VK_TO_VSC = 0
+
+	// MAX_PATH Win32 API constant.
+	MAX_PATH = 260
+)
 
 // -----------------------------------------------------------------------------
 // MessageBox() Flags (from WinUser.h)
 
-// MB_OK Win32 API constant.
-const MB_OK = 0x00000000
+const (
+	// MB_OK Win32 API constant.
+	MB_OK = 0x00000000
 
-// MB_OKCANCEL Win32 API constant.
-const MB_OKCANCEL = 0x00000001
+	// MB_OKCANCEL Win32 API constant.
+	MB_OKCANCEL = 0x00000001
 
-// MB_ABORTRETRYIGNORE Win32 API constant.
-const MB_ABORTRETRYIGNORE = 0x00000002
+	// MB_ABORTRETRYIGNORE Win32 API constant.
+	MB_ABORTRETRYIGNORE = 0x00000002
 
-// MB_YESNOCANCEL Win32 API constant.
-const MB_YESNOCANCEL = 0x00000003
+	// MB_YESNOCANCEL Win32 API constant.
+	MB_YESNOCANCEL = 0x00000003
 
-// MB_YESNO Win32 API constant.
-const MB_YESNO = 0x00000004
+	// MB_YESNO Win32 API constant.
+	MB_YESNO = 0x00000004
 
-// MB_RETRYCANCEL Win32 API constant.
-const MB_RETRYCANCEL = 0x00000005
+	// MB_RETRYCANCEL Win32 API constant.
+	MB_RETRYCANCEL = 0x00000005
 
-// MB_CANCELTRYCONTINUE Win32 API constant.
-const MB_CANCELTRYCONTINUE = 0x00000006
+	// MB_CANCELTRYCONTINUE Win32 API constant.
+	MB_CANCELTRYCONTINUE = 0x00000006
 
-// MB_USERICON Win32 API constant.
-const MB_USERICON = 0x00000080
+	// MB_USERICON Win32 API constant.
+	MB_USERICON = 0x00000080
 
-// MB_ICONHAND Win32 API constant.
-const MB_ICONHAND = 0x00000010
+	// MB_ICONHAND Win32 API constant.
+	MB_ICONHAND = 0x00000010
 
-// MB_ICONQUESTION Win32 API constant.
-const MB_ICONQUESTION = 0x00000020
+	// MB_ICONQUESTION Win32 API constant.
+	MB_ICONQUESTION = 0x00000020
 
-// MB_ICONEXCLAMATION Win32 API constant.
-const MB_ICONEXCLAMATION = 0x00000030
+	// MB_ICONEXCLAMATION Win32 API constant.
+	MB_ICONEXCLAMATION = 0x00000030
 
-// MB_ICONASTERISK Win32 API constant.
-const MB_ICONASTERISK = 0x00000040
+	// MB_ICONASTERISK Win32 API constant.
+	MB_ICONASTERISK = 0x00000040
 
-// MB_ICONINFORMATION Win32 API constant.
-const MB_ICONINFORMATION = MB_ICONASTERISK
+	// MB_ICONINFORMATION Win32 API constant.
+	MB_ICONINFORMATION = MB_ICONASTERISK
 
-// MB_ICONWARNING Win32 API constant.
-const MB_ICONWARNING = MB_ICONEXCLAMATION
+	// MB_ICONWARNING Win32 API constant.
+	MB_ICONWARNING = MB_ICONEXCLAMATION
 
-// MB_ICONERROR Win32 API constant.
-const MB_ICONERROR = MB_ICONHAND
+	// MB_ICONERROR Win32 API constant.
+	MB_ICONERROR = MB_ICONHAND
 
-// MB_ICONSTOP Win32 API constant.
-const MB_ICONSTOP = MB_ICONHAND
+	// MB_ICONSTOP Win32 API constant.
+	MB_ICONSTOP = MB_ICONHAND
 
-// MB_DEFBUTTON1 Win32 API constant.
-const MB_DEFBUTTON1 = 0x00000000
+	// MB_DEFBUTTON1 Win32 API constant.
+	MB_DEFBUTTON1 = 0x00000000
 
-// MB_DEFBUTTON2 Win32 API constant.
-const MB_DEFBUTTON2 = 0x00000100
+	// MB_DEFBUTTON2 Win32 API constant.
+	MB_DEFBUTTON2 = 0x00000100
 
-// MB_DEFBUTTON3 Win32 API constant.
-const MB_DEFBUTTON3 = 0x00000200
+	// MB_DEFBUTTON3 Win32 API constant.
+	MB_DEFBUTTON3 = 0x00000200
 
-// MB_DEFBUTTON4 Win32 API constant.
-const MB_DEFBUTTON4 = 0x00000300
-
-// -----------------------------------------------------------------------------
-
-// MF_CHECKED Win32 API constant.
-const MF_CHECKED = 0x00000008
-
-// MF_POPUP Win32 API constant.
-const MF_POPUP = 0x00000010
-
-// MF_SEPARATOR Win32 API constant.
-const MF_SEPARATOR = 0x00000800
-
-// MF_STRING Win32 API constant.
-const MF_STRING = 0x00000000
-
-// MF_UNCHECKED Win32 API constant.
-const MF_UNCHECKED = 0x00000000
-
-// MFT_STRING Win32 API constant.
-const MFT_STRING = 0
-
-// MIIM_SUBMENU Win32 API constant.
-const MIIM_SUBMENU = 0x00000004
-
-// MM_TEXT Win32 API constant.
-const MM_TEXT = 1
-
-// MSGFLT_ADD Win32 API constant.
-const MSGFLT_ADD = 1
-
-// NO_ERROR Win32 API constant.
-const NO_ERROR = 0 // dderror
-
-// OFN_FILEMUSTEXIST Win32 API constant.
-const OFN_FILEMUSTEXIST = 0x00001000
-
-// OFN_PATHMUSTEXIST Win32 API constant.
-const OFN_PATHMUSTEXIST = 0x00000800
-
-// OPEN_ALWAYS Win32 API constant.
-const OPEN_ALWAYS = 4
-
-// OUT_TT_ONLY_PRECIS Win32 API constant.
-const OUT_TT_ONLY_PRECIS = 7
+	// MB_DEFBUTTON4 Win32 API constant.
+	MB_DEFBUTTON4 = 0x00000300
+)
 
 // -----------------------------------------------------------------------------
 
-// NULL __
-const NULL = 0
+const (
+	// MF_CHECKED Win32 API constant.
+	MF_CHECKED = 0x00000008
+
+	// MF_POPUP Win32 API constant.
+	MF_POPUP = 0x00000010
+
+	// MF_SEPARATOR Win32 API constant.
+	MF_SEPARATOR = 0x00000800
+
+	// MF_STRING Win32 API constant.
+	MF_STRING = 0x00000000
+
+	// MF_UNCHECKED Win32 API constant.
+	MF_UNCHECKED = 0x00000000
+
+	// MFT_STRING Win32 API constant.
+	MFT_STRING = 0
+
+	// MIIM_SUBMENU Win32 API constant.
+	MIIM_SUBMENU = 0x00000004
+
+	// MM_TEXT Win32 API constant.
+	MM_TEXT = 1
+
+	// MSGFLT_ADD Win32 API constant.
+	MSGFLT_ADD = 1
+
+	// NO_ERROR Win32 API constant.
+	NO_ERROR = 0 // dderror
+
+	// OFN_FILEMUSTEXIST Win32 API constant.
+	OFN_FILEMUSTEXIST = 0x00001000
+
+	// OFN_PATHMUSTEXIST Win32 API constant.
+	OFN_PATHMUSTEXIST = 0x00000800
+
+	// OPEN_ALWAYS Win32 API constant.
+	OPEN_ALWAYS = 4
+
+	// OUT_TT_ONLY_PRECIS Win32 API constant.
+	OUT_TT_ONLY_PRECIS = 7
+)
+
+// -----------------------------------------------------------------------------
+
+const (
+	// NULL __
+	NULL = 0
+)
 
 // -----------------------------------------------------------------------------
 // PeekMessage() wRemoveMsg parameters
 
-// PM_NOREMOVE Win32 API constant.
-const PM_NOREMOVE = 0x000
+const (
+	// PM_NOREMOVE Win32 API constant.
+	PM_NOREMOVE = 0x000
 
-// PM_REMOVE Win32 API constant.
-const PM_REMOVE = 0x001
+	// PM_REMOVE Win32 API constant.
+	PM_REMOVE = 0x001
 
-// PM_NOYIELD Win32 API constant.
-const PM_NOYIELD = 0x002
-
-// -----------------------------------------------------------------------------
-
-// PROOF_QUALITY Win32 API constant.
-const PROOF_QUALITY = 2
-
-// SRCCOPY Win32 API constant.
-const SRCCOPY = 0x00CC0020 // dest = source
-
-// SS_LEFT Win32 API constant.
-const SS_LEFT = 0x00000000
-
-// STD_INPUT_HANDLE Win32 API constant.
-const STD_INPUT_HANDLE = -10
-
-// SUBLANG_DEFAULT Win32 API constant.
-const SUBLANG_DEFAULT = 0x01
-
-// SW_HIDE Win32 API constant.
-const SW_HIDE = 0
-
-// SW_SHOW Win32 API constant.
-const SW_SHOW = 5
-
-// SWP_NOMOVE Win32 API constant.
-const SWP_NOMOVE = 0x0002
-
-// SWP_NOSIZE Win32 API constant.
-const SWP_NOSIZE = 0x0001
-
-// SYNCHRONIZE Win32 API constant.
-const SYNCHRONIZE = 0x00100000
-
-// TRUE Win32 API constant.
-const TRUE = 1
+	// PM_NOYIELD Win32 API constant.
+	PM_NOYIELD = 0x002
+)
 
 // -----------------------------------------------------------------------------
 
-// VK_LBUTTON virtual key
-const VK_LBUTTON = 0x01
+const (
+	// PROOF_QUALITY Win32 API constant.
+	PROOF_QUALITY = 2
 
-// VK_BACK virtual key
-const VK_BACK = 0x08
+	// SRCCOPY Win32 API constant.
+	SRCCOPY = 0x00CC0020 // dest = source
 
-// VK_SHIFT virtual key
-const VK_SHIFT = 0x10
+	// SS_LEFT Win32 API constant.
+	SS_LEFT = 0x00000000
 
-// VK_CONTROL virtual key
-const VK_CONTROL = 0x11
+	// STD_INPUT_HANDLE Win32 API constant.
+	STD_INPUT_HANDLE = -10
 
-// VK_MENU virtual key
-const VK_MENU = 0x12
+	// SUBLANG_DEFAULT Win32 API constant.
+	SUBLANG_DEFAULT = 0x01
 
-// VK_ESCAPE virtual key
-const VK_ESCAPE = 0x1B
+	// SW_HIDE Win32 API constant.
+	SW_HIDE = 0
 
-// VK_PRIOR virtual key
-const VK_PRIOR = 0x21
+	// SW_SHOW Win32 API constant.
+	SW_SHOW = 5
 
-// VK_NEXT virtual key
-const VK_NEXT = 0x22
+	// SWP_NOMOVE Win32 API constant.
+	SWP_NOMOVE = 0x0002
 
-// VK_END virtual key
-const VK_END = 0x23
+	// SWP_NOSIZE Win32 API constant.
+	SWP_NOSIZE = 0x0001
 
-// VK_HOME virtual key
-const VK_HOME = 0x24
+	// SYNCHRONIZE Win32 API constant.
+	SYNCHRONIZE = 0x00100000
 
-// VK_LEFT virtual key
-const VK_LEFT = 0x25
-
-// VK_UP virtual key
-const VK_UP = 0x26
-
-// VK_RIGHT virtual key
-const VK_RIGHT = 0x27
-
-// VK_DOWN virtual key
-const VK_DOWN = 0x28
-
-// VK_DELETE virtual key
-const VK_DELETE = 0x2E
-
-// VK_APPS virtual key
-const VK_APPS = 0x5D
-
-// VK_ADD virtual key
-const VK_ADD = 0x6B
-
-// VK_SUBTRACT virtual key
-const VK_SUBTRACT = 0x6D
-
-// VK_F1 virtual key
-const VK_F1 = 0x70
-
-// VK_F2 virtual key
-const VK_F2 = 0x71
-
-// VK_F3 virtual key
-const VK_F3 = 0x72
-
-// VK_F4 virtual key
-const VK_F4 = 0x73
-
-// VK_F5 virtual key
-const VK_F5 = 0x74
-
-// VK_F6 virtual key
-const VK_F6 = 0x75
-
-// VK_F7 virtual key
-const VK_F7 = 0x76
-
-// VK_F8 virtual key
-const VK_F8 = 0x77
-
-// VK_F9 virtual key
-const VK_F9 = 0x78
-
-// VK_F10 virtual key
-const VK_F10 = 0x79
-
-// VK_F11 virtual key
-const VK_F11 = 0x7A
-
-// VK_F12 virtual key
-const VK_F12 = 0x7B
-
-// VK_LSHIFT virtual key
-const VK_LSHIFT = 0xA0
-
-// VK_RSHIFT virtual key
-const VK_RSHIFT = 0xA1
-
-// VK_OEM_PLUS virtual key
-const VK_OEM_PLUS = 0xBB
-
-// VK_OEM_MINUS virtual key
-const VK_OEM_MINUS = 0xBD
-
-// VK_OEM_4 virtual key
-const VK_OEM_4 = 0xDB
-
-// VK_OEM_6 virtual key
-const VK_OEM_6 = 0xDD
+	// TRUE Win32 API constant.
+	TRUE = 1
+)
 
 // -----------------------------------------------------------------------------
 
-// WAIT_OBJECT __
-const WAIT_OBJECT = 0
+const (
+	// VK_LBUTTON virtual key
+	VK_LBUTTON = 0x01
 
-// WAIT_OBJECT_0 __
-const WAIT_OBJECT_0 = 0
+	// VK_BACK virtual key
+	VK_BACK = 0x08
 
-// WAIT_TIMEOUT __
-const WAIT_TIMEOUT = 258
+	// VK_SHIFT virtual key
+	VK_SHIFT = 0x10
+
+	// VK_CONTROL virtual key
+	VK_CONTROL = 0x11
+
+	// VK_MENU virtual key
+	VK_MENU = 0x12
+
+	// VK_ESCAPE virtual key
+	VK_ESCAPE = 0x1B
+
+	// VK_PRIOR virtual key
+	VK_PRIOR = 0x21
+
+	// VK_NEXT virtual key
+	VK_NEXT = 0x22
+
+	// VK_END virtual key
+	VK_END = 0x23
+
+	// VK_HOME virtual key
+	VK_HOME = 0x24
+
+	// VK_LEFT virtual key
+	VK_LEFT = 0x25
+
+	// VK_UP virtual key
+	VK_UP = 0x26
+
+	// VK_RIGHT virtual key
+	VK_RIGHT = 0x27
+
+	// VK_DOWN virtual key
+	VK_DOWN = 0x28
+
+	// VK_DELETE virtual key
+	VK_DELETE = 0x2E
+
+	// VK_APPS virtual key
+	VK_APPS = 0x5D
+
+	// VK_ADD virtual key
+	VK_ADD = 0x6B
+
+	// VK_SUBTRACT virtual key
+	VK_SUBTRACT = 0x6D
+
+	// VK_F1 virtual key
+	VK_F1 = 0x70
+
+	// VK_F2 virtual key
+	VK_F2 = 0x71
+
+	// VK_F3 virtual key
+	VK_F3 = 0x72
+
+	// VK_F4 virtual key
+	VK_F4 = 0x73
+
+	// VK_F5 virtual key
+	VK_F5 = 0x74
+
+	// VK_F6 virtual key
+	VK_F6 = 0x75
+
+	// VK_F7 virtual key
+	VK_F7 = 0x76
+
+	// VK_F8 virtual key
+	VK_F8 = 0x77
+
+	// VK_F9 virtual key
+	VK_F9 = 0x78
+
+	// VK_F10 virtual key
+	VK_F10 = 0x79
+
+	// VK_F11 virtual key
+	VK_F11 = 0x7A
+
+	// VK_F12 virtual key
+	VK_F12 = 0x7B
+
+	// VK_LSHIFT virtual key
+	VK_LSHIFT = 0xA0
+
+	// VK_RSHIFT virtual key
+	VK_RSHIFT = 0xA1
+
+	// VK_OEM_PLUS virtual key
+	VK_OEM_PLUS = 0xBB
+
+	// VK_OEM_MINUS virtual key
+	VK_OEM_MINUS = 0xBD
+
+	// VK_OEM_4 virtual key
+	VK_OEM_4 = 0xDB
+
+	// VK_OEM_6 virtual key
+	VK_OEM_6 = 0xDD
+)
 
 // -----------------------------------------------------------------------------
 
-// WHEEL_DELTA Win32 API constant.
-const WHEEL_DELTA = 120
+const (
+	// WAIT_OBJECT __
+	WAIT_OBJECT = 0
+
+	// WAIT_OBJECT_0 __
+	WAIT_OBJECT_0 = 0
+
+	// WAIT_TIMEOUT __
+	WAIT_TIMEOUT = 258
+)
+
+// -----------------------------------------------------------------------------
+
+const (
+	// WHEEL_DELTA Win32 API constant.
+	WHEEL_DELTA = 120
+)
 
 // -----------------------------------------------------------------------------
 // Window messages used by Zircon-Go lib and applications:
 
-// WM_ACTIVATE Win32 API message constant.
-const WM_ACTIVATE = 0x0006
+const (
+	// WM_ACTIVATE Win32 API message constant.
+	WM_ACTIVATE = 0x0006
 
-// WM_CHAR Win32 API message constant.
-const WM_CHAR = 0x0102
+	// WM_CHAR Win32 API message constant.
+	WM_CHAR = 0x0102
 
-// WM_COMMAND Win32 API message constant.
-const WM_COMMAND = 0x0111
+	// WM_COMMAND Win32 API message constant.
+	WM_COMMAND = 0x0111
 
-// WM_COPYDATA Win32 API message constant.
-const WM_COPYDATA = 0x004A
+	// WM_COPYDATA Win32 API message constant.
+	WM_COPYDATA = 0x004A
 
-// WM_CREATE Win32 API message constant.
-const WM_CREATE = 0x0001
+	// WM_CREATE Win32 API message constant.
+	WM_CREATE = 0x0001
 
-// WM_DESTROY Win32 API message constant.
-const WM_DESTROY = 0x0002
+	// WM_DESTROY Win32 API message constant.
+	WM_DESTROY = 0x0002
 
-// WM_DROPFILES Win32 API message constant.
-const WM_DROPFILES = 0x0233
+	// WM_DROPFILES Win32 API message constant.
+	WM_DROPFILES = 0x0233
 
-// WM_INITDIALOG Win32 API message constant.
-const WM_INITDIALOG = 0x0110
+	// WM_INITDIALOG Win32 API message constant.
+	WM_INITDIALOG = 0x0110
 
-// WM_KEYDOWN Win32 API message constant.
-const WM_KEYDOWN = 0x0100
+	// WM_KEYDOWN Win32 API message constant.
+	WM_KEYDOWN = 0x0100
 
-// WM_KILLFOCUS Win32 API message constant.
-const WM_KILLFOCUS = 0x0008
+	// WM_KILLFOCUS Win32 API message constant.
+	WM_KILLFOCUS = 0x0008
 
-// WM_LBUTTONDOWN Win32 API message constant.
-const WM_LBUTTONDOWN = 0x0201
+	// WM_LBUTTONDOWN Win32 API message constant.
+	WM_LBUTTONDOWN = 0x0201
 
-// WM_LBUTTONUP Win32 API message constant.
-const WM_LBUTTONUP = 0x0202
+	// WM_LBUTTONUP Win32 API message constant.
+	WM_LBUTTONUP = 0x0202
 
-// WM_MOUSEMOVE Win32 API message constant.
-const WM_MOUSEMOVE = 0x0200
+	// WM_MOUSEMOVE Win32 API message constant.
+	WM_MOUSEMOVE = 0x0200
 
-// WM_MOUSEWHEEL Win32 API message constant.
-const WM_MOUSEWHEEL = 0x020A
+	// WM_MOUSEWHEEL Win32 API message constant.
+	WM_MOUSEWHEEL = 0x020A
 
-// WM_MOVE Win32 API message constant.
-const WM_MOVE = 0x0003
+	// WM_MOVE Win32 API message constant.
+	WM_MOVE = 0x0003
 
-// WM_NULL Win32 API message constant.
-const WM_NULL = 0x0000
+	// WM_NULL Win32 API message constant.
+	WM_NULL = 0x0000
 
-// WM_PAINT Win32 API message constant.
-const WM_PAINT = 0x000F
+	// WM_PAINT Win32 API message constant.
+	WM_PAINT = 0x000F
 
-// WM_SETFOCUS Win32 API message constant.
-const WM_SETFOCUS = 0x0007
+	// WM_SETFOCUS Win32 API message constant.
+	WM_SETFOCUS = 0x0007
 
-// WM_SETFONT Win32 API message constant.
-const WM_SETFONT = 0x0030
+	// WM_SETFONT Win32 API message constant.
+	WM_SETFONT = 0x0030
 
-// WM_SIZE Win32 API message constant.
-const WM_SIZE = 0x0005
+	// WM_SIZE Win32 API message constant.
+	WM_SIZE = 0x0005
 
-// All other window messages:
+	// All other window messages:
 
-// WM_ENABLE Win32 API message constant.
-const WM_ENABLE = 0x000A
+	// WM_ENABLE Win32 API message constant.
+	WM_ENABLE = 0x000A
 
-// WM_SETREDRAW Win32 API message constant.
-const WM_SETREDRAW = 0x000B
+	// WM_SETREDRAW Win32 API message constant.
+	WM_SETREDRAW = 0x000B
 
-// WM_SETTEXT Win32 API message constant.
-const WM_SETTEXT = 0x000C
+	// WM_SETTEXT Win32 API message constant.
+	WM_SETTEXT = 0x000C
 
-// WM_GETTEXT Win32 API message constant.
-const WM_GETTEXT = 0x000D
+	// WM_GETTEXT Win32 API message constant.
+	WM_GETTEXT = 0x000D
 
-// WM_GETTEXTLENGTH Win32 API message constant.
-const WM_GETTEXTLENGTH = 0x000E
+	// WM_GETTEXTLENGTH Win32 API message constant.
+	WM_GETTEXTLENGTH = 0x000E
 
-// WM_CLOSE Win32 API message constant.
-const WM_CLOSE = 0x0010
+	// WM_CLOSE Win32 API message constant.
+	WM_CLOSE = 0x0010
 
-// WM_QUERYENDSESSION Win32 API message constant.
-const WM_QUERYENDSESSION = 0x0011
+	// WM_QUERYENDSESSION Win32 API message constant.
+	WM_QUERYENDSESSION = 0x0011
 
-// WM_QUIT Win32 API message constant.
-const WM_QUIT = 0x0012
+	// WM_QUIT Win32 API message constant.
+	WM_QUIT = 0x0012
 
-// WM_QUERYOPEN Win32 API message constant.
-const WM_QUERYOPEN = 0x0013
+	// WM_QUERYOPEN Win32 API message constant.
+	WM_QUERYOPEN = 0x0013
 
-// WM_ERASEBKGND Win32 API message constant.
-const WM_ERASEBKGND = 0x0014
+	// WM_ERASEBKGND Win32 API message constant.
+	WM_ERASEBKGND = 0x0014
 
-// WM_SYSCOLORCHANGE Win32 API message constant.
-const WM_SYSCOLORCHANGE = 0x0015
+	// WM_SYSCOLORCHANGE Win32 API message constant.
+	WM_SYSCOLORCHANGE = 0x0015
 
-// WM_ENDSESSION Win32 API message constant.
-const WM_ENDSESSION = 0x0016
+	// WM_ENDSESSION Win32 API message constant.
+	WM_ENDSESSION = 0x0016
 
-// WM_SHOWWINDOW Win32 API message constant.
-const WM_SHOWWINDOW = 0x0018
+	// WM_SHOWWINDOW Win32 API message constant.
+	WM_SHOWWINDOW = 0x0018
 
-// WM_WININICHANGE Win32 API message constant.
-const WM_WININICHANGE = 0x001A
+	// WM_WININICHANGE Win32 API message constant.
+	WM_WININICHANGE = 0x001A
 
-// WM_DEVMODECHANGE Win32 API message constant.
-const WM_DEVMODECHANGE = 0x001B
+	// WM_DEVMODECHANGE Win32 API message constant.
+	WM_DEVMODECHANGE = 0x001B
 
-// WM_ACTIVATEAPP Win32 API message constant.
-const WM_ACTIVATEAPP = 0x001C
+	// WM_ACTIVATEAPP Win32 API message constant.
+	WM_ACTIVATEAPP = 0x001C
 
-// WM_FONTCHANGE Win32 API message constant.
-const WM_FONTCHANGE = 0x001D
+	// WM_FONTCHANGE Win32 API message constant.
+	WM_FONTCHANGE = 0x001D
 
-// WM_TIMECHANGE Win32 API message constant.
-const WM_TIMECHANGE = 0x001E
+	// WM_TIMECHANGE Win32 API message constant.
+	WM_TIMECHANGE = 0x001E
 
-// WM_CANCELMODE Win32 API message constant.
-const WM_CANCELMODE = 0x001F
+	// WM_CANCELMODE Win32 API message constant.
+	WM_CANCELMODE = 0x001F
 
-// WM_SETCURSOR Win32 API message constant.
-const WM_SETCURSOR = 0x0020
+	// WM_SETCURSOR Win32 API message constant.
+	WM_SETCURSOR = 0x0020
 
-// WM_MOUSEACTIVATE Win32 API message constant.
-const WM_MOUSEACTIVATE = 0x0021
+	// WM_MOUSEACTIVATE Win32 API message constant.
+	WM_MOUSEACTIVATE = 0x0021
 
-// WM_CHILDACTIVATE Win32 API message constant.
-const WM_CHILDACTIVATE = 0x0022
+	// WM_CHILDACTIVATE Win32 API message constant.
+	WM_CHILDACTIVATE = 0x0022
 
-// WM_QUEUESYNC Win32 API message constant.
-const WM_QUEUESYNC = 0x0023
+	// WM_QUEUESYNC Win32 API message constant.
+	WM_QUEUESYNC = 0x0023
 
-// WM_GETMINMAXINFO Win32 API message constant.
-const WM_GETMINMAXINFO = 0x0024
+	// WM_GETMINMAXINFO Win32 API message constant.
+	WM_GETMINMAXINFO = 0x0024
 
-// WM_PAINTICON Win32 API message constant.
-const WM_PAINTICON = 0x0026
+	// WM_PAINTICON Win32 API message constant.
+	WM_PAINTICON = 0x0026
 
-// WM_ICONERASEBKGND Win32 API message constant.
-const WM_ICONERASEBKGND = 0x0027
+	// WM_ICONERASEBKGND Win32 API message constant.
+	WM_ICONERASEBKGND = 0x0027
 
-// WM_NEXTDLGCTL Win32 API message constant.
-const WM_NEXTDLGCTL = 0x0028
+	// WM_NEXTDLGCTL Win32 API message constant.
+	WM_NEXTDLGCTL = 0x0028
 
-// WM_SPOOLERSTATUS Win32 API message constant.
-const WM_SPOOLERSTATUS = 0x002A
+	// WM_SPOOLERSTATUS Win32 API message constant.
+	WM_SPOOLERSTATUS = 0x002A
 
-// WM_DRAWITEM Win32 API message constant.
-const WM_DRAWITEM = 0x002B
+	// WM_DRAWITEM Win32 API message constant.
+	WM_DRAWITEM = 0x002B
 
-// WM_MEASUREITEM Win32 API message constant.
-const WM_MEASUREITEM = 0x002C
+	// WM_MEASUREITEM Win32 API message constant.
+	WM_MEASUREITEM = 0x002C
 
-// WM_DELETEITEM Win32 API message constant.
-const WM_DELETEITEM = 0x002D
+	// WM_DELETEITEM Win32 API message constant.
+	WM_DELETEITEM = 0x002D
 
-// WM_VKEYTOITEM Win32 API message constant.
-const WM_VKEYTOITEM = 0x002E
+	// WM_VKEYTOITEM Win32 API message constant.
+	WM_VKEYTOITEM = 0x002E
 
-// WM_CHARTOITEM Win32 API message constant.
-const WM_CHARTOITEM = 0x002F
+	// WM_CHARTOITEM Win32 API message constant.
+	WM_CHARTOITEM = 0x002F
 
-// WM_GETFONT Win32 API message constant.
-const WM_GETFONT = 0x0031
+	// WM_GETFONT Win32 API message constant.
+	WM_GETFONT = 0x0031
 
-// WM_SETHOTKEY Win32 API message constant.
-const WM_SETHOTKEY = 0x0032
+	// WM_SETHOTKEY Win32 API message constant.
+	WM_SETHOTKEY = 0x0032
 
-// WM_GETHOTKEY Win32 API message constant.
-const WM_GETHOTKEY = 0x0033
+	// WM_GETHOTKEY Win32 API message constant.
+	WM_GETHOTKEY = 0x0033
 
-// WM_QUERYDRAGICON Win32 API message constant.
-const WM_QUERYDRAGICON = 0x0037
+	// WM_QUERYDRAGICON Win32 API message constant.
+	WM_QUERYDRAGICON = 0x0037
 
-// WM_COMPAREITEM Win32 API message constant.
-const WM_COMPAREITEM = 0x0039
+	// WM_COMPAREITEM Win32 API message constant.
+	WM_COMPAREITEM = 0x0039
 
-// WM_GETOBJECT Win32 API message constant.
-const WM_GETOBJECT = 0x003D
+	// WM_GETOBJECT Win32 API message constant.
+	WM_GETOBJECT = 0x003D
 
-// WM_COMPACTING Win32 API message constant.
-const WM_COMPACTING = 0x0041
+	// WM_COMPACTING Win32 API message constant.
+	WM_COMPACTING = 0x0041
 
-// WM_COMMNOTIFY Win32 API message constant. No longer supported.
-const WM_COMMNOTIFY = 0x0044
+	// WM_COMMNOTIFY Win32 API message constant. No longer supported.
+	WM_COMMNOTIFY = 0x0044
 
-// WM_WINDOWPOSCHANGING Win32 API message constant.
-const WM_WINDOWPOSCHANGING = 0x0046
+	// WM_WINDOWPOSCHANGING Win32 API message constant.
+	WM_WINDOWPOSCHANGING = 0x0046
 
-// WM_WINDOWPOSCHANGED Win32 API message constant.
-const WM_WINDOWPOSCHANGED = 0x0047
+	// WM_WINDOWPOSCHANGED Win32 API message constant.
+	WM_WINDOWPOSCHANGED = 0x0047
 
-// WM_POWER Win32 API message constant.
-const WM_POWER = 0x0048
+	// WM_POWER Win32 API message constant.
+	WM_POWER = 0x0048
 
-// WM_CANCELJOURNAL Win32 API message constant.
-const WM_CANCELJOURNAL = 0x004B
+	// WM_CANCELJOURNAL Win32 API message constant.
+	WM_CANCELJOURNAL = 0x004B
 
-// WM_NOTIFY Win32 API message constant.
-const WM_NOTIFY = 0x004E
+	// WM_NOTIFY Win32 API message constant.
+	WM_NOTIFY = 0x004E
 
-// WM_INPUTLANGCHANGEREQUEST Win32 API message constant.
-const WM_INPUTLANGCHANGEREQUEST = 0x0050
+	// WM_INPUTLANGCHANGEREQUEST Win32 API message constant.
+	WM_INPUTLANGCHANGEREQUEST = 0x0050
 
-// WM_INPUTLANGCHANGE Win32 API message constant.
-const WM_INPUTLANGCHANGE = 0x0051
+	// WM_INPUTLANGCHANGE Win32 API message constant.
+	WM_INPUTLANGCHANGE = 0x0051
 
-// WM_TCARD Win32 API message constant.
-const WM_TCARD = 0x0052
+	// WM_TCARD Win32 API message constant.
+	WM_TCARD = 0x0052
 
-// WM_HELP Win32 API message constant.
-const WM_HELP = 0x0053
+	// WM_HELP Win32 API message constant.
+	WM_HELP = 0x0053
 
-// WM_USERCHANGED Win32 API message constant.
-const WM_USERCHANGED = 0x0054
+	// WM_USERCHANGED Win32 API message constant.
+	WM_USERCHANGED = 0x0054
 
-// WM_NOTIFYFORMAT Win32 API message constant.
-const WM_NOTIFYFORMAT = 0x0055
+	// WM_NOTIFYFORMAT Win32 API message constant.
+	WM_NOTIFYFORMAT = 0x0055
 
-// WM_CONTEXTMENU Win32 API message constant.
-const WM_CONTEXTMENU = 0x007B
+	// WM_CONTEXTMENU Win32 API message constant.
+	WM_CONTEXTMENU = 0x007B
 
-// WM_STYLECHANGING Win32 API message constant.
-const WM_STYLECHANGING = 0x007C
+	// WM_STYLECHANGING Win32 API message constant.
+	WM_STYLECHANGING = 0x007C
 
-// WM_STYLECHANGED Win32 API message constant.
-const WM_STYLECHANGED = 0x007D
+	// WM_STYLECHANGED Win32 API message constant.
+	WM_STYLECHANGED = 0x007D
 
-// WM_DISPLAYCHANGE Win32 API message constant.
-const WM_DISPLAYCHANGE = 0x007E
+	// WM_DISPLAYCHANGE Win32 API message constant.
+	WM_DISPLAYCHANGE = 0x007E
 
-// WM_GETICON Win32 API message constant.
-const WM_GETICON = 0x007F
+	// WM_GETICON Win32 API message constant.
+	WM_GETICON = 0x007F
 
-// WM_SETICON Win32 API message constant.
-const WM_SETICON = 0x0080
+	// WM_SETICON Win32 API message constant.
+	WM_SETICON = 0x0080
 
-// WM_NCCREATE Win32 API message constant.
-const WM_NCCREATE = 0x0081
+	// WM_NCCREATE Win32 API message constant.
+	WM_NCCREATE = 0x0081
 
-// WM_NCDESTROY Win32 API message constant.
-const WM_NCDESTROY = 0x0082
+	// WM_NCDESTROY Win32 API message constant.
+	WM_NCDESTROY = 0x0082
 
-// WM_NCCALCSIZE Win32 API message constant.
-const WM_NCCALCSIZE = 0x0083
+	// WM_NCCALCSIZE Win32 API message constant.
+	WM_NCCALCSIZE = 0x0083
 
-// WM_NCHITTEST Win32 API message constant.
-const WM_NCHITTEST = 0x0084
+	// WM_NCHITTEST Win32 API message constant.
+	WM_NCHITTEST = 0x0084
 
-// WM_NCPAINT Win32 API message constant.
-const WM_NCPAINT = 0x0085
+	// WM_NCPAINT Win32 API message constant.
+	WM_NCPAINT = 0x0085
 
-// WM_NCACTIVATE Win32 API message constant.
-const WM_NCACTIVATE = 0x0086
+	// WM_NCACTIVATE Win32 API message constant.
+	WM_NCACTIVATE = 0x0086
 
-// WM_GETDLGCODE Win32 API message constant.
-const WM_GETDLGCODE = 0x0087
+	// WM_GETDLGCODE Win32 API message constant.
+	WM_GETDLGCODE = 0x0087
 
-// WM_SYNCPAINT Win32 API message constant.
-const WM_SYNCPAINT = 0x0088
+	// WM_SYNCPAINT Win32 API message constant.
+	WM_SYNCPAINT = 0x0088
 
-// WM_NCMOUSEMOVE Win32 API message constant.
-const WM_NCMOUSEMOVE = 0x00A0
+	// WM_NCMOUSEMOVE Win32 API message constant.
+	WM_NCMOUSEMOVE = 0x00A0
 
-// WM_NCLBUTTONDOWN Win32 API message constant.
-const WM_NCLBUTTONDOWN = 0x00A1
+	// WM_NCLBUTTONDOWN Win32 API message constant.
+	WM_NCLBUTTONDOWN = 0x00A1
 
-// WM_NCLBUTTONUP Win32 API message constant.
-const WM_NCLBUTTONUP = 0x00A2
+	// WM_NCLBUTTONUP Win32 API message constant.
+	WM_NCLBUTTONUP = 0x00A2
 
-// WM_NCLBUTTONDBLCLK Win32 API message constant.
-const WM_NCLBUTTONDBLCLK = 0x00A3
+	// WM_NCLBUTTONDBLCLK Win32 API message constant.
+	WM_NCLBUTTONDBLCLK = 0x00A3
 
-// WM_NCRBUTTONDOWN Win32 API message constant.
-const WM_NCRBUTTONDOWN = 0x00A4
+	// WM_NCRBUTTONDOWN Win32 API message constant.
+	WM_NCRBUTTONDOWN = 0x00A4
 
-// WM_NCRBUTTONUP Win32 API message constant.
-const WM_NCRBUTTONUP = 0x00A5
+	// WM_NCRBUTTONUP Win32 API message constant.
+	WM_NCRBUTTONUP = 0x00A5
 
-// WM_NCRBUTTONDBLCLK Win32 API message constant.
-const WM_NCRBUTTONDBLCLK = 0x00A6
+	// WM_NCRBUTTONDBLCLK Win32 API message constant.
+	WM_NCRBUTTONDBLCLK = 0x00A6
 
-// WM_NCMBUTTONDOWN Win32 API message constant.
-const WM_NCMBUTTONDOWN = 0x00A7
+	// WM_NCMBUTTONDOWN Win32 API message constant.
+	WM_NCMBUTTONDOWN = 0x00A7
 
-// WM_NCMBUTTONUP Win32 API message constant.
-const WM_NCMBUTTONUP = 0x00A8
+	// WM_NCMBUTTONUP Win32 API message constant.
+	WM_NCMBUTTONUP = 0x00A8
 
-// WM_NCMBUTTONDBLCLK Win32 API message constant.
-const WM_NCMBUTTONDBLCLK = 0x00A9
+	// WM_NCMBUTTONDBLCLK Win32 API message constant.
+	WM_NCMBUTTONDBLCLK = 0x00A9
 
-// WM_NCXBUTTONDOWN Win32 API message constant.
-const WM_NCXBUTTONDOWN = 0x00AB
+	// WM_NCXBUTTONDOWN Win32 API message constant.
+	WM_NCXBUTTONDOWN = 0x00AB
 
-// WM_NCXBUTTONUP Win32 API message constant.
-const WM_NCXBUTTONUP = 0x00AC
+	// WM_NCXBUTTONUP Win32 API message constant.
+	WM_NCXBUTTONUP = 0x00AC
 
-// WM_NCXBUTTONDBLCLK Win32 API message constant.
-const WM_NCXBUTTONDBLCLK = 0x00AD
+	// WM_NCXBUTTONDBLCLK Win32 API message constant.
+	WM_NCXBUTTONDBLCLK = 0x00AD
 
-// WM_INPUT_DEVICE_CHANGE Win32 API message constant.
-const WM_INPUT_DEVICE_CHANGE = 0x00FE
+	// WM_INPUT_DEVICE_CHANGE Win32 API message constant.
+	WM_INPUT_DEVICE_CHANGE = 0x00FE
 
-// WM_INPUT Win32 API message constant.
-const WM_INPUT = 0x00FF
+	// WM_INPUT Win32 API message constant.
+	WM_INPUT = 0x00FF
 
-// WM_KEYFIRST Win32 API message constant.
-const WM_KEYFIRST = 0x0100
+	// WM_KEYFIRST Win32 API message constant.
+	WM_KEYFIRST = 0x0100
 
-// WM_KEYUP Win32 API message constant.
-const WM_KEYUP = 0x0101
+	// WM_KEYUP Win32 API message constant.
+	WM_KEYUP = 0x0101
 
-// WM_DEADCHAR Win32 API message constant.
-const WM_DEADCHAR = 0x0103
+	// WM_DEADCHAR Win32 API message constant.
+	WM_DEADCHAR = 0x0103
 
-// WM_SYSKEYDOWN Win32 API message constant.
-const WM_SYSKEYDOWN = 0x0104
+	// WM_SYSKEYDOWN Win32 API message constant.
+	WM_SYSKEYDOWN = 0x0104
 
-// WM_SYSKEYUP Win32 API message constant.
-const WM_SYSKEYUP = 0x0105
+	// WM_SYSKEYUP Win32 API message constant.
+	WM_SYSKEYUP = 0x0105
 
-// WM_SYSCHAR Win32 API message constant.
-const WM_SYSCHAR = 0x0106
+	// WM_SYSCHAR Win32 API message constant.
+	WM_SYSCHAR = 0x0106
 
-// WM_SYSDEADCHAR Win32 API message constant.
-const WM_SYSDEADCHAR = 0x0107
+	// WM_SYSDEADCHAR Win32 API message constant.
+	WM_SYSDEADCHAR = 0x0107
 
-// WM_UNICHAR Win32 API message constant.
-const WM_UNICHAR = 0x0109
+	// WM_UNICHAR Win32 API message constant.
+	WM_UNICHAR = 0x0109
 
-// WM_KEYLAST Win32 API message constant.
-const WM_KEYLAST = 0x0109 // depends on Windows version
+	// WM_KEYLAST Win32 API message constant.
+	WM_KEYLAST = 0x0109 // depends on Windows version
 
-// WM_IME_STARTCOMPOSITION Win32 API message constant.
-const WM_IME_STARTCOMPOSITION = 0x010D
+	// WM_IME_STARTCOMPOSITION Win32 API message constant.
+	WM_IME_STARTCOMPOSITION = 0x010D
 
-// WM_IME_ENDCOMPOSITION Win32 API message constant.
-const WM_IME_ENDCOMPOSITION = 0x010E
+	// WM_IME_ENDCOMPOSITION Win32 API message constant.
+	WM_IME_ENDCOMPOSITION = 0x010E
 
-// WM_IME_COMPOSITION Win32 API message constant.
-const WM_IME_COMPOSITION = 0x010F
+	// WM_IME_COMPOSITION Win32 API message constant.
+	WM_IME_COMPOSITION = 0x010F
 
-// WM_IME_KEYLAST Win32 API message constant.
-const WM_IME_KEYLAST = 0x010F
+	// WM_IME_KEYLAST Win32 API message constant.
+	WM_IME_KEYLAST = 0x010F
 
-// WM_SYSCOMMAND Win32 API message constant.
-const WM_SYSCOMMAND = 0x0112
+	// WM_SYSCOMMAND Win32 API message constant.
+	WM_SYSCOMMAND = 0x0112
 
-// WM_TIMER Win32 API message constant.
-const WM_TIMER = 0x0113
+	// WM_TIMER Win32 API message constant.
+	WM_TIMER = 0x0113
 
-// WM_HSCROLL Win32 API message constant.
-const WM_HSCROLL = 0x0114
+	// WM_HSCROLL Win32 API message constant.
+	WM_HSCROLL = 0x0114
 
-// WM_VSCROLL Win32 API message constant.
-const WM_VSCROLL = 0x0115
+	// WM_VSCROLL Win32 API message constant.
+	WM_VSCROLL = 0x0115
 
-// WM_INITMENU Win32 API message constant.
-const WM_INITMENU = 0x0116
+	// WM_INITMENU Win32 API message constant.
+	WM_INITMENU = 0x0116
 
-// WM_INITMENUPOPUP Win32 API message constant.
-const WM_INITMENUPOPUP = 0x0117
+	// WM_INITMENUPOPUP Win32 API message constant.
+	WM_INITMENUPOPUP = 0x0117
 
-// WM_GESTURE Win32 API message constant.
-const WM_GESTURE = 0x0119
+	// WM_GESTURE Win32 API message constant.
+	WM_GESTURE = 0x0119
 
-// WM_GESTURENOTIFY Win32 API message constant.
-const WM_GESTURENOTIFY = 0x011A
+	// WM_GESTURENOTIFY Win32 API message constant.
+	WM_GESTURENOTIFY = 0x011A
 
-// WM_MENUSELECT Win32 API message constant.
-const WM_MENUSELECT = 0x011F
+	// WM_MENUSELECT Win32 API message constant.
+	WM_MENUSELECT = 0x011F
 
-// WM_MENUCHAR Win32 API message constant.
-const WM_MENUCHAR = 0x0120
+	// WM_MENUCHAR Win32 API message constant.
+	WM_MENUCHAR = 0x0120
 
-// WM_ENTERIDLE Win32 API message constant.
-const WM_ENTERIDLE = 0x0121
+	// WM_ENTERIDLE Win32 API message constant.
+	WM_ENTERIDLE = 0x0121
 
-// WM_MENURBUTTONUP Win32 API message constant.
-const WM_MENURBUTTONUP = 0x0122
+	// WM_MENURBUTTONUP Win32 API message constant.
+	WM_MENURBUTTONUP = 0x0122
 
-// WM_MENUDRAG Win32 API message constant.
-const WM_MENUDRAG = 0x0123
+	// WM_MENUDRAG Win32 API message constant.
+	WM_MENUDRAG = 0x0123
 
-// WM_MENUGETOBJECT Win32 API message constant.
-const WM_MENUGETOBJECT = 0x0124
+	// WM_MENUGETOBJECT Win32 API message constant.
+	WM_MENUGETOBJECT = 0x0124
 
-// WM_UNINITMENUPOPUP Win32 API message constant.
-const WM_UNINITMENUPOPUP = 0x0125
+	// WM_UNINITMENUPOPUP Win32 API message constant.
+	WM_UNINITMENUPOPUP = 0x0125
 
-// WM_MENUCOMMAND Win32 API message constant.
-const WM_MENUCOMMAND = 0x0126
+	// WM_MENUCOMMAND Win32 API message constant.
+	WM_MENUCOMMAND = 0x0126
 
-// WM_CHANGEUISTATE Win32 API message constant.
-const WM_CHANGEUISTATE = 0x0127
+	// WM_CHANGEUISTATE Win32 API message constant.
+	WM_CHANGEUISTATE = 0x0127
 
-// WM_UPDATEUISTATE Win32 API message constant.
-const WM_UPDATEUISTATE = 0x0128
+	// WM_UPDATEUISTATE Win32 API message constant.
+	WM_UPDATEUISTATE = 0x0128
 
-// WM_QUERYUISTATE Win32 API message constant.
-const WM_QUERYUISTATE = 0x0129
+	// WM_QUERYUISTATE Win32 API message constant.
+	WM_QUERYUISTATE = 0x0129
 
-// WM_CTLCOLORMSGBOX Win32 API message constant.
-const WM_CTLCOLORMSGBOX = 0x0132
+	// WM_CTLCOLORMSGBOX Win32 API message constant.
+	WM_CTLCOLORMSGBOX = 0x0132
 
-// WM_CTLCOLOREDIT Win32 API message constant.
-const WM_CTLCOLOREDIT = 0x0133
+	// WM_CTLCOLOREDIT Win32 API message constant.
+	WM_CTLCOLOREDIT = 0x0133
 
-// WM_CTLCOLORLISTBOX Win32 API message constant.
-const WM_CTLCOLORLISTBOX = 0x0134
+	// WM_CTLCOLORLISTBOX Win32 API message constant.
+	WM_CTLCOLORLISTBOX = 0x0134
 
-// WM_CTLCOLORBTN Win32 API message constant.
-const WM_CTLCOLORBTN = 0x0135
+	// WM_CTLCOLORBTN Win32 API message constant.
+	WM_CTLCOLORBTN = 0x0135
 
-// WM_CTLCOLORDLG Win32 API message constant.
-const WM_CTLCOLORDLG = 0x0136
+	// WM_CTLCOLORDLG Win32 API message constant.
+	WM_CTLCOLORDLG = 0x0136
 
-// WM_CTLCOLORSCROLLBAR Win32 API message constant.
-const WM_CTLCOLORSCROLLBAR = 0x0137
+	// WM_CTLCOLORSCROLLBAR Win32 API message constant.
+	WM_CTLCOLORSCROLLBAR = 0x0137
 
-// WM_CTLCOLORSTATIC Win32 API message constant.
-const WM_CTLCOLORSTATIC = 0x0138
+	// WM_CTLCOLORSTATIC Win32 API message constant.
+	WM_CTLCOLORSTATIC = 0x0138
 
-// WM_MOUSEFIRST Win32 API message constant.
-const WM_MOUSEFIRST = 0x0200
+	// WM_MOUSEFIRST Win32 API message constant.
+	WM_MOUSEFIRST = 0x0200
 
-// WM_LBUTTONDBLCLK Win32 API message constant.
-const WM_LBUTTONDBLCLK = 0x0203
+	// WM_LBUTTONDBLCLK Win32 API message constant.
+	WM_LBUTTONDBLCLK = 0x0203
 
-// WM_RBUTTONDOWN Win32 API message constant.
-const WM_RBUTTONDOWN = 0x0204
+	// WM_RBUTTONDOWN Win32 API message constant.
+	WM_RBUTTONDOWN = 0x0204
 
-// WM_RBUTTONUP Win32 API message constant.
-const WM_RBUTTONUP = 0x0205
+	// WM_RBUTTONUP Win32 API message constant.
+	WM_RBUTTONUP = 0x0205
 
-// WM_RBUTTONDBLCLK Win32 API message constant.
-const WM_RBUTTONDBLCLK = 0x0206
+	// WM_RBUTTONDBLCLK Win32 API message constant.
+	WM_RBUTTONDBLCLK = 0x0206
 
-// WM_MBUTTONDOWN Win32 API message constant.
-const WM_MBUTTONDOWN = 0x0207
+	// WM_MBUTTONDOWN Win32 API message constant.
+	WM_MBUTTONDOWN = 0x0207
 
-// WM_MBUTTONUP Win32 API message constant.
-const WM_MBUTTONUP = 0x0208
+	// WM_MBUTTONUP Win32 API message constant.
+	WM_MBUTTONUP = 0x0208
 
-// WM_MBUTTONDBLCLK Win32 API message constant.
-const WM_MBUTTONDBLCLK = 0x0209
+	// WM_MBUTTONDBLCLK Win32 API message constant.
+	WM_MBUTTONDBLCLK = 0x0209
 
-// WM_XBUTTONDOWN Win32 API message constant.
-const WM_XBUTTONDOWN = 0x020B
+	// WM_XBUTTONDOWN Win32 API message constant.
+	WM_XBUTTONDOWN = 0x020B
 
-// WM_XBUTTONUP Win32 API message constant.
-const WM_XBUTTONUP = 0x020C
+	// WM_XBUTTONUP Win32 API message constant.
+	WM_XBUTTONUP = 0x020C
 
-// WM_XBUTTONDBLCLK Win32 API message constant.
-const WM_XBUTTONDBLCLK = 0x020D
+	// WM_XBUTTONDBLCLK Win32 API message constant.
+	WM_XBUTTONDBLCLK = 0x020D
 
-// WM_MOUSEHWHEEL Win32 API message constant.
-const WM_MOUSEHWHEEL = 0x020E
+	// WM_MOUSEHWHEEL Win32 API message constant.
+	WM_MOUSEHWHEEL = 0x020E
 
-// WM_MOUSELAST Win32 API message constant.
-const WM_MOUSELAST = 0x020E // depends on Windows version
+	// WM_MOUSELAST Win32 API message constant.
+	WM_MOUSELAST = 0x020E // depends on Windows version
 
-// WM_PARENTNOTIFY Win32 API message constant.
-const WM_PARENTNOTIFY = 0x0210
+	// WM_PARENTNOTIFY Win32 API message constant.
+	WM_PARENTNOTIFY = 0x0210
 
-// WM_ENTERMENULOOP Win32 API message constant.
-const WM_ENTERMENULOOP = 0x0211
+	// WM_ENTERMENULOOP Win32 API message constant.
+	WM_ENTERMENULOOP = 0x0211
 
-// WM_EXITMENULOOP Win32 API message constant.
-const WM_EXITMENULOOP = 0x0212
+	// WM_EXITMENULOOP Win32 API message constant.
+	WM_EXITMENULOOP = 0x0212
 
-// WM_NEXTMENU Win32 API message constant.
-const WM_NEXTMENU = 0x0213
+	// WM_NEXTMENU Win32 API message constant.
+	WM_NEXTMENU = 0x0213
 
-// WM_SIZING Win32 API message constant.
-const WM_SIZING = 0x0214
+	// WM_SIZING Win32 API message constant.
+	WM_SIZING = 0x0214
 
-// WM_CAPTURECHANGED Win32 API message constant.
-const WM_CAPTURECHANGED = 0x0215
+	// WM_CAPTURECHANGED Win32 API message constant.
+	WM_CAPTURECHANGED = 0x0215
 
-// WM_MOVING Win32 API message constant.
-const WM_MOVING = 0x0216
+	// WM_MOVING Win32 API message constant.
+	WM_MOVING = 0x0216
 
-// WM_POWERBROADCAST Win32 API message constant.
-const WM_POWERBROADCAST = 0x0218
+	// WM_POWERBROADCAST Win32 API message constant.
+	WM_POWERBROADCAST = 0x0218
 
-// WM_DEVICECHANGE Win32 API message constant.
-const WM_DEVICECHANGE = 0x0219
+	// WM_DEVICECHANGE Win32 API message constant.
+	WM_DEVICECHANGE = 0x0219
 
-// WM_MDICREATE Win32 API message constant.
-const WM_MDICREATE = 0x0220
+	// WM_MDICREATE Win32 API message constant.
+	WM_MDICREATE = 0x0220
 
-// WM_MDIDESTROY Win32 API message constant.
-const WM_MDIDESTROY = 0x0221
+	// WM_MDIDESTROY Win32 API message constant.
+	WM_MDIDESTROY = 0x0221
 
-// WM_MDIACTIVATE Win32 API message constant.
-const WM_MDIACTIVATE = 0x0222
+	// WM_MDIACTIVATE Win32 API message constant.
+	WM_MDIACTIVATE = 0x0222
 
-// WM_MDIRESTORE Win32 API message constant.
-const WM_MDIRESTORE = 0x0223
+	// WM_MDIRESTORE Win32 API message constant.
+	WM_MDIRESTORE = 0x0223
 
-// WM_MDINEXT Win32 API message constant.
-const WM_MDINEXT = 0x0224
+	// WM_MDINEXT Win32 API message constant.
+	WM_MDINEXT = 0x0224
 
-// WM_MDIMAXIMIZE Win32 API message constant.
-const WM_MDIMAXIMIZE = 0x0225
+	// WM_MDIMAXIMIZE Win32 API message constant.
+	WM_MDIMAXIMIZE = 0x0225
 
-// WM_MDITILE Win32 API message constant.
-const WM_MDITILE = 0x0226
+	// WM_MDITILE Win32 API message constant.
+	WM_MDITILE = 0x0226
 
-// WM_MDICASCADE Win32 API message constant.
-const WM_MDICASCADE = 0x0227
+	// WM_MDICASCADE Win32 API message constant.
+	WM_MDICASCADE = 0x0227
 
-// WM_MDIICONARRANGE Win32 API message constant.
-const WM_MDIICONARRANGE = 0x0228
+	// WM_MDIICONARRANGE Win32 API message constant.
+	WM_MDIICONARRANGE = 0x0228
 
-// WM_MDIGETACTIVE Win32 API message constant.
-const WM_MDIGETACTIVE = 0x0229
+	// WM_MDIGETACTIVE Win32 API message constant.
+	WM_MDIGETACTIVE = 0x0229
 
-// WM_MDISETMENU Win32 API message constant.
-const WM_MDISETMENU = 0x0230
+	// WM_MDISETMENU Win32 API message constant.
+	WM_MDISETMENU = 0x0230
 
-// WM_ENTERSIZEMOVE Win32 API message constant.
-const WM_ENTERSIZEMOVE = 0x0231
+	// WM_ENTERSIZEMOVE Win32 API message constant.
+	WM_ENTERSIZEMOVE = 0x0231
 
-// WM_EXITSIZEMOVE Win32 API message constant.
-const WM_EXITSIZEMOVE = 0x0232
+	// WM_EXITSIZEMOVE Win32 API message constant.
+	WM_EXITSIZEMOVE = 0x0232
 
-// WM_MDIREFRESHMENU Win32 API message constant.
-const WM_MDIREFRESHMENU = 0x0234
+	// WM_MDIREFRESHMENU Win32 API message constant.
+	WM_MDIREFRESHMENU = 0x0234
 
-// WM_TOUCH Win32 API message constant.
-const WM_TOUCH = 0x0240
+	// WM_TOUCH Win32 API message constant.
+	WM_TOUCH = 0x0240
 
-// WM_IME_SETCONTEXT Win32 API message constant.
-const WM_IME_SETCONTEXT = 0x0281
+	// WM_IME_SETCONTEXT Win32 API message constant.
+	WM_IME_SETCONTEXT = 0x0281
 
-// WM_IME_NOTIFY Win32 API message constant.
-const WM_IME_NOTIFY = 0x0282
+	// WM_IME_NOTIFY Win32 API message constant.
+	WM_IME_NOTIFY = 0x0282
 
-// WM_IME_CONTROL Win32 API message constant.
-const WM_IME_CONTROL = 0x0283
+	// WM_IME_CONTROL Win32 API message constant.
+	WM_IME_CONTROL = 0x0283
 
-// WM_IME_COMPOSITIONFULL Win32 API message constant.
-const WM_IME_COMPOSITIONFULL = 0x0284
+	// WM_IME_COMPOSITIONFULL Win32 API message constant.
+	WM_IME_COMPOSITIONFULL = 0x0284
 
-// WM_IME_SELECT Win32 API message constant.
-const WM_IME_SELECT = 0x0285
+	// WM_IME_SELECT Win32 API message constant.
+	WM_IME_SELECT = 0x0285
 
-// WM_IME_CHAR Win32 API message constant.
-const WM_IME_CHAR = 0x0286
+	// WM_IME_CHAR Win32 API message constant.
+	WM_IME_CHAR = 0x0286
 
-// WM_IME_REQUEST Win32 API message constant.
-const WM_IME_REQUEST = 0x0288
+	// WM_IME_REQUEST Win32 API message constant.
+	WM_IME_REQUEST = 0x0288
 
-// WM_IME_KEYDOWN Win32 API message constant.
-const WM_IME_KEYDOWN = 0x0290
+	// WM_IME_KEYDOWN Win32 API message constant.
+	WM_IME_KEYDOWN = 0x0290
 
-// WM_IME_KEYUP Win32 API message constant.
-const WM_IME_KEYUP = 0x0291
+	// WM_IME_KEYUP Win32 API message constant.
+	WM_IME_KEYUP = 0x0291
 
-// WM_NCMOUSEHOVER Win32 API message constant.
-const WM_NCMOUSEHOVER = 0x02A0
+	// WM_NCMOUSEHOVER Win32 API message constant.
+	WM_NCMOUSEHOVER = 0x02A0
 
-// WM_MOUSEHOVER Win32 API message constant.
-const WM_MOUSEHOVER = 0x02A1
+	// WM_MOUSEHOVER Win32 API message constant.
+	WM_MOUSEHOVER = 0x02A1
 
-// WM_NCMOUSELEAVE Win32 API message constant.
-const WM_NCMOUSELEAVE = 0x02A2
+	// WM_NCMOUSELEAVE Win32 API message constant.
+	WM_NCMOUSELEAVE = 0x02A2
 
-// WM_MOUSELEAVE Win32 API message constant.
-const WM_MOUSELEAVE = 0x02A3
+	// WM_MOUSELEAVE Win32 API message constant.
+	WM_MOUSELEAVE = 0x02A3
 
-// WM_WTSSESSION_CHANGE Win32 API message constant.
-const WM_WTSSESSION_CHANGE = 0x02B1
+	// WM_WTSSESSION_CHANGE Win32 API message constant.
+	WM_WTSSESSION_CHANGE = 0x02B1
 
-// WM_TABLET_FIRST Win32 API message constant.
-const WM_TABLET_FIRST = 0x02c0
+	// WM_TABLET_FIRST Win32 API message constant.
+	WM_TABLET_FIRST = 0x02c0
 
-// WM_TABLET_LAST Win32 API message constant.
-const WM_TABLET_LAST = 0x02df
+	// WM_TABLET_LAST Win32 API message constant.
+	WM_TABLET_LAST = 0x02df
 
-// WM_CUT Win32 API message constant.
-const WM_CUT = 0x0300
+	// WM_CUT Win32 API message constant.
+	WM_CUT = 0x0300
 
-// WM_COPY Win32 API message constant.
-const WM_COPY = 0x0301
+	// WM_COPY Win32 API message constant.
+	WM_COPY = 0x0301
 
-// WM_PASTE Win32 API message constant.
-const WM_PASTE = 0x0302
+	// WM_PASTE Win32 API message constant.
+	WM_PASTE = 0x0302
 
-// WM_CLEAR Win32 API message constant.
-const WM_CLEAR = 0x0303
+	// WM_CLEAR Win32 API message constant.
+	WM_CLEAR = 0x0303
 
-// WM_UNDO Win32 API message constant.
-const WM_UNDO = 0x0304
+	// WM_UNDO Win32 API message constant.
+	WM_UNDO = 0x0304
 
-// WM_RENDERFORMAT Win32 API message constant.
-const WM_RENDERFORMAT = 0x0305
+	// WM_RENDERFORMAT Win32 API message constant.
+	WM_RENDERFORMAT = 0x0305
 
-// WM_RENDERALLFORMATS Win32 API message constant.
-const WM_RENDERALLFORMATS = 0x0306
+	// WM_RENDERALLFORMATS Win32 API message constant.
+	WM_RENDERALLFORMATS = 0x0306
 
-// WM_DESTROYCLIPBOARD Win32 API message constant.
-const WM_DESTROYCLIPBOARD = 0x0307
+	// WM_DESTROYCLIPBOARD Win32 API message constant.
+	WM_DESTROYCLIPBOARD = 0x0307
 
-// WM_DRAWCLIPBOARD Win32 API message constant.
-const WM_DRAWCLIPBOARD = 0x0308
+	// WM_DRAWCLIPBOARD Win32 API message constant.
+	WM_DRAWCLIPBOARD = 0x0308
 
-// WM_PAINTCLIPBOARD Win32 API message constant.
-const WM_PAINTCLIPBOARD = 0x0309
+	// WM_PAINTCLIPBOARD Win32 API message constant.
+	WM_PAINTCLIPBOARD = 0x0309
 
-// WM_VSCROLLCLIPBOARD Win32 API message constant.
-const WM_VSCROLLCLIPBOARD = 0x030A
+	// WM_VSCROLLCLIPBOARD Win32 API message constant.
+	WM_VSCROLLCLIPBOARD = 0x030A
 
-// WM_SIZECLIPBOARD Win32 API message constant.
-const WM_SIZECLIPBOARD = 0x030B
+	// WM_SIZECLIPBOARD Win32 API message constant.
+	WM_SIZECLIPBOARD = 0x030B
 
-// WM_ASKCBFORMATNAME Win32 API message constant.
-const WM_ASKCBFORMATNAME = 0x030C
+	// WM_ASKCBFORMATNAME Win32 API message constant.
+	WM_ASKCBFORMATNAME = 0x030C
 
-// WM_CHANGECBCHAIN Win32 API message constant.
-const WM_CHANGECBCHAIN = 0x030D
+	// WM_CHANGECBCHAIN Win32 API message constant.
+	WM_CHANGECBCHAIN = 0x030D
 
-// WM_HSCROLLCLIPBOARD Win32 API message constant.
-const WM_HSCROLLCLIPBOARD = 0x030E
+	// WM_HSCROLLCLIPBOARD Win32 API message constant.
+	WM_HSCROLLCLIPBOARD = 0x030E
 
-// WM_QUERYNEWPALETTE Win32 API message constant.
-const WM_QUERYNEWPALETTE = 0x030F
+	// WM_QUERYNEWPALETTE Win32 API message constant.
+	WM_QUERYNEWPALETTE = 0x030F
 
-// WM_PALETTEISCHANGING Win32 API message constant.
-const WM_PALETTEISCHANGING = 0x0310
+	// WM_PALETTEISCHANGING Win32 API message constant.
+	WM_PALETTEISCHANGING = 0x0310
 
-// WM_PALETTECHANGED Win32 API message constant.
-const WM_PALETTECHANGED = 0x0311
+	// WM_PALETTECHANGED Win32 API message constant.
+	WM_PALETTECHANGED = 0x0311
 
-// WM_HOTKEY Win32 API message constant.
-const WM_HOTKEY = 0x0312
+	// WM_HOTKEY Win32 API message constant.
+	WM_HOTKEY = 0x0312
 
-// WM_PRINT Win32 API message constant.
-const WM_PRINT = 0x0317
+	// WM_PRINT Win32 API message constant.
+	WM_PRINT = 0x0317
 
-// WM_PRINTCLIENT Win32 API message constant.
-const WM_PRINTCLIENT = 0x0318
+	// WM_PRINTCLIENT Win32 API message constant.
+	WM_PRINTCLIENT = 0x0318
 
-// WM_APPCOMMAND Win32 API message constant.
-const WM_APPCOMMAND = 0x0319
+	// WM_APPCOMMAND Win32 API message constant.
+	WM_APPCOMMAND = 0x0319
 
-// WM_THEMECHANGED Win32 API message constant.
-const WM_THEMECHANGED = 0x031A
+	// WM_THEMECHANGED Win32 API message constant.
+	WM_THEMECHANGED = 0x031A
 
-// WM_CLIPBOARDUPDATE Win32 API message constant.
-const WM_CLIPBOARDUPDATE = 0x031D
+	// WM_CLIPBOARDUPDATE Win32 API message constant.
+	WM_CLIPBOARDUPDATE = 0x031D
 
-// WM_DWMCOMPOSITIONCHANGED Win32 API message constant.
-const WM_DWMCOMPOSITIONCHANGED = 0x031E
+	// WM_DWMCOMPOSITIONCHANGED Win32 API message constant.
+	WM_DWMCOMPOSITIONCHANGED = 0x031E
 
-// WM_DWMNCRENDERINGCHANGED Win32 API message constant.
-const WM_DWMNCRENDERINGCHANGED = 0x031F
+	// WM_DWMNCRENDERINGCHANGED Win32 API message constant.
+	WM_DWMNCRENDERINGCHANGED = 0x031F
 
-// WM_DWMCOLORIZATIONCOLORCHANGED Win32 API message constant.
-const WM_DWMCOLORIZATIONCOLORCHANGED = 0x0320
+	// WM_DWMCOLORIZATIONCOLORCHANGED Win32 API message constant.
+	WM_DWMCOLORIZATIONCOLORCHANGED = 0x0320
 
-// WM_DWMWINDOWMAXIMIZEDCHANGE Win32 API message constant.
-const WM_DWMWINDOWMAXIMIZEDCHANGE = 0x0321
+	// WM_DWMWINDOWMAXIMIZEDCHANGE Win32 API message constant.
+	WM_DWMWINDOWMAXIMIZEDCHANGE = 0x0321
 
-// WM_DWMSENDICONICTHUMBNAIL Win32 API message constant.
-const WM_DWMSENDICONICTHUMBNAIL = 0x0323
+	// WM_DWMSENDICONICTHUMBNAIL Win32 API message constant.
+	WM_DWMSENDICONICTHUMBNAIL = 0x0323
 
-// WM_DWMSENDICONICLIVEPREVIEWBITMAP Win32 API message constant.
-const WM_DWMSENDICONICLIVEPREVIEWBITMAP = 0x0326
+	// WM_DWMSENDICONICLIVEPREVIEWBITMAP Win32 API message constant.
+	WM_DWMSENDICONICLIVEPREVIEWBITMAP = 0x0326
 
-// WM_GETTITLEBARINFOEX Win32 API message constant.
-const WM_GETTITLEBARINFOEX = 0x033F
+	// WM_GETTITLEBARINFOEX Win32 API message constant.
+	WM_GETTITLEBARINFOEX = 0x033F
 
-// WM_HANDHELDFIRST Win32 API message constant.
-const WM_HANDHELDFIRST = 0x0358
+	// WM_HANDHELDFIRST Win32 API message constant.
+	WM_HANDHELDFIRST = 0x0358
 
-// WM_HANDHELDLAST Win32 API message constant.
-const WM_HANDHELDLAST = 0x035F
+	// WM_HANDHELDLAST Win32 API message constant.
+	WM_HANDHELDLAST = 0x035F
 
-// WM_AFXFIRST Win32 API message constant.
-const WM_AFXFIRST = 0x0360
+	// WM_AFXFIRST Win32 API message constant.
+	WM_AFXFIRST = 0x0360
 
-// WM_AFXLAST Win32 API message constant.
-const WM_AFXLAST = 0x037F
+	// WM_AFXLAST Win32 API message constant.
+	WM_AFXLAST = 0x037F
 
-// WM_PENWINFIRST Win32 API message constant.
-const WM_PENWINFIRST = 0x0380
+	// WM_PENWINFIRST Win32 API message constant.
+	WM_PENWINFIRST = 0x0380
 
-// WM_PENWINLAST Win32 API message constant.
-const WM_PENWINLAST = 0x038F
+	// WM_PENWINLAST Win32 API message constant.
+	WM_PENWINLAST = 0x038F
 
-// WM_USER Win32 API message constant.
-const WM_USER = 0x0400
+	// WM_USER Win32 API message constant.
+	WM_USER = 0x0400
 
-// WM_APP Win32 API message constant.
-const WM_APP = 0x8000
+	// WM_APP Win32 API message constant.
+	WM_APP = 0x8000
 
-// WM_SETTINGCHANGE Win32 API message constant.
-const WM_SETTINGCHANGE = WM_WININICHANGE
+	// WM_SETTINGCHANGE Win32 API message constant.
+	WM_SETTINGCHANGE = WM_WININICHANGE
+)
 
 // -----------------------------------------------------------------------------
 
-// WS_OVERLAPPED Window Style (Win32)
-const WS_OVERLAPPED = 0x00000000
+const (
+	// WS_OVERLAPPED Window Style (Win32)
+	WS_OVERLAPPED = 0x00000000
 
-// WS_EX_ACCEPTFILES Window Style (Win32)
-const WS_EX_ACCEPTFILES = 0x00000010
+	// WS_EX_ACCEPTFILES Window Style (Win32)
+	WS_EX_ACCEPTFILES = 0x00000010
 
-// WS_TABSTOP Window Style (Win32)
-const WS_TABSTOP = 0x00010000
+	// WS_TABSTOP Window Style (Win32)
+	WS_TABSTOP = 0x00010000
 
-// WS_MAXIMIZEBOX Window Style (Win32)
-const WS_MAXIMIZEBOX = 0x00010000
+	// WS_MAXIMIZEBOX Window Style (Win32)
+	WS_MAXIMIZEBOX = 0x00010000
 
-// WS_MINIMIZEBOX Window Style (Win32)
-const WS_MINIMIZEBOX = 0x00020000
+	// WS_MINIMIZEBOX Window Style (Win32)
+	WS_MINIMIZEBOX = 0x00020000
 
-// WS_THICKFRAME Window Style (Win32)
-const WS_THICKFRAME = 0x00040000
+	// WS_THICKFRAME Window Style (Win32)
+	WS_THICKFRAME = 0x00040000
 
-// WS_SYSMENU Window Style (Win32)
-const WS_SYSMENU = 0x00080000
+	// WS_SYSMENU Window Style (Win32)
+	WS_SYSMENU = 0x00080000
 
-// WS_BORDER Window Style (Win32)
-const WS_BORDER = 0x00800000
+	// WS_BORDER Window Style (Win32)
+	WS_BORDER = 0x00800000
 
-// WS_CAPTION Window Style (Win32)
-const WS_CAPTION = 0x00C00000
+	// WS_CAPTION Window Style (Win32)
+	WS_CAPTION = 0x00C00000
 
-// WS_VISIBLE Window Style (Win32)
-const WS_VISIBLE = 0x10000000
+	// WS_VISIBLE Window Style (Win32)
+	WS_VISIBLE = 0x10000000
 
-// WS_CHILD Window Style (Win32)
-const WS_CHILD = 0x40000000
+	// WS_CHILD Window Style (Win32)
+	WS_CHILD = 0x40000000
 
-// WS_POPUP Window Style (Win32)
-const WS_POPUP = 0x80000000
+	// WS_POPUP Window Style (Win32)
+	WS_POPUP = 0x80000000
 
-// WS_OVERLAPPEDWINDOW Window Style (Win32)
-const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU |
-	WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
+	// WS_OVERLAPPEDWINDOW Window Style (Win32)
+	WS_OVERLAPPEDWINDOW = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU |
+		WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
+)
 
 // -----------------------------------------------------------------------------
 // # Simple Types

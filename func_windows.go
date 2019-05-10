@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-08 11:34:09 B6C364                       zr-win/[func_windows.go]
+// :v: 2019-05-10 02:58:00 9B4546                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -20,6 +20,7 @@ package win
 //   GetRegistryString(key, valueName string) string
 //
 // # Internal Constants
+//   rootKeys = []struct
 //
 // # Internal Functions
 //   getRegistryKey(key string) HKEY
@@ -42,14 +43,16 @@ import (
 // OSType __
 type OSType int
 
-// OSUnknown indicates the operating system is unknown.
-const OSUnknown = OSType(0)
+const (
+	// OSUnknown indicates the operating system is unknown.
+	OSUnknown = OSType(0)
 
-// OSLinux indicates the operating system is any version of Linux.
-const OSLinux = OSType('L')
+	// OSLinux indicates the operating system is any version of Linux.
+	OSLinux = OSType('L')
 
-// OSWindows indicates the operating system is any version of Windows.
-const OSWindows = OSType('W')
+	// OSWindows indicates the operating system is any version of Windows.
+	OSWindows = OSType('W')
+)
 
 // -----------------------------------------------------------------------------
 // # System Information Functions
