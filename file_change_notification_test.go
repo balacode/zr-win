@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-07 20:45:25 565A86      zr-win/[file_change_notification_test.go]
+// :v: 2019-05-10 03:01:01 42C710      zr-win/[file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -35,7 +35,7 @@ func Test_fchn_FindFirstChangeNotification_(t *testing.T) {
 	// wait for one second
 	// write a timestamp to file B
 	//
-	NOTIFY := FILE_NOTIFY_CHANGE_FILE_NAME |
+	const notify = FILE_NOTIFY_CHANGE_FILE_NAME |
 		FILE_NOTIFY_CHANGE_DIR_NAME |
 		FILE_NOTIFY_CHANGE_ATTRIBUTES |
 		FILE_NOTIFY_CHANGE_SIZE |
@@ -46,11 +46,11 @@ func Test_fchn_FindFirstChangeNotification_(t *testing.T) {
 	//
 	// call with invalid folder:
 	// should return INVALID_HANDLE_VALUE i.e. -1 / 0xFFFFFFFFFFFFFFFF
-	got := HANDLE(FindFirstChangeNotification(`z:\yx`, TRUE, DWORD(NOTIFY)))
+	got := HANDLE(FindFirstChangeNotification(`z:\yx`, TRUE, DWORD(notify)))
 	zr.TTrue(t, (got&INVALID_HANDLE_VALUE) == INVALID_HANDLE_VALUE)
 	//
 	// call with valid folder:
-	got = FindFirstChangeNotification(".", TRUE, DWORD(NOTIFY))
+	got = FindFirstChangeNotification(".", TRUE, DWORD(notify))
 	zr.TTrue(t, got != 0)
 	zr.TTrue(t, got < 65535)
 } //                                      Test_fchn_FindFirstChangeNotification_
@@ -61,27 +61,17 @@ func Test_fchn_FileChangeNotifications_(t *testing.T) {
 		PL("Test_fchn_FileChangeNotifications_ IS UNIFINISHED")
 		return
 	}
-	const WAIT_OBJECT = 0 // TODO: move constants
-	const WAIT_OBJECT_0 = 0
-	const WAIT_TIMEOUT = 258
-	const NULL = 0
-	const INFINITE = 0xFFFFFFFF // infinite timeout
 	path := `X:\TEST`
-	NOTIFY := FILE_NOTIFY_CHANGE_CREATION |
+	const notify = FILE_NOTIFY_CHANGE_CREATION |
 		FILE_NOTIFY_CHANGE_FILE_NAME |
 		FILE_NOTIFY_CHANGE_LAST_WRITE |
 		FILE_NOTIFY_CHANGE_SIZE |
 		0
-	// not used:
-	// FILE_NOTIFY_CHANGE_ATTRIBUTES |
-	// FILE_NOTIFY_CHANGE_DIR_NAME |
-	// FILE_NOTIFY_CHANGE_LAST_ACCESS |
-	// FILE_NOTIFY_CHANGE_SECURITY |
 	tms := zr.Timestamp
 	//
 	// start watching the folder
 	handles := []HANDLE{
-		FindFirstChangeNotification(path, TRUE, DWORD(NOTIFY)),
+		FindFirstChangeNotification(path, TRUE, DWORD(notify)),
 	}
 	// check that handle value is correct
 	switch handles[0] {
