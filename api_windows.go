@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-10 02:58:00 ACCE4D                        zr-win/[api_windows.go]
+// :v: 2019-05-10 03:05:12 148A2F                        zr-win/[api_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -1596,444 +1596,454 @@ const (
 // -----------------------------------------------------------------------------
 // # Simple Types
 
-// ATOM type
-type ATOM uint16
+type (
+	// ATOM type
+	ATOM uint16
 
-// BOOL type
-type BOOL int32
+	// BOOL type
+	BOOL int32
 
-// BYTE type
-type BYTE byte
+	// BYTE type
+	BYTE byte
 
-// CHAR type
-type CHAR byte
+	// CHAR type
+	CHAR byte
 
-// COLORREF type
-type COLORREF uint32
+	// COLORREF type
+	COLORREF uint32
 
-// DWORD type
-type DWORD uint32
+	// DWORD type
+	DWORD uint32
 
-// INT type
-type INT int32
+	// INT type
+	INT int32
 
-// LANGID type
-type LANGID WORD
+	// LANGID type
+	LANGID WORD
 
-// LONG type
-type LONG int32
+	// LONG type
+	LONG int32
 
-// SHORT type
-type SHORT uint16
+	// SHORT type
+	SHORT uint16
 
-// UINT type
-type UINT uint32
+	// UINT type
+	UINT uint32
 
-// ULONG type
-type ULONG uint32
+	// ULONG type
+	ULONG uint32
 
-// WCHAR type
-type WCHAR uint16
+	// WCHAR type
+	WCHAR uint16
 
-// WORD type
-type WORD uint16
+	// WORD type
+	WORD uint16
+)
 
 // -----------------------------------------------------------------------------
 // # Pointer Types
 
-// LPARAM type
-type LPARAM uintptr
+type (
+	// LPARAM type
+	LPARAM uintptr
 
-// WPARAM type
-type WPARAM uintptr
+	// WPARAM type
+	WPARAM uintptr
 
-// DLGPROC type
-type DLGPROC uintptr
+	// DLGPROC type
+	DLGPROC uintptr
 
-// INT_PTR type
-type INT_PTR uintptr
+	// INT_PTR type
+	INT_PTR uintptr
 
-// LONG_PTR type
-type LONG_PTR uintptr
+	// LONG_PTR type
+	LONG_PTR uintptr
 
-// LPBOOL type
-type LPBOOL *BOOL
+	// LPBOOL type
+	LPBOOL *BOOL
 
-// LPBYTE type
-type LPBYTE *DWORD
+	// LPBYTE type
+	LPBYTE *DWORD
 
-// LPCCH type
-type LPCCH *CHAR
+	// LPCCH type
+	LPCCH *CHAR
 
-// LPCSTR type
-type LPCSTR *CHAR
+	// LPCSTR type
+	LPCSTR *CHAR
 
-// LPCTSTR type
-type LPCTSTR *WCHAR
+	// LPCTSTR type
+	LPCTSTR *WCHAR
 
-// LPCVOID type
-type LPCVOID unsafe.Pointer
+	// LPCVOID type
+	LPCVOID unsafe.Pointer
 
-// LPCWCH type
-type LPCWCH *WCHAR
+	// LPCWCH type
+	LPCWCH *WCHAR
 
-// LPCWSTR type
-type LPCWSTR *WCHAR
+	// LPCWSTR type
+	LPCWSTR *WCHAR
 
-// LPDWORD type
-type LPDWORD *DWORD
+	// LPDWORD type
+	LPDWORD *DWORD
 
-// LPSTR type
-type LPSTR *CHAR // always use Unicode
+	// LPSTR type
+	LPSTR *CHAR // always use Unicode
 
-// LPTSTR type
-type LPTSTR *WCHAR
+	// LPTSTR type
+	LPTSTR *WCHAR
 
-// LPVOID type
-type LPVOID unsafe.Pointer
+	// LPVOID type
+	LPVOID unsafe.Pointer
 
-// LPWSTR type
-type LPWSTR *WCHAR
+	// LPWSTR type
+	LPWSTR *WCHAR
 
-// LRESULT type
-type LRESULT LONG_PTR
+	// LRESULT type
+	LRESULT LONG_PTR
 
-// PHKEY type
-type PHKEY *HKEY
+	// PHKEY type
+	PHKEY *HKEY
 
-// PWSTR type
-type PWSTR *WCHAR
+	// PWSTR type
+	PWSTR *WCHAR
 
-// SIZE_T type
-type SIZE_T ULONG_PTR
+	// SIZE_T type
+	SIZE_T ULONG_PTR
 
-// UINT_PTR type
-type UINT_PTR uintptr
+	// UINT_PTR type
+	UINT_PTR uintptr
 
-// ULONG_PTR type
-type ULONG_PTR uintptr
+	// ULONG_PTR type
+	ULONG_PTR uintptr
 
-// WNDPROC type
-type WNDPROC uintptr
+	// WNDPROC type
+	WNDPROC uintptr
+)
 
 // -----------------------------------------------------------------------------
 // # Handle Types
 
-// HANDLE handle type
-type HANDLE uintptr
+type (
+	// HANDLE handle type
+	HANDLE uintptr
 
-// HACCEL handle type (Accelerator)
-type HACCEL HANDLE
+	// HACCEL handle type (Accelerator)
+	HACCEL HANDLE
 
-// HBITMAP handle type (GDI Bitmap)
-type HBITMAP HANDLE
+	// HBITMAP handle type (GDI Bitmap)
+	HBITMAP HANDLE
 
-// HBRUSH handle type (GDI Brush)
-type HBRUSH HANDLE
+	// HBRUSH handle type (GDI Brush)
+	HBRUSH HANDLE
 
-// HCURSOR handle type (Cursor)
-type HCURSOR HANDLE
+	// HCURSOR handle type (Cursor)
+	HCURSOR HANDLE
 
-// HDC handle type (Device Context)
-type HDC HANDLE
+	// HDC handle type (Device Context)
+	HDC HANDLE
 
-// HDROP handle type
-type HDROP HANDLE
+	// HDROP handle type
+	HDROP HANDLE
 
-// HFONT handle type
-type HFONT HANDLE
+	// HFONT handle type
+	HFONT HANDLE
 
-// HGDIOBJ handle type
-type HGDIOBJ HANDLE
+	// HGDIOBJ handle type
+	HGDIOBJ HANDLE
 
-// HGLOBAL handle type
-type HGLOBAL HANDLE
+	// HGLOBAL handle type
+	HGLOBAL HANDLE
 
-// HICON handle type
-type HICON HANDLE
+	// HICON handle type
+	HICON HANDLE
 
-// HINSTANCE handle type
-type HINSTANCE HANDLE
+	// HINSTANCE handle type
+	HINSTANCE HANDLE
 
-// HKEY handle type
-type HKEY HANDLE
+	// HKEY handle type
+	HKEY HANDLE
 
-// HMENU handle type
-type HMENU HANDLE
+	// HMENU handle type
+	HMENU HANDLE
 
-// HMODULE handle type
-type HMODULE HANDLE
+	// HMODULE handle type
+	HMODULE HANDLE
 
-// HRGN handle type
-type HRGN HANDLE
+	// HRGN handle type
+	HRGN HANDLE
 
-// HWND handle type
-type HWND HANDLE
+	// HWND handle type
+	HWND HANDLE
+)
 
 // -----------------------------------------------------------------------------
 // # Other Types
 
-// ACCESS_MASK Win32 API type.
-type ACCESS_MASK DWORD
+type (
+	// ACCESS_MASK Win32 API type.
+	ACCESS_MASK DWORD
 
-// FINDEX_INFO_LEVELS Win32 API type.
-type FINDEX_INFO_LEVELS int32
+	// FINDEX_INFO_LEVELS Win32 API type.
+	FINDEX_INFO_LEVELS int32
 
-// FINDEX_SEARCH_OPS Win32 API type.
-type FINDEX_SEARCH_OPS int32
+	// FINDEX_SEARCH_OPS Win32 API type.
+	FINDEX_SEARCH_OPS int32
 
-// HOOKPROC Win32 API type.
-type HOOKPROC func(int, WPARAM, LPARAM) LRESULT
+	// HOOKPROC Win32 API type.
+	HOOKPROC func(int, WPARAM, LPARAM) LRESULT
 
-// REGSAM Win32 API type. Requested Key access mask type.
-type REGSAM ACCESS_MASK
+	// REGSAM Win32 API type. Requested Key access mask type.
+	REGSAM ACCESS_MASK
+)
 
 // -----------------------------------------------------------------------------
 // # Structure Types
 
-// CONSOLE_SCREEN_BUFFER_INFOEX structure
-type CONSOLE_SCREEN_BUFFER_INFOEX struct {
-	CbSize               ULONG
-	DwSize               COORD
-	DwCursorPosition     COORD
-	WAttributes          WORD
-	SrWindow             SMALL_RECT
-	DwMaximumWindowSize  COORD
-	WPopupAttributes     WORD
-	BFullscreenSupported BOOL
-	ColorTable           [16]COLORREF
-} //                                                CONSOLE_SCREEN_BUFFER_INFOEX
+type (
+	// CONSOLE_SCREEN_BUFFER_INFOEX structure
+	CONSOLE_SCREEN_BUFFER_INFOEX struct {
+		CbSize               ULONG
+		DwSize               COORD
+		DwCursorPosition     COORD
+		WAttributes          WORD
+		SrWindow             SMALL_RECT
+		DwMaximumWindowSize  COORD
+		WPopupAttributes     WORD
+		BFullscreenSupported BOOL
+		ColorTable           [16]COLORREF
+	} //                                            CONSOLE_SCREEN_BUFFER_INFOEX
 
-// COORD structure
-type COORD struct {
-	X SHORT
-	Y SHORT
-} //                                                                       COORD
+	// COORD structure
+	COORD struct {
+		X SHORT
+		Y SHORT
+	} //                                                                   COORD
 
-// DLGITEMTEMPLATE structure
-type DLGITEMTEMPLATE struct {
-	Style           DWORD
-	DwExtendedStyle DWORD
-	X               SHORT
-	Y               SHORT
-	Cx              SHORT
-	Cy              SHORT
-	Id              WORD
-} //                                                             DLGITEMTEMPLATE
+	// DLGITEMTEMPLATE structure
+	DLGITEMTEMPLATE struct {
+		Style           DWORD
+		DwExtendedStyle DWORD
+		X               SHORT
+		Y               SHORT
+		Cx              SHORT
+		Cy              SHORT
+		Id              WORD
+	} //                                                         DLGITEMTEMPLATE
 
-// DLGTEMPLATE structure
-type DLGTEMPLATE struct {
-	Style           DWORD
-	DwExtendedStyle DWORD
-	Cdit            WORD
-	X               SHORT
-	Y               SHORT
-	Cx              SHORT
-	Cy              SHORT
-} //                                                                 DLGTEMPLATE
+	// DLGTEMPLATE structure
+	DLGTEMPLATE struct {
+		Style           DWORD
+		DwExtendedStyle DWORD
+		Cdit            WORD
+		X               SHORT
+		Y               SHORT
+		Cx              SHORT
+		Cy              SHORT
+	} //                                                             DLGTEMPLATE
 
-// FILETIME structure
-type FILETIME struct {
-	DwLowDateTime  DWORD
-	DwHighDateTime DWORD
-} //                                                                    FILETIME
+	// FILETIME structure
+	FILETIME struct {
+		DwLowDateTime  DWORD
+		DwHighDateTime DWORD
+	} //                                                                FILETIME
 
-// INPUT_RECORD structure
-type INPUT_RECORD struct {
-	EventType WORD
-	Event     [4]uint32
-} //                                                                INPUT_RECORD
+	// INPUT_RECORD structure
+	INPUT_RECORD struct {
+		EventType WORD
+		Event     [4]uint32
+	} //                                                            INPUT_RECORD
 
-// LOGFONT structure
-type LOGFONT struct {
-	LfHeight         LONG
-	LfWidth          LONG
-	LfEscapement     LONG
-	LfOrientation    LONG
-	LfWeight         LONG
-	LfItalic         BYTE
-	LfUnderline      BYTE
-	LfStrikeOut      BYTE
-	LfCharSet        BYTE
-	LfOutPrecision   BYTE
-	LfClipPrecision  BYTE
-	LfQuality        BYTE
-	LfPitchAndFamily BYTE
-	LfFaceName       [LF_FACESIZE]WCHAR
-} //                                                                     LOGFONT
+	// LOGFONT structure
+	LOGFONT struct {
+		LfHeight         LONG
+		LfWidth          LONG
+		LfEscapement     LONG
+		LfOrientation    LONG
+		LfWeight         LONG
+		LfItalic         BYTE
+		LfUnderline      BYTE
+		LfStrikeOut      BYTE
+		LfCharSet        BYTE
+		LfOutPrecision   BYTE
+		LfClipPrecision  BYTE
+		LfQuality        BYTE
+		LfPitchAndFamily BYTE
+		LfFaceName       [LF_FACESIZE]WCHAR
+	} //                                                                 LOGFONT
 
-// MENUITEMINFO structure
-type MENUITEMINFO struct {
-	CbSize        UINT
-	FMask         UINT
-	FType         UINT
-	FState        UINT
-	WID           UINT
-	HSubMenu      HMENU
-	HbmpChecked   HBITMAP
-	HbmpUnchecked HBITMAP
-	DwItemData    ULONG_PTR
-	DwTypeData    LPWSTR
-	Cch           UINT
-	HbmpItem      HBITMAP
-} //                                                                MENUITEMINFO
+	// MENUITEMINFO structure
+	MENUITEMINFO struct {
+		CbSize        UINT
+		FMask         UINT
+		FType         UINT
+		FState        UINT
+		WID           UINT
+		HSubMenu      HMENU
+		HbmpChecked   HBITMAP
+		HbmpUnchecked HBITMAP
+		DwItemData    ULONG_PTR
+		DwTypeData    LPWSTR
+		Cch           UINT
+		HbmpItem      HBITMAP
+	} //                                                            MENUITEMINFO
 
-// MSG structure
-type MSG struct {
-	HWnd    HWND
-	Message UINT
-	WParam  WPARAM
-	LParam  LPARAM
-	Time    DWORD
-	Pt      POINT
-} //                                                                         MSG
+	// MSG structure
+	MSG struct {
+		HWnd    HWND
+		Message UINT
+		WParam  WPARAM
+		LParam  LPARAM
+		Time    DWORD
+		Pt      POINT
+	} //                                                                     MSG
 
-// OPENFILENAME structure
-type OPENFILENAME struct {
-	LStructSize       DWORD
-	HwndOwner         HWND
-	HInstance         HINSTANCE
-	LpstrFilter       LPCWSTR
-	LpstrCustomFilter LPWSTR
-	NMaxCustFilter    DWORD
-	NFilterIndex      DWORD
-	LpstrFile         LPWSTR
-	NMaxFile          DWORD
-	LpstrFileTitle    LPWSTR
-	NMaxFileTitle     DWORD
-	LpstrInitialDir   LPCWSTR
-	LpstrTitle        LPCWSTR
-	Flags             DWORD
-	NFileOffset       WORD
-	NFileExtension    WORD
-	LpstrDefExt       LPCWSTR
-	LCustData         LPARAM
-	LpfnHook          *HOOKPROC
-	LpTemplateName    LPCWSTR
-	// if _WIN32_WINNT >= 0x0500
-	//    pvReserved  LPVOID
-	//    dwReserved  DWORD
-	//    FlagsEx     DWORD
-	// endif
-} //                                                                OPENFILENAME
+	// OPENFILENAME structure
+	OPENFILENAME struct {
+		LStructSize       DWORD
+		HwndOwner         HWND
+		HInstance         HINSTANCE
+		LpstrFilter       LPCWSTR
+		LpstrCustomFilter LPWSTR
+		NMaxCustFilter    DWORD
+		NFilterIndex      DWORD
+		LpstrFile         LPWSTR
+		NMaxFile          DWORD
+		LpstrFileTitle    LPWSTR
+		NMaxFileTitle     DWORD
+		LpstrInitialDir   LPCWSTR
+		LpstrTitle        LPCWSTR
+		Flags             DWORD
+		NFileOffset       WORD
+		NFileExtension    WORD
+		LpstrDefExt       LPCWSTR
+		LCustData         LPARAM
+		LpfnHook          *HOOKPROC
+		LpTemplateName    LPCWSTR
+		// if _WIN32_WINNT >= 0x0500
+		//    pvReserved  LPVOID
+		//    dwReserved  DWORD
+		//    FlagsEx     DWORD
+		// endif
+	} //                                                            OPENFILENAME
 
-// OSVERSIONINFO structure
-type OSVERSIONINFO struct {
-	dwOSVersionInfoSize DWORD
-	dwMajorVersion      DWORD
-	dwMinorVersion      DWORD
-	dwBuildNumber       DWORD
-	dwPlatformId        DWORD
-	szCSDVersion        [128]WCHAR
-} //                                                               OSVERSIONINFO
+	// OSVERSIONINFO structure
+	OSVERSIONINFO struct {
+		dwOSVersionInfoSize DWORD
+		dwMajorVersion      DWORD
+		dwMinorVersion      DWORD
+		dwBuildNumber       DWORD
+		dwPlatformId        DWORD
+		szCSDVersion        [128]WCHAR
+	} //                                                           OSVERSIONINFO
 
-// OVERLAPPED structure
-type OVERLAPPED struct {
-	Internal     ULONG_PTR
-	InternalHigh ULONG_PTR
-	Offset       DWORD
-	OffsetHigh   DWORD
-	HEvent       HANDLE
-} //                                                                  OVERLAPPED
+	// OVERLAPPED structure
+	OVERLAPPED struct {
+		Internal     ULONG_PTR
+		InternalHigh ULONG_PTR
+		Offset       DWORD
+		OffsetHigh   DWORD
+		HEvent       HANDLE
+	} //                                                              OVERLAPPED
 
-// PAINTSTRUCT structure
-type PAINTSTRUCT struct {
-	HDC         HDC
-	FErase      BOOL
-	RcPaint     RECT
-	FRestore    BOOL
-	FIncUpdate  BOOL
-	RgbReserved [32]BYTE
-} //                                                                 PAINTSTRUCT
+	// PAINTSTRUCT structure
+	PAINTSTRUCT struct {
+		HDC         HDC
+		FErase      BOOL
+		RcPaint     RECT
+		FRestore    BOOL
+		FIncUpdate  BOOL
+		RgbReserved [32]BYTE
+	} //                                                             PAINTSTRUCT
 
-// POINT structure
-type POINT struct {
-	X LONG
-	Y LONG
-} //                                                                       POINT
+	// POINT structure
+	POINT struct {
+		X LONG
+		Y LONG
+	} //                                                                   POINT
 
-// RECT structure
-type RECT struct {
-	Left   LONG
-	Top    LONG
-	Right  LONG
-	Bottom LONG
-} //                                                                        RECT
+	// RECT structure
+	RECT struct {
+		Left   LONG
+		Top    LONG
+		Right  LONG
+		Bottom LONG
+	} //                                                                    RECT
 
-// SECURITY_ATTRIBUTES structure
-type SECURITY_ATTRIBUTES struct {
-	NLength              DWORD
-	LpSecurityDescriptor LPVOID
-	BInheritHandle       BOOL
-} //                                                         SECURITY_ATTRIBUTES
+	// SECURITY_ATTRIBUTES structure
+	SECURITY_ATTRIBUTES struct {
+		NLength              DWORD
+		LpSecurityDescriptor LPVOID
+		BInheritHandle       BOOL
+	} //                                                     SECURITY_ATTRIBUTES
 
-// SIZE structure
-type SIZE struct {
-	Cx int32
-	Cy int32
-} //                                                                        SIZE
+	// SIZE structure
+	SIZE struct {
+		Cx int32
+		Cy int32
+	} //                                                                    SIZE
 
-// SMALL_RECT structure
-type SMALL_RECT struct {
-	Left   int16
-	Top    int16
-	Right  int16
-	Bottom int16
-} //                                                                  SMALL_RECT
+	// SMALL_RECT structure
+	SMALL_RECT struct {
+		Left   int16
+		Top    int16
+		Right  int16
+		Bottom int16
+	} //                                                              SMALL_RECT
 
-// TEXTMETRIC structure contains information about a font
-type TEXTMETRIC struct {
-	TmHeight           LONG
-	TmAscent           LONG
-	TmDescent          LONG
-	TmInternalLeading  LONG
-	TmExternalLeading  LONG
-	TmAveCharWidth     LONG
-	TmMaxCharWidth     LONG
-	TmWeight           LONG
-	TmOverhang         LONG
-	TmDigitizedAspectX LONG
-	TmDigitizedAspectY LONG
-	TmFirstChar        WCHAR
-	TmLastChar         WCHAR
-	TmDefaultChar      WCHAR
-	TmBreakChar        WCHAR
-	TmItalic           BYTE
-	TmUnderlined       BYTE
-	TmStruckOut        BYTE
-	TmPitchAndFamily   BYTE
-	TmCharSet          BYTE
-} //                                                                  TEXTMETRIC
+	// TEXTMETRIC structure contains information about a font
+	TEXTMETRIC struct {
+		TmHeight           LONG
+		TmAscent           LONG
+		TmDescent          LONG
+		TmInternalLeading  LONG
+		TmExternalLeading  LONG
+		TmAveCharWidth     LONG
+		TmMaxCharWidth     LONG
+		TmWeight           LONG
+		TmOverhang         LONG
+		TmDigitizedAspectX LONG
+		TmDigitizedAspectY LONG
+		TmFirstChar        WCHAR
+		TmLastChar         WCHAR
+		TmDefaultChar      WCHAR
+		TmBreakChar        WCHAR
+		TmItalic           BYTE
+		TmUnderlined       BYTE
+		TmStruckOut        BYTE
+		TmPitchAndFamily   BYTE
+		TmCharSet          BYTE
+	} //                                                              TEXTMETRIC
 
-// WIN32_FIND_DATA structure
-type WIN32_FIND_DATA struct {
-	DwFileAttributes   DWORD
-	FtCreationTime     FILETIME
-	FtLastAccessTime   FILETIME
-	FtLastWriteTime    FILETIME
-	NFileSizeHigh      DWORD
-	NFileSizeLow       DWORD
-	DwReserved0        DWORD
-	DwReserved1        DWORD
-	CFileName          [MAX_PATH]WCHAR
-	CAlternateFileName [14]WCHAR
-} //                                                             WIN32_FIND_DATA
+	// WIN32_FIND_DATA structure
+	WIN32_FIND_DATA struct {
+		DwFileAttributes   DWORD
+		FtCreationTime     FILETIME
+		FtLastAccessTime   FILETIME
+		FtLastWriteTime    FILETIME
+		NFileSizeHigh      DWORD
+		NFileSizeLow       DWORD
+		DwReserved0        DWORD
+		DwReserved1        DWORD
+		CFileName          [MAX_PATH]WCHAR
+		CAlternateFileName [14]WCHAR
+	} //                                                         WIN32_FIND_DATA
 
-// WNDCLASSEX structure
-type WNDCLASSEX struct {
-	CbSize        UINT
-	Style         UINT
-	LpfnWndProc   WNDPROC
-	CbClsExtra    int32
-	CbWndExtra    int32
-	HInstance     HINSTANCE
-	HIcon         HICON
-	HCursor       HCURSOR
-	HbrBackground HBRUSH
-	LpszMenuName  LPCWSTR
-	LpszClassName LPCWSTR
-	HIconSm       HICON
-} //                                                                  WNDCLASSEX
+	// WNDCLASSEX structure
+	WNDCLASSEX struct {
+		CbSize        UINT
+		Style         UINT
+		LpfnWndProc   WNDPROC
+		CbClsExtra    int32
+		CbWndExtra    int32
+		HInstance     HINSTANCE
+		HIcon         HICON
+		HCursor       HCURSOR
+		HbrBackground HBRUSH
+		LpszMenuName  LPCWSTR
+		LpszClassName LPCWSTR
+		HIconSm       HICON
+	} //                                                              WNDCLASSEX
+)
 
 // -----------------------------------------------------------------------------
 // # Windows Macro Functions
