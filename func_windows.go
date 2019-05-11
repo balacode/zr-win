@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-10 02:59:03 693100                       zr-win/[func_windows.go]
+// :v: 2019-05-11 04:36:47 B1F4F4                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -130,17 +130,18 @@ func VolumeID(path string) uint32 {
 	case 2:
 		path += "\\"
 	}
-	drive := path[:3]
-	ret := DWORD(0)
-	result := GetVolumeInformation(
-		drive, // in  LPCTSTR lpRootPathName
-		nil,   // out LPTSTR  lpVolumeNameBuffer
-		0,     // in  DWORD   nVolumeNameSize
-		&ret,  // out LPDWORD lpVolumeSerialNumber
-		nil,   // out LPDWORD lpMaximumComponentLength
-		nil,   // out LPDWORD lpFileSystemFlags
-		nil,   // out LPTSTR  lpFileSystemNameBuffer
-		0,     // in  DWORD   nFileSystemNameSize
+	var (
+		drive  = path[:3]
+		ret    = DWORD(0)
+		result = GetVolumeInformation(
+			drive, // in  LPCTSTR lpRootPathName
+			nil,   // out LPTSTR  lpVolumeNameBuffer
+			0,     // in  DWORD   nVolumeNameSize
+			&ret,  // out LPDWORD lpVolumeSerialNumber
+			nil,   // out LPDWORD lpMaximumComponentLength
+			nil,   // out LPDWORD lpFileSystemFlags
+			nil,   // out LPTSTR  lpFileSystemNameBuffer
+			0)     // in  DWORD   nFileSystemNameSize
 	)
 	if result == FALSE {
 		return 0
@@ -223,8 +224,10 @@ func GetRegistryString(key, valueName string) string {
 		return erv
 	}
 	// copy the array to a string
-	retBuf := bytes.NewBuffer(make([]byte, 0, bufSize))
-	ws := retBuf.WriteString
+	var (
+		retBuf = bytes.NewBuffer(make([]byte, 0, bufSize))
+		ws     = retBuf.WriteString
+	)
 	for i := 0; ar[i] != 0; i++ {
 		ws(string(ar[i]))
 	}
