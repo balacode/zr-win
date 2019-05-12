@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-10 03:01:01 42C710      zr-win/[file_change_notification_test.go]
+// :v: 2019-05-12 17:10:01 66A6F3      zr-win/[file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -12,14 +12,12 @@ import (
 	"github.com/balacode/zr"
 )
 
-/*
-to test all items in file_change_notification.go use:
-    go test --run Test_fchn_
-
-to generate a test coverage report for the whole module use:
-    go test -coverprofile cover.out
-    go tool cover -html=cover.out
-*/
+//  to test all items in file_change_notification.go use:
+//      go test --run Test_fchn_
+//
+//  to generate a test coverage report for the whole module use:
+//      go test -coverprofile cover.out
+//      go tool cover -html=cover.out
 
 // go test --run Test_fchn_FindFirstChangeNotification_
 func Test_fchn_FindFirstChangeNotification_(t *testing.T) {

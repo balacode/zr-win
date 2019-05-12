@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-06 06:30:05 83A637               zr-win/[dll_kernel32_windows.go]
+// :v: 2019-05-12 17:10:01 8DF18E               zr-win/[dll_kernel32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -417,8 +417,8 @@ func WideCharToMultiByte(
 	return INT(ret)
 } //                                                         WideCharToMultiByte
 
-/*
-// WriteConsoleInput library: kernel32.dll [UNUSED]
+/*UNUSED*
+// WriteConsoleInput library: kernel32.dll
 func WriteConsoleInput(
 	hConsoleInput HANDLE,
 	lpBuffer *INPUT_RECORD,
@@ -433,6 +433,6 @@ func WriteConsoleInput(
 	)
 	return BOOLResult(ret)
 } //                                                           WriteConsoleInput
-*/
+*UNUSED*/
 
 //end
