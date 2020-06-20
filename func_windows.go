@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-11 04:36:47 B1F4F4                       zr-win/[func_windows.go]
+// :v: 2020-06-20 10:31:31 EB03B5                       zr-win/[func_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -40,7 +40,7 @@ import (
 // -----------------------------------------------------------------------------
 // # Constants
 
-// OSType __
+// OSType _ _
 type OSType int
 
 const (
@@ -57,7 +57,7 @@ const (
 // -----------------------------------------------------------------------------
 // # System Information Functions
 
-// FirmwareDate __
+// FirmwareDate _ _
 func FirmwareDate() string {
 	if IsWindows() {
 		return registryHardwareInfo("SystemBiosDate")
@@ -66,7 +66,7 @@ func FirmwareDate() string {
 	return ""
 } //                                                                FirmwareDate
 
-// FirmwareVersion __
+// FirmwareVersion _ _
 func FirmwareVersion() string {
 	if IsWindows() {
 		return registryHardwareInfo("SystemBiosVersion")
@@ -80,7 +80,7 @@ func IsWindows() bool {
 	return OSClass() == OSWindows
 } //                                                                   IsWindows
 
-// OSClass __
+// OSClass _ _
 func OSClass() OSType {
 	switch windowsVersionInfo().dwPlatformId {
 	// ancient Windows platforms e.g. Windows ME
@@ -96,7 +96,7 @@ func OSClass() OSType {
 	return OSUnknown
 } //                                                                     OSClass
 
-// OSFolder __
+// OSFolder _ _
 func OSFolder() string {
 	var buffer [MAX_PATH + 1]WCHAR // buffer to receive Windows directory
 	count := GetWindowsDirectory(
@@ -110,12 +110,12 @@ func OSFolder() string {
 	return ret
 } //                                                                    OSFolder
 
-// SystemVolumeID __
+// SystemVolumeID _ _
 func SystemVolumeID() uint32 {
 	return VolumeID(OSFolder())
 } //                                                              SystemVolumeID
 
-// VolumeID __
+// VolumeID _ _
 func VolumeID(path string) uint32 {
 	switch len(path) {
 	case 0:
@@ -237,7 +237,7 @@ func GetRegistryString(key, valueName string) string {
 // -----------------------------------------------------------------------------
 // # Internal Constants
 
-// rootKeys __
+// rootKeys _ _
 var rootKeys = []struct {
 	name string
 	key  HKEY
@@ -254,7 +254,7 @@ var rootKeys = []struct {
 // -----------------------------------------------------------------------------
 // # Internal Functions
 
-// getRegistryKey __
+// getRegistryKey _ _
 func getRegistryKey(key string) HKEY {
 	const erv = HKEY(0)
 	if len(key) == 0 {
@@ -285,7 +285,7 @@ func getRegistrySubkey(key string) string {
 	return erv
 } //                                                           getRegistrySubkey
 
-// registryHardwareInfo __
+// registryHardwareInfo _ _
 func registryHardwareInfo(valueName string) string {
 	ret := GetRegistryString(
 		`HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System`,
@@ -295,7 +295,7 @@ func registryHardwareInfo(valueName string) string {
 	return ret
 } //                                                        registryHardwareInfo
 
-// windowsVersionInfo __
+// windowsVersionInfo _ _
 func windowsVersionInfo() OSVERSIONINFO {
 	var ret OSVERSIONINFO
 	ret.dwOSVersionInfoSize = DWORD(unsafe.Sizeof(ret))

@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-10 03:05:12 148A2F                        zr-win/[api_windows.go]
+// :v: 2020-06-20 10:31:31 E203CB                        zr-win/[api_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -265,28 +265,28 @@ const (
 // -----------------------------------------------------------------------------
 
 const (
-	// FILE_NOTIFY_CHANGE_FILE_NAME __
+	// FILE_NOTIFY_CHANGE_FILE_NAME _ _
 	FILE_NOTIFY_CHANGE_FILE_NAME = 0x00000001
 
-	// FILE_NOTIFY_CHANGE_DIR_NAME __
+	// FILE_NOTIFY_CHANGE_DIR_NAME _ _
 	FILE_NOTIFY_CHANGE_DIR_NAME = 0x00000002
 
-	// FILE_NOTIFY_CHANGE_ATTRIBUTES __
+	// FILE_NOTIFY_CHANGE_ATTRIBUTES _ _
 	FILE_NOTIFY_CHANGE_ATTRIBUTES = 0x00000004
 
-	// FILE_NOTIFY_CHANGE_SIZE __
+	// FILE_NOTIFY_CHANGE_SIZE _ _
 	FILE_NOTIFY_CHANGE_SIZE = 0x00000008
 
-	// FILE_NOTIFY_CHANGE_LAST_WRITE __
+	// FILE_NOTIFY_CHANGE_LAST_WRITE _ _
 	FILE_NOTIFY_CHANGE_LAST_WRITE = 0x00000010
 
-	// FILE_NOTIFY_CHANGE_LAST_ACCESS __
+	// FILE_NOTIFY_CHANGE_LAST_ACCESS _ _
 	FILE_NOTIFY_CHANGE_LAST_ACCESS = 0x00000020
 
-	// FILE_NOTIFY_CHANGE_CREATION __
+	// FILE_NOTIFY_CHANGE_CREATION _ _
 	FILE_NOTIFY_CHANGE_CREATION = 0x00000040
 
-	// FILE_NOTIFY_CHANGE_SECURITY __
+	// FILE_NOTIFY_CHANGE_SECURITY _ _
 	FILE_NOTIFY_CHANGE_SECURITY = 0x00000100
 )
 
@@ -459,10 +459,10 @@ const (
 	// IDI_APPLICATION Win32 API constant.
 	IDI_APPLICATION = 32512
 
-	// INVALID_HANDLE_VALUE __
+	// INVALID_HANDLE_VALUE _ _
 	INVALID_HANDLE_VALUE = 0xffffffff // TODO: HANDLE(-1)
 
-	// INFINITE __
+	// INFINITE _ _
 	INFINITE = 0xFFFFFFFF // infinite timeout
 
 	// KEY_EVENT Win32 API constant.
@@ -656,7 +656,7 @@ const (
 // -----------------------------------------------------------------------------
 
 const (
-	// NULL __
+	// NULL _ _
 	NULL = 0
 )
 
@@ -826,13 +826,13 @@ const (
 // -----------------------------------------------------------------------------
 
 const (
-	// WAIT_OBJECT __
+	// WAIT_OBJECT _ _
 	WAIT_OBJECT = 0
 
-	// WAIT_OBJECT_0 __
+	// WAIT_OBJECT_0 _ _
 	WAIT_OBJECT_0 = 0
 
-	// WAIT_TIMEOUT __
+	// WAIT_TIMEOUT _ _
 	WAIT_TIMEOUT = 258
 )
 

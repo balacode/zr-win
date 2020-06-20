@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-09 17:22:37 75CB11                zr-win/[api_helpers_windows.go]
+// :v: 2020-06-20 10:31:31 B7705F                zr-win/[api_helpers_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -36,14 +36,14 @@ import (
 // the result of the last Win32 API function call. Used for debugging.
 var ShowResultStatus = false
 
-// FuncName __
+// FuncName _ _
 func FuncName(callDepth int) string {
 	programCounter, _, _, _ := runtime.Caller(callDepth)
 	funcName := runtime.FuncForPC(programCounter).Name()
 	return funcName
 } //                                                                    FuncName
 
-// LineNo __
+// LineNo _ _
 func LineNo(callDepth int) int {
 	_, _, lineNo, _ := runtime.Caller(callDepth)
 	return lineNo
@@ -97,7 +97,7 @@ func ErrorName(errNo DWORD) string {
 	return retBuf.String()
 } //                                                                   ErrorName
 
-// PWSTRFromString __
+// PWSTRFromString _ _
 func PWSTRFromString(s string) *WCHAR {
 	if s == "" {
 		return (*WCHAR)(nil)
@@ -130,7 +130,7 @@ func StringFromPWSTR(s LPWSTR) string {
 	return retBuf.String()
 } //                                                             StringFromPWSTR
 
-// UintptrFromString __
+// UintptrFromString _ _
 func UintptrFromString(s *string) uintptr {
 	if *s == "" {
 		return 0
@@ -150,7 +150,7 @@ func UintptrFromString(s *string) uintptr {
 	return uintptr(unsafe.Pointer(ret))
 } //                                                           UintptrFromString
 
-// WriteWSTR __
+// WriteWSTR _ _
 func WriteWSTR(ptr *uintptr, s string) {
 	for _, r := range s + "\x00" {
 		wch := WCHAR(r)

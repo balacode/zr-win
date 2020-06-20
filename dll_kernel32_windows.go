@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-12 17:10:01 8DF18E               zr-win/[dll_kernel32_windows.go]
+// :v: 2020-06-20 10:31:31 2DF4C7               zr-win/[dll_kernel32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
@@ -92,7 +92,7 @@ func FindClose(hFindFile HANDLE) BOOL {
 	return BOOLResult(ret)
 } //                                                                   FindClose
 
-// FindCloseChangeNotification __
+// FindCloseChangeNotification _ _
 func FindCloseChangeNotification(hChangeHandle HANDLE) BOOL {
 	ret, _, _ := kernelFindCloseChangeNotification.Call(
 		uintptr(hChangeHandle), // HANDLE
