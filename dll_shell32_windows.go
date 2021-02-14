@@ -39,4 +39,4 @@ func DragQueryFile(hDrop HDROP, iFile UINT, lpszFile LPTSTR, cch UINT) UINT {
 	return UINT(ret)
 } //                                                               DragQueryFile
 
-//end
+// end

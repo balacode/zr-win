@@ -2361,4 +2361,4 @@ func WindowMessageName(msg UINT) string {
 	return "WM_...UNKNOWN"
 } //                                                           WindowMessageName
 
-//end
+// end

@@ -320,4 +320,4 @@ func TextOut(hDC HDC, x, y INT, Text string, c INT) BOOL {
 	return BOOLResult(ret)
 } //                                                                     TextOut
 
-//end
+// end

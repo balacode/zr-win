@@ -56,4 +56,4 @@ func RegQueryValueEx(
 	return LONG(ret)
 } //                                                             RegQueryValueEx
 
-//end
+// end

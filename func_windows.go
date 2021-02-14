@@ -306,4 +306,4 @@ func windowsVersionInfo() OSVERSIONINFO {
 	return ret
 } //                                                          windowsVersionInfo
 
-//end
+// end

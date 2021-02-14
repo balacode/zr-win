@@ -670,4 +670,4 @@ func WindowFromDC(hDC HDC) HWND {
 	return HWND(ret)
 } //                                                                WindowFromDC
 
-//end
+// end
