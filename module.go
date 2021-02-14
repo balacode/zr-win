@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
+// ZR Library: Windows 32 API                                 zr-win/[module.go]
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-18 17:44:10 F9A2DD                             zr-win/[module.go]
 // -----------------------------------------------------------------------------
 
 // Package win provides Windows API function and

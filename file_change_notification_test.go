@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
+// ZR Library: Windows 32 API          zr-win/[file_change_notification_test.go]
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2019-05-12 17:10:01 66A6F3      zr-win/[file_change_notification_test.go]
 // -----------------------------------------------------------------------------
 
 package win

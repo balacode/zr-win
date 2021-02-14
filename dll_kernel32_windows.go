@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
+// ZR Library: Windows 32 API                   zr-win/[dll_kernel32_windows.go]
 // (c) balarabe@protonmail.com                                      License: MIT
-// :v: 2020-06-20 10:31:31 2DF4C7               zr-win/[dll_kernel32_windows.go]
 // -----------------------------------------------------------------------------
 
 package win
