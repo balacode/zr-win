@@ -2,7 +2,7 @@
 
 module github.com/balacode/zr-win
 
-require github.com/balacode/zr v1.0.0
+require github.com/balacode/zr v1.1.0
 
 go 1.16
 
